@@ -1,0 +1,8 @@
+{
+  "textToModify" : "le texte en entrée du formulaire",
+  "instructions" : [
+    {"name" : "nom de l'instruction (garder le même nom que la méthode en java)", "occurrence" : "le float correspondant à l'instruction et sans double quotes"}
+    {"name" : "insertLetters", "occurrence" : 0.4}
+    {"name" : "swapcontiguousWords", "occurrence" : 0.05}
+  ]
+}
