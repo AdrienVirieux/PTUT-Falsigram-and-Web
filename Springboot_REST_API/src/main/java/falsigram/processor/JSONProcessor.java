@@ -1,3 +1,11 @@
+/**
+*
+* This class allows to process the JSON request
+*
+* @author Pascal Flores
+ *
+ */
+
 package falsigram.processor;
 
 import org.json.JSONArray;
@@ -9,11 +17,21 @@ public class JSONProcessor {
     private JSONObject request;
     private Text text;
 
+    /**
+     * @param stringRequest
+     */
     public JSONProcessor(String stringRequest){
         this.request = new JSONObject(stringRequest);
         text = new Text(request.getString("text"));
     }
 
+    /**
+     *
+     * Analyses the JSON request given in the object constructor
+     * and calls the appropriate methods
+     *
+     * @return String
+     */
     public String processJSONRequest() {
         JSONObject instruction;
         float occurrence;
