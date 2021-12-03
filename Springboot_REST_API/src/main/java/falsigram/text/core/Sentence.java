@@ -48,4 +48,13 @@ public class Sentence {
         this.content = content;
     }
 
+    public String toString() {
+        StringBuilder sb  = new StringBuilder();
+        for (int i = 0; i < this.content.size(); ++i){
+            for (int j = 0; j < this.content.get(i).size(); ++j){
+                sb.append(this.content.get(i).get(j));
+            }
+        }
+        return sb.toString();
+    }
 }
