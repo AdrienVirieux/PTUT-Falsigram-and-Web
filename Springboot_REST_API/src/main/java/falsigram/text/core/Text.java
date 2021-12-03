@@ -8,6 +8,7 @@
 
 package falsigram.text.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Text {
@@ -18,7 +19,9 @@ public class Text {
      * Default constructor
      */
     public Text(String content) {
-        for (String s : content.split("[.!?:]")){
+        this.content = new ArrayList<Sentence>();
+
+        for (String s : content.split("([.!?:]=;)")){
             this.content.add(new Sentence(s));
         }
     }
