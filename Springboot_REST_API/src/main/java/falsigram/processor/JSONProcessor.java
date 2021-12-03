@@ -11,6 +11,8 @@ package falsigram.processor;
 import org.json.JSONObject;
 import falsigram.text.core.Text;
 import falsigram.text.utils.*;
+import java.time.Duration;
+
 public class JSONProcessor {
 
     private JSONObject request;
@@ -21,7 +23,10 @@ public class JSONProcessor {
      */
     public JSONProcessor(String stringRequest){
         this.request = new JSONObject(stringRequest);
+        System.out.println("Conversion du texte en Text...");
+        long sT = System.nanoTime();
         text = new Text(request.getString("text"));
+        System.out.println("conversion terminée. Temps d'exécution : "+ (System.nanoTime() - sT));
     }
 
     /**
@@ -32,7 +37,7 @@ public class JSONProcessor {
      * @return String
      */
     public String processJSONRequest() {
-        JSONObject instruction;
+        /*JSONObject instruction;
         float occurrence;
         for (int i = 0; i < request.getJSONArray("instructions").length(); ++i) {
             instruction = request.getJSONArray("instructions").getJSONObject(i);
@@ -141,7 +146,7 @@ public class JSONProcessor {
                         break;
                 }
             }
-        }
+        }*/
         return this.text.toString();
     }
 }
