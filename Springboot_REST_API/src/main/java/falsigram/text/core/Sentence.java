@@ -18,18 +18,22 @@ public class Sentence {
     /**
      * Default constructor
      */
-    public Sentence(String content) {
+    public Sentence(String sentence) {
+        this.content = new ArrayList<List<Character>>();
         List<Character> tmp = new ArrayList<Character>();
-        for (int i = 0; i < content.length()-1; ++i){
-            if (content.charAt(i) != ' '){
-                tmp.add(content.charAt(i));
+        for (int i = 0; i < sentence.length()-1; ++i){
+            if (sentence.charAt(i) != ' '){
+                tmp.add(sentence.charAt(i));
             }
             else {
+                System.out.println(tmp);
                 this.content.add(tmp);
-                tmp.clear();
+                tmp = new ArrayList<Character>();
             }
         }
-        this.punctuation = content.charAt(content.length()-1);
+        System.out.println(tmp);
+        this.content.add(tmp);
+        this.punctuation = sentence.charAt(sentence.length()-1);
     }
 
     public char getPunctuation() {
@@ -49,11 +53,13 @@ public class Sentence {
     }
 
     public String toString() {
+
         StringBuilder sb  = new StringBuilder();
         for (int i = 0; i < this.content.size(); ++i){
             for (int j = 0; j < this.content.get(i).size(); ++j){
                 sb.append(this.content.get(i).get(j));
             }
+            sb.append(' ');
         }
         sb.append(punctuation);
         return sb.toString();
