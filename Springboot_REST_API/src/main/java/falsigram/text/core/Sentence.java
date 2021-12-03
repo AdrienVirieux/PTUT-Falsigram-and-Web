@@ -55,6 +55,7 @@ public class Sentence {
                 sb.append(this.content.get(i).get(j));
             }
         }
+        sb.append(punctuation);
         return sb.toString();
     }
 }
