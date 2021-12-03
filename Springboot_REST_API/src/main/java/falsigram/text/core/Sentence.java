@@ -26,13 +26,12 @@ public class Sentence {
                 tmp.add(sentence.charAt(i));
             }
             else {
-                System.out.println(tmp);
                 this.content.add(tmp);
                 tmp = new ArrayList<Character>();
             }
         }
-        System.out.println(tmp);
         this.content.add(tmp);
+        System.out.println(this.content.get(this.content.size()-1));
         this.punctuation = sentence.charAt(sentence.length()-1);
     }
 
@@ -52,6 +51,7 @@ public class Sentence {
         this.content = content;
     }
 
+    @Override
     public String toString() {
 
         StringBuilder sb  = new StringBuilder();
@@ -59,7 +59,9 @@ public class Sentence {
             for (int j = 0; j < this.content.get(i).size(); ++j){
                 sb.append(this.content.get(i).get(j));
             }
-            sb.append(' ');
+            if (i != this.content.size()-1){
+                sb.append(' ');
+            }
         }
         sb.append(punctuation);
         return sb.toString();
