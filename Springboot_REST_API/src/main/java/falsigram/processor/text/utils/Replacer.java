@@ -6,9 +6,9 @@
  *
  */
 
-package functions.text.utils;
+package falsigram.processor.text.utils;
 
-import functions.text.core.Text;
+import falsigram.processor.text.core.Text;
 
 import java.util.*;
 
