@@ -31,4 +31,21 @@ public class Sentence {
         }
         this.punctuation = content.charAt(content.length()-1);
     }
+
+    public char getPunctuation() {
+        return punctuation;
+    }
+
+    public void setPunctuation(char punctuation) {
+        this.punctuation = punctuation;
+    }
+
+    public List<List<Character>> getContent() {
+        return content;
+    }
+
+    public void setContent(List<List<Character>> content) {
+        this.content = content;
+    }
+
 }
