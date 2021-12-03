@@ -8,9 +8,6 @@
 
 package falsigram.text.core;
 
-
-import falsigram.text.utils.Replacer;
-
 import java.util.List;
 
 public class Text {
