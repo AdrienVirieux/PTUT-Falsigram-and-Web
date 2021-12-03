@@ -31,7 +31,6 @@ public class Sentence {
             }
         }
         this.content.add(tmp);
-        System.out.println(this.content.get(this.content.size()-1));
         this.punctuation = sentence.charAt(sentence.length()-1);
     }
 
