@@ -8,7 +8,6 @@
 
 package falsigram.processor;
 
-import falsigram.text.core.Sentence;
 import org.json.JSONObject;
 import falsigram.text.core.Text;
 import falsigram.text.utils.*;
@@ -18,18 +17,13 @@ public class JSONProcessor {
 
     private JSONObject request;
     private Text text;
-    private Sentence s;
 
     /**
      * @param stringRequest
      */
     public JSONProcessor(String stringRequest){
         this.request = new JSONObject(stringRequest);
-        /*System.out.println("Conversion du texte en Text...");
-        long sT = System.nanoTime();
         text = new Text(request.getString("text"));
-        System.out.println("conversion terminée. Temps d'exécution : "+ (System.nanoTime() - sT));*/
-        s = new Sentence("J'adore manger des patates!");
     }
 
     /**
@@ -40,7 +34,7 @@ public class JSONProcessor {
      * @return String
      */
     public String processJSONRequest() {
-        /*JSONObject instruction;
+        JSONObject instruction;
         float occurrence;
         for (int i = 0; i < request.getJSONArray("instructions").length(); ++i) {
             instruction = request.getJSONArray("instructions").getJSONObject(i);
@@ -149,7 +143,8 @@ public class JSONProcessor {
                         break;
                 }
             }
-        }*/
-        return this.s.toString();
+        }
+        String ret = this.text.toString();
+        return ret;
     }
 }
