@@ -8,10 +8,9 @@
 
 package falsigram.processor;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-import text.*;
-
+import falsigram.text.core.Text;
+import falsigram.text.utils.*;
 public class JSONProcessor {
 
     private JSONObject request;
