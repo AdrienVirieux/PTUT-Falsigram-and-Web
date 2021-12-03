@@ -26,5 +26,13 @@ public class Text {
         }
     }
 
-
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < this.content.size(); ++i)
+        {
+            sb.append(this.content.get(i).toString());
+        }
+        return sb.toString();
+    }
 }
