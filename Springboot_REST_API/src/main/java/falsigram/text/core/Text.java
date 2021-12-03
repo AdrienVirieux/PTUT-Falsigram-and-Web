@@ -32,6 +32,7 @@ public class Text {
         for(int i = 0; i < this.content.size(); ++i)
         {
             sb.append(this.content.get(i).toString());
+            sb.append(' ');
         }
         return sb.toString();
     }
