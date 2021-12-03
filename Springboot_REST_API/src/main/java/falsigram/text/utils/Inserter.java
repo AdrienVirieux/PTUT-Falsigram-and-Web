@@ -6,27 +6,28 @@
  *
  */
 
-package falsigram.processor.text.utils;
+package falsigram.text.utils;
 
-import falsigram.processor.text.core.Text;
+import falsigram.text.core.Text;
 
 import java.util.*;
 
 
-public class Deleter {
+public class Inserter {
 
     /**
      * Default constructor
      */
-    public Deleter() {
+    public Inserter() {
     }
 
     /**
      * @param List l 
      * @param int index 
-     * @return  List<Character>
+     * @param char ch 
+     * @return List<Character>
      */
-    private List<Character> deleteChar(List<Character> l, int index) {
+    private List<Character> insertChar(List<Character> l, int index, char ch) {
         // TODO implement here
         return null;
     }
@@ -36,7 +37,7 @@ public class Deleter {
      * @param float occurrence 
      * @return Text
      */
-    public Text deleterLetters(Text t, float occurrence) {
+    public Text insertLetters(Text t, float occurrence) {
         // TODO implement here
         return null;
     }
@@ -46,7 +47,7 @@ public class Deleter {
      * @param float occurrence 
      * @return Text
      */
-    public Text deleterSpaces(Text t, float occurrence) {
+    public Text insertSpaces(Text t, float occurrence) {
         // TODO implement here
         return null;
     }
@@ -56,7 +57,7 @@ public class Deleter {
      * @param float occurrence 
      * @return Text
      */
-    public Text deleterAccents(Text t, float occurrence) {
+    public Text insertAccent(Text t, float occurrence) {
         // TODO implement here
         return null;
     }
@@ -66,7 +67,7 @@ public class Deleter {
      * @param float occurrence 
      * @return Text
      */
-    public Text deleterPunctuations(Text t, float occurrence) {
+    public Text insertNearKeyboardKeyLetters(Text t, float occurrence) {
         // TODO implement here
         return null;
     }
