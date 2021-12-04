@@ -21,7 +21,11 @@ public class Sentence {
     public Sentence(String sentence) {
         this.content = new ArrayList<List<Character>>();
         List<Character> tmp = new ArrayList<Character>();
-        for (int i = 0; i < sentence.length()-1; ++i){
+
+        int indexFirstNonSpace = 0;
+        while (sentence.charAt(indexFirstNonSpace) == ' ') ++indexFirstNonSpace;
+
+        for (int i = indexFirstNonSpace; i < sentence.length()-1; ++i){
             if (sentence.charAt(i) != ' '){
                 tmp.add(sentence.charAt(i));
             }
