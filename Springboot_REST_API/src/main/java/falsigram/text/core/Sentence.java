@@ -18,14 +18,12 @@ public class Sentence implements Iterable<List<Character>>, Iterator<List<Charac
     /**
      * Default constructor
      */
+
     public Sentence(String sentence) {
         this.content = new ArrayList<List<Character>>();
         List<Character> tmp = new ArrayList<Character>();
 
-        int indexFirstNonSpace = 0;
-        while (sentence.charAt(indexFirstNonSpace) == ' ') ++indexFirstNonSpace;
-
-        for (int i = indexFirstNonSpace; i < sentence.length()-1; ++i){
+        for (int i = 1; i < sentence.length()-1; ++i){
             if (sentence.charAt(i) != ' '){
                 tmp.add(sentence.charAt(i));
             }
