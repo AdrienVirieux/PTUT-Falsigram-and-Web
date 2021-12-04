@@ -27,6 +27,10 @@ public class Text implements Iterable<Sentence>, Iterator<Sentence> {
         }
     }
 
+    public List<Sentence> getContent() {
+        return content;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
