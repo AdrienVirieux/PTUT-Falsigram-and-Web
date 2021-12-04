@@ -9,9 +9,10 @@
 package falsigram.text.core;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Text {
+public class Text implements Iterable<Sentence>, Iterator<Sentence> {
 
     private List<Sentence> content;
 
@@ -35,5 +36,27 @@ public class Text {
             sb.append(' ');
         }
         return sb.toString();
+    }
+
+
+    /*
+        Fonctions pour faire fonctionner un Iterator avec Text
+    */
+    private int currentIndex = 0;
+
+    @Override
+    public Iterator<Sentence> iterator() {
+        return this;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return currentIndex < content.size();
+    }
+
+    @Override
+    public Sentence next() {
+        currentIndex++;
+        return content.get(currentIndex - 1);
     }
 }
