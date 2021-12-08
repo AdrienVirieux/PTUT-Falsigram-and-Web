@@ -11,7 +11,7 @@ package falsigram.text.core;
 import java.util.*;
 
 
-public class Sentence implements Iterable<List<Character>>, Iterator<List<Character>> {
+public class Sentence {
     private char punctuation;
     private List<List<Character>> content;
 
@@ -68,27 +68,5 @@ public class Sentence implements Iterable<List<Character>>, Iterator<List<Charac
         }
         sb.append(punctuation);
         return sb.toString();
-    }
-
-
-    /*
-        Fonctions pour faire fonctionner un Iterator avec Sentence
-    */
-    private int currentIndex = 0;
-
-    @Override
-    public Iterator<List<Character>> iterator() {
-        return this;
-    }
-
-    @Override
-    public boolean hasNext() {
-        return currentIndex < content.size();
-    }
-
-    @Override
-    public List<Character> next() {
-        currentIndex++;
-        return content.get(currentIndex - 1);
     }
 }
