@@ -44,16 +44,16 @@ public class JSONProcessor {
                     case 'i' :
                         switch (instruction.getString("name")){
                             case "insertLetters" :
-                                this.text = Inserter.insertLetters(this.text, occurrence);
+                                Inserter.insertLetters(this.text.getContent(), occurrence);
                                 break;
                             case "insertSpaces" :
-                                this.text = Inserter.insertSpaces(this.text, occurrence);
+                                Inserter.insertSpaces(this.text.getContent(), occurrence);
                                 break;
                             case "insertAccents" :
-                                this.text = Inserter.insertAccents(this.text, occurrence);
+                                Inserter.insertAccents(this.text.getContent(), occurrence);
                                 break;
                             case "insertNearKeyboardKeyLetters" :
-                                this.text = Inserter.insertNearKeyboardKeyLetters(this.text, occurrence);
+                                Inserter.insertNearKeyboardKeyLetters(this.text.getContent(), occurrence);
                                 break;
                             default :
                                 break;
@@ -62,46 +62,46 @@ public class JSONProcessor {
                     case 'r' :
                         switch (instruction.getString("name")){
                             case "replaceLetters" :
-                                this.text = Replacer.replaceLetters(this.text, occurrence);
+                                Replacer.replaceLetters(this.text.getContent(), occurrence);
                                 break;
                             case "replaceAccents" :
-                                this.text = Replacer.replaceAccents(this.text, occurrence);
+                                Replacer.replaceAccents(this.text.getContent(), occurrence);
                                 break;
                             case "replacePunctuations" :
-                                this.text = Replacer.replacePunctuations(this.text, occurrence);
+                                Replacer.replacePunctuations(this.text.getContent(), occurrence);
                                 break;
                             case "replaceAHomophones" :
-                                this.text = Replacer.replaceAHomophones(this.text, occurrence);
+                                Replacer.replaceAHomophones(this.text.getContent(), occurrence);
                                 break;
                             case "replaceEtHomophones" :
-                                this.text = Replacer.replaceEtHomophones(this.text, occurrence);
+                                Replacer.replaceEtHomophones(this.text.getContent(), occurrence);
                                 break;
                             case "replaceSaHomophones" :
-                                this.text = Replacer.replaceSaHomophones(this.text, occurrence);
+                                Replacer.replaceSaHomophones(this.text.getContent(), occurrence);
                                 break;
                             case "replaceSeHomophones" :
-                                this.text = Replacer.replaceSeHomophones(this.text, occurrence);
+                                Replacer.replaceSeHomophones(this.text.getContent(), occurrence);
                                 break;
                             case "replaceSaitHomophones" :
-                                this.text = Replacer.replaceSaitHomophones(this.text, occurrence);
+                                Replacer.replaceSaitHomophones(this.text.getContent(), occurrence);
                                 break;
                             case "replaceDansHomophones" :
-                                this.text = Replacer.replaceDansHomophones(this.text, occurrence);
+                                Replacer.replaceDansHomophones(this.text.getContent(), occurrence);
                                 break;
                             case "replaceLaHomophones" :
-                                this.text = Replacer.replaceLaHomophones(this.text, occurrence);
+                                Replacer.replaceLaHomophones(this.text.getContent(), occurrence);
                                 break;
                             case "replaceMaisHomophones" :
-                                this.text = Replacer.replaceMaisHomophones(this.text, occurrence);
+                                Replacer.replaceMaisHomophones(this.text.getContent(), occurrence);
                                 break;
                             case "replaceOnHomophones" :
-                                this.text = Replacer.replaceOnHomophones(this.text, occurrence);
+                                Replacer.replaceOnHomophones(this.text.getContent(), occurrence);
                                 break;
                             case "replaceOuHomophones" :
-                                this.text = Replacer.replaceOuHomophones(this.text, occurrence);
+                                Replacer.replaceOuHomophones(this.text.getContent(), occurrence);
                                 break;
                             case "replacePeuHomophones" :
-                                this.text = Replacer.replacePeuHomophones(this.text, occurrence);
+                                Replacer.replacePeuHomophones(this.text.getContent(), occurrence);
                                 break;
                             default :
                                 break;
@@ -110,37 +110,37 @@ public class JSONProcessor {
                     case 'd' :
                         switch (instruction.getString("name")) {
                             case "deleteLetters" :
-                                this.text = Deleter.deleteLetters(this.text, occurrence);
+                                Deleter.deleteLetters(this.text.getContent(), occurrence);
                                 break;
                             case "deleteSpaces" :
-                                this.text = Deleter.deleteSpaces(this.text, occurrence);
+                                Deleter.deleteSpaces(this.text.getContent(), occurrence);
                                 break;
                             case "deleteAccents" :
-                                this.text = Deleter.deleteAccents(this.text, occurrence);
+                                Deleter.deleteAccents(this.text.getContent(), occurrence);
                                 break;
                             case "deletePunctuations" :
-                                this.text = Deleter.deletePunctuations(this.text, occurrence);
+                                Deleter.deletePunctuations(this.text.getContent(), occurrence);
                             default :
                                 break;
                         }
                         break;
-                    case 's' :
+                    /*case 's' :
                         switch (instruction.getString("name")) {
                             case "swapCharsInWord" :
-                                this.text = Swapper.swapCharsInWord(this.text, occurrence);
+                                Swapper.swapCharsInWord(this.text.getContent(), occurrence);
                                 break;
                             case "swapContiguousCharsInWord" :
-                                this.text = Swapper.swapContiguousInWord(this.text, occurrence);
+                                Swapper.swapContiguousInWord(this.text.getContent(), occurrence);
                                 break;
                             case "swapWordsInSentence" :
-                                this.text = Swapper.swapWordsInSentence(this.text, occurrence);
+                                Swapper.swapWordsInSentence(this.text.getContent(), occurrence);
                                 break;
                             case "swapContiguousWordsInSentence" :
-                                this.text = Swapper.swapContiguousWordsInSentence(this.text, occurrence);
+                                Swapper.swapContiguousWordsInSentence(this.text.getContent(), occurrence);
                             default :
                                 break;
                         }
-                        break;
+                        break;*/
                 }
             }
         }
