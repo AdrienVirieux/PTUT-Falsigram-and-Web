@@ -23,93 +23,108 @@ public class Deleter {
     public Deleter() {
     }
 
-    /*
+/*
     private static List<Character> deleteChar(List<Character> l, int index) {
         l.remove(index);
         return l;
     }
-    */
+*/
 
     /**
      * @param text Text
      * @param occurrence float
-     * @return Text
      */
-    public static Text deleteLetters(Text text, float occurrence) {
-        int charIndex;
+    public static void deleteLetters(List<Sentence> text, float occurrence) {
+        List<Character> tmp = new ArrayList<>();
 
-        for (Sentence sentence : text) {
-            for (List<Character> word : sentence) {
-                charIndex = 0;
-                for (Character c : word) {
-
-                    if (occurrence != 1) {
+        if (occurrence != 1) {
+            for (Sentence sentence : text) {
+                for (List<Character> word : sentence.getContent()) {
+                    for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
                         /* On créer un nombre aléatoire entre 0 et 1 */
                         float randNbr = new Random().nextFloat();
-                        if (occurrence > randNbr) {
-                            word.remove(charIndex);
-                        }
+                        if (randNbr > occurrence)
+                            tmp.add(word.get(charIndex));
                     }
-                    else
-                        word.remove(charIndex);
-                    charIndex += 1;
-
+                    word.clear();
+                    word.addAll(tmp);
+                    tmp.clear();
                 }
             }
+        } else {
+            for (Sentence sentence : text) {
+                for (List<Character> word : sentence.getContent())
+                    word.clear();
+            }
         }
-
-        return text;
     }
 
 
     /**
      * @param text Text
      * @param occurrence float
-     * @return Text
      */
-    public static Text deleteSpaces(Text text, float occurrence) {
-        int wordIndex;
+    // TODO appeler la fonction
+    public static String deleteLettersString(List<Sentence> text, float occurrence) {
+        StringBuilder texteEntier = new StringBuilder(text.toString());
 
-        for (Sentence sentence : text) {
-            wordIndex = 0;
-            for (List<Character> word : sentence) {
-                if (word.equals(sentence.getContent().get(0))) continue;
+        if (occurrence != 1) {
+            for (int charIndex = 0; charIndex < texteEntier.length();) {
+                /* On créer un nombre aléatoire entre 0 et 1 */
+                float randNbr = new Random().nextFloat();
+                if (Character.isLetter(texteEntier.charAt(charIndex)) && randNbr < occurrence) {
+                    texteEntier.deleteCharAt(texteEntier.charAt(charIndex));
+                    continue;
+                }
+                ++charIndex;
+            }
+        } else {
+            for (int charIndex = 0; charIndex < texteEntier.length(); ++charIndex)
+                texteEntier.deleteCharAt(texteEntier.charAt(charIndex));
+        }
 
-                if (occurrence != 1) {
+        return texteEntier.toString();
+    }
+
+
+    /**
+     * @param text Text
+     * @param occurrence float
+     */
+    public static void deleteSpaces(List<Sentence> text, float occurrence) {
+        if (occurrence != 1) {
+            for (Sentence sentence : text) {
+                for (int wordIndex = 1; wordIndex < sentence.getContent().size();) {
                     /* On créer un nombre aléatoire entre 0 et 1 */
                     float randNbr = new Random().nextFloat();
-                    if (occurrence > randNbr) {
-                        for (Character c : word)
-                            sentence.getContent().get(wordIndex).add(c);
-                        word.clear();
+                    if (randNbr < occurrence) {
+                        sentence.getContent().get(wordIndex-1).addAll(sentence.getContent().get(wordIndex));
+                        sentence.getContent().remove(wordIndex);
+                        continue;
                     }
+                    ++wordIndex;
                 }
-                else {
-                    for (Character c : word)
-                        sentence.getContent().get(wordIndex).add(c);
-                    word.clear();
+            }
+        } else {
+            for (Sentence sentence : text) {
+                for (int wordIndex = 1; wordIndex < sentence.getContent().size();) {
+                    sentence.getContent().get(0).addAll(sentence.getContent().get(wordIndex));
+                    sentence.getContent().remove(wordIndex);
                 }
-                wordIndex += 1;
-
             }
         }
-
-        return text;
     }
-
 
     /**
      * @param text Text
      * @param occurrence float
-     * @return Text
      */
-    public static Text deleteAccents(Text text, float occurrence) {
-        for (Sentence sentence : text) {
-            for (List<Character> word : sentence) {
-                for (Character c : word) {
-                    // TODO faire en sorte de ne prendre que les caracteres accentués
-
-                    if (occurrence != 1) {
+    public static void deleteAccents(List<Sentence> text, float occurrence) {
+        // TODO ne fonctionne pas
+        if (occurrence != 1) {
+            for (Sentence sentence : text) {
+                for (List<Character> word : sentence.getContent()) {
+                    for (Character c : word) {
                         /* On créer un nombre aléatoire entre 0 et 1 */
                         float randNbr = new Random().nextFloat();
                         if (occurrence > randNbr) {
@@ -117,47 +132,44 @@ public class Deleter {
                             c = tmp.charAt(0);
                         }
                     }
-                    else {
+                }
+            }
+        } else {
+            for (Sentence sentence : text) {
+                for (List<Character> word : sentence.getContent()) {
+                    for (Character c : word) {
                         String tmp = Normalizer.normalize(String.valueOf(c), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
                         c = tmp.charAt(0);
                     }
-
                 }
             }
         }
-
-        return text;
     }
 
     /**
      * @param text Text
      * @param occurrence float
-     * @return Text
      */
-    public static Text deletePunctuations(Text text, float occurrence) {
-        int sentenceIndex = 0;
-
-        for (Sentence sentence : text) {
-            if (sentence.equals(text.getContent().get(0))) continue;
-
-            if (occurrence != 1) {
+    public static void deletePunctuations(List<Sentence> text, float occurrence) {
+        if (occurrence != 1) {
+            for (int sentenceIndex = 1; sentenceIndex < text.size();) {
                 /* On créer un nombre aléatoire entre 0 et 1 */
                 float randNbr = new Random().nextFloat();
                 if (occurrence > randNbr) {
-                    for (List<Character> word : sentence)
-                        text.getContent().get(sentenceIndex).getContent().add(word);
-                    sentence.remove();
+                    for (List<Character> word : text.get(sentenceIndex).getContent())
+                        text.get(sentenceIndex - 1).getContent().add(word);
+                    text.remove(sentenceIndex);
+                    continue;
                 }
+                ++sentenceIndex;
             }
-            else {
-                for (List<Character> word : sentence)
-                    text.getContent().get(sentenceIndex).getContent().add(word);
-                sentence.remove();
+        } else {
+            for (int sentenceIndex = 1; sentenceIndex < text.size(); ) {
+                for (List<Character> word : text.get(sentenceIndex).getContent())
+                    text.get(0).getContent().add(word);
+                text.remove(sentenceIndex);
             }
-            sentenceIndex += 1;
         }
-
-        return text;
     }
 
 }
