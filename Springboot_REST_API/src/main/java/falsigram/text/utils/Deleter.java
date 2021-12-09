@@ -17,19 +17,14 @@ import java.util.*;
 
 public class Deleter {
 
+    /*    Fonctions    */
     /**
      * Default constructor
      */
     public Deleter() {
     }
 
-/*
-    private static List<Character> deleteChar(List<Character> l, int index) {
-        l.remove(index);
-        return l;
-    }
-*/
-
+    /* Public fonctions */
     /**
      * @param text Text
      * @param occurrence float
@@ -38,13 +33,13 @@ public class Deleter {
         List<Character> tmp = new ArrayList<>();
 
         if (occurrence != 1) {
+            Random rand = new Random();  // Initialisation d'un nombre Random
             for (Sentence sentence : text) {
                 for (List<Character> word : sentence.getContent()) {
-                    for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
+                    for (Character c : word) {
                         /* On créer un nombre aléatoire entre 0 et 1 */
-                        float randNbr = new Random().nextFloat();
-                        if (randNbr > occurrence)
-                            tmp.add(word.get(charIndex));
+                        if (rand.nextFloat() > occurrence)
+                            tmp.add(c);
                     }
                     word.clear();
                     word.addAll(tmp);
@@ -93,11 +88,11 @@ public class Deleter {
      */
     public static void deleteSpaces(List<Sentence> text, float occurrence) {
         if (occurrence != 1) {
+            Random rand = new Random();  // Initialisation d'un nombre Random
             for (Sentence sentence : text) {
                 for (int wordIndex = 1; wordIndex < sentence.getContent().size();) {
                     /* On créer un nombre aléatoire entre 0 et 1 */
-                    float randNbr = new Random().nextFloat();
-                    if (randNbr < occurrence) {
+                    if (rand.nextFloat() < occurrence) {
                         sentence.getContent().get(wordIndex-1).addAll(sentence.getContent().get(wordIndex));
                         sentence.getContent().remove(wordIndex);
                         continue;
@@ -152,22 +147,16 @@ public class Deleter {
      */
     public static void deletePunctuations(List<Sentence> text, float occurrence) {
         if (occurrence != 1) {
-            for (int sentenceIndex = 1; sentenceIndex < text.size();) {
+            Random rand = new Random();  // Initialisation d'un nombre Random
+            for (Sentence sentence : text) {
                 /* On créer un nombre aléatoire entre 0 et 1 */
-                float randNbr = new Random().nextFloat();
-                if (occurrence > randNbr) {
-                    for (List<Character> word : text.get(sentenceIndex).getContent())
-                        text.get(sentenceIndex - 1).getContent().add(word);
-                    text.remove(sentenceIndex);
-                    continue;
+                if (rand.nextFloat() < occurrence) {
+                    sentence.setPunctuation(' ');  // impossible de set un caractere a NULL
                 }
-                ++sentenceIndex;
             }
         } else {
-            for (int sentenceIndex = 1; sentenceIndex < text.size(); ) {
-                for (List<Character> word : text.get(sentenceIndex).getContent())
-                    text.get(0).getContent().add(word);
-                text.remove(sentenceIndex);
+            for (Sentence sentence : text) {
+                sentence.setPunctuation(' ');
             }
         }
     }
