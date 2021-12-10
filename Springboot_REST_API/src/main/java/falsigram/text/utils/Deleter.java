@@ -41,46 +41,14 @@ public class Deleter {
                         if (rand.nextFloat() > occurrence)
                             tmp.add(c);
                     }
-                    word.clear();
-                    word.addAll(tmp);
-                    tmp.clear();
+                    word.removeAll(tmp);
                 }
             }
         } else {
-            for (Sentence sentence : text) {
-                for (List<Character> word : sentence.getContent())
-                    word.clear();
-            }
+            for (Sentence sentence : text)
+                sentence.getContent().clear();
         }
     }
-
-
-    /**
-     * @param text Text
-     * @param occurrence float
-     */
-    // TODO appeler la fonction
-    public static String deleteLettersString(List<Sentence> text, float occurrence) {
-        StringBuilder texteEntier = new StringBuilder(text.toString());
-
-        if (occurrence != 1) {
-            for (int charIndex = 0; charIndex < texteEntier.length();) {
-                /* On créer un nombre aléatoire entre 0 et 1 */
-                float randNbr = new Random().nextFloat();
-                if (Character.isLetter(texteEntier.charAt(charIndex)) && randNbr < occurrence) {
-                    texteEntier.deleteCharAt(texteEntier.charAt(charIndex));
-                    continue;
-                }
-                ++charIndex;
-            }
-        } else {
-            for (int charIndex = 0; charIndex < texteEntier.length(); ++charIndex)
-                texteEntier.deleteCharAt(texteEntier.charAt(charIndex));
-        }
-
-        return texteEntier.toString();
-    }
-
 
     /**
      * @param text Text
@@ -115,16 +83,17 @@ public class Deleter {
      * @param occurrence float
      */
     public static void deleteAccents(List<Sentence> text, float occurrence) {
-        // TODO ne fonctionne pas
         if (occurrence != 1) {
+            Random rand = new Random();  // Initialisation d'un nombre Random
             for (Sentence sentence : text) {
                 for (List<Character> word : sentence.getContent()) {
-                    for (Character c : word) {
-                        /* On créer un nombre aléatoire entre 0 et 1 */
-                        float randNbr = new Random().nextFloat();
-                        if (occurrence > randNbr) {
-                            String tmp = Normalizer.normalize(String.valueOf(c), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
-                            c = tmp.charAt(0);
+                    for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
+                        if (word.get(charIndex).toString().matches("[À-ÿ]")) {
+                            /* On créer un nombre aléatoire entre 0 et 1 */
+                            if (rand.nextFloat() < occurrence) {
+                                String tmp = Normalizer.normalize(String.valueOf(word.get(charIndex)), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+                                word.set(charIndex, tmp.charAt(0));
+                            }
                         }
                     }
                 }
@@ -132,9 +101,11 @@ public class Deleter {
         } else {
             for (Sentence sentence : text) {
                 for (List<Character> word : sentence.getContent()) {
-                    for (Character c : word) {
-                        String tmp = Normalizer.normalize(String.valueOf(c), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
-                        c = tmp.charAt(0);
+                    for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
+                        if (word.get(charIndex).toString().matches("[À-ÿ]")) {
+                            String tmp = Normalizer.normalize(String.valueOf(word.get(charIndex)), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+                            word.set(charIndex, tmp.charAt(0));
+                        }
                     }
                 }
             }
