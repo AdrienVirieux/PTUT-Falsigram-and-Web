@@ -10,6 +10,7 @@ package falsigram.text.utils;
 
 import falsigram.text.core.Sentence;
 
+import java.text.Normalizer;
 import java.util.*;
 
 
@@ -56,17 +57,13 @@ public class Inserter {
      * @return Character
      */
     private static Character chooseNearKey(List<Character> word, int charIndex) {
-        switch (Character.toLowerCase(word.get(charIndex))) {
+        String tmp = Normalizer.normalize(String.valueOf(word.get(charIndex)), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+        switch (Character.toLowerCase(tmp.charAt(0))) {
             case 'a':
-            case 'à':
                 return keysNearA.get(new Random().nextInt(keysNearA.size()));
             case 'z':
                 return keysNearZ.get(new Random().nextInt(keysNearZ.size()));
             case 'e':
-            case 'é':
-            case 'è':
-            case 'ê':
-            case 'ë':
                 return keysNearE.get(new Random().nextInt(keysNearE.size()));
             case 'r':
                 return keysNearR.get(new Random().nextInt(keysNearR.size()));
@@ -75,11 +72,8 @@ public class Inserter {
             case 'y':
                 return keysNearY.get(new Random().nextInt(keysNearY.size()));
             case 'u':
-            case 'ù':
                 return keysNearU.get(new Random().nextInt(keysNearU.size()));
             case 'i':
-            case 'î':
-            case 'ï':
                 return keysNearI.get(new Random().nextInt(keysNearI.size()));
             case 'o':
                 return keysNearO.get(new Random().nextInt(keysNearO.size()));
