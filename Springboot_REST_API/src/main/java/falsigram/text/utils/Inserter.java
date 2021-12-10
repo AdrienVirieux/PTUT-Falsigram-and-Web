@@ -43,6 +43,15 @@ public class Inserter {
     private static final List<Character> keysNearB = Arrays.asList('v', 'g', 'n');
     private static final List<Character> keysNearN = Arrays.asList('b', 'h');
 
+    /* Listes des accents suivant la lettre */
+    private static final List<Character> accentsA = Arrays.asList('à', 'ä', 'â');
+    private static final List<Character> accentsE = Arrays.asList('é', 'è', 'ê', 'ë');
+    private static final List<Character> accentsI = Arrays.asList('î', 'ï');
+    private static final List<Character> accentsO = Arrays.asList('ô', 'ö');
+    private static final List<Character> accentsU = Arrays.asList('û', 'ü', 'ù');
+    private static final List<Character> accentsY = Arrays.asList('ÿ', 'ý');
+
+
     /*    Fonctions    */
     /**
      * Default constructor
@@ -116,11 +125,31 @@ public class Inserter {
         }
     }
 
+    private static Character chooseAccent(List<Character> word, int charIndex) {
+        switch (Character.toLowerCase(word.get(charIndex))) {
+            case 'a':
+                return accentsA.get(new Random().nextInt(accentsA.size()));
+            case 'e':
+                return accentsE.get(new Random().nextInt(accentsE.size()));
+            case 'i':
+                return accentsI.get(new Random().nextInt(accentsI.size()));
+            case 'o':
+                return accentsO.get(new Random().nextInt(accentsO.size()));
+            case 'u':
+                return accentsU.get(new Random().nextInt(accentsU.size()));
+            case 'y':
+                return accentsY.get(new Random().nextInt(accentsY.size()));
+            default:
+                return word.get(charIndex);
+        }
+    }
+
     /* Public fonctions */
     /**
      * @param text Text
      * @param occurrence float
      */
+    // TODO a voir si on decide d'implementer les UpperCases
     public static void insertLetters(List<Sentence> text, float occurrence) {
         if (occurrence != 1) {
             Random rand = new Random();  // Initialisation d'un nombre Random
@@ -199,14 +228,39 @@ public class Inserter {
      * @param text Text
      * @param occurrence float
      */
+    // TODO a voir si on decide d'implementer les UpperCases
     public static void insertAccents(List<Sentence> text, float occurrence) {
-        // TODO implement here
+        if (occurrence != 1) {
+            Random rand = new Random();  // Initialisation d'un nombre Random
+            for (Sentence sentence : text) {
+                for (List<Character> word : sentence.getContent()) {
+                    for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
+                        if (word.get(charIndex).toString().matches("[a-zA-Z]")) {
+                            /* On créer un nombre aléatoire entre 0 et 1 */
+                            if (rand.nextFloat() < occurrence)
+                                word.set(charIndex, chooseAccent(word, charIndex));
+                        }
+                    }
+                }
+            }
+        } else {
+            for (Sentence sentence : text) {
+                for (List<Character> word : sentence.getContent()) {
+                    for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
+                        if (word.get(charIndex).toString().matches("[a-zA-Z]")) {
+                            word.set(charIndex, chooseAccent(word, charIndex));
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**
      * @param text Text
      * @param occurrence float
      */
+    // TODO a voir si on decide d'implementer les UpperCases
     public static void insertNearKeyboardKeyLetters(List<Sentence> text, float occurrence) {
         if (occurrence != 1) {
             Random rand = new Random();  // Initialisation d'un nombre Random
@@ -215,7 +269,6 @@ public class Inserter {
                     for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
                         /* On créer un nombre aléatoire entre 0 et 1 */
                         if (rand.nextFloat() < occurrence) {
-                            // TODO a voir si on decide d'implementer les UpperCases
                             if (Character.isUpperCase(word.get(charIndex)))
                                 word.add(charIndex + 1, Character.toUpperCase(chooseNearKey(word, charIndex)));
                             else
@@ -229,7 +282,6 @@ public class Inserter {
             for (Sentence sentence : text) {
                 for (List<Character> word : sentence.getContent()) {
                     for (int charIndex = 0; charIndex < word.size(); charIndex += 2) {
-                        // TODO a voir si on decide d'implementer les UpperCases
                         if (Character.isUpperCase(word.get(charIndex)))
                             word.add(charIndex + 1, Character.toUpperCase(chooseNearKey(word, charIndex)));
                         else
