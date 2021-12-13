@@ -17,147 +17,156 @@ import java.util.*;
 
 public class Deleter {
 
+    /* static members */
+    private static final Random randomGenerator = new Random();
+    private static final String accents = "éèàùâêîôûëïçÉÈÀÙÂÊÎÔÛËÏÇ";
+
+    /* Private methods */
+
     /**
-     * Default constructor
+     * Removes the accented character at position index in the array word
+     * @param word the list of characters that will be modified
+     * @param index the index of the character to modify
      */
-    public Deleter() {
+    private static void deleteAccent(List<Character> word, int index) {
+        switch (word.get(index)) {
+            case 'é': case 'è': case 'ê': case 'ë':
+                word.set(index, 'e');
+                break;
+            case 'à': case 'â':
+                word.set(index, 'a');
+                break;
+            case 'î': case 'ï':
+                word.set(index, 'i');
+                break;
+            case 'ù': case 'ü':
+                word.set(index,'u');
+                break;
+            case 'ô':
+                word.set(index, 'o');
+                break;
+            case 'ç':
+                word.set(index, 'c');
+                break;
+            case 'É': case 'È': case 'Ê': case 'Ë':
+                word.set(index, 'E');
+                break;
+            case 'À': case 'Â':
+                word.set(index, 'A');
+                break;
+            case 'Î': case 'Ï':
+                word.set(index, 'I');
+                break;
+            case 'Ù': case 'Ü':
+                word.set(index,'U');
+                break;
+            case 'Ô':
+                word.set(index, 'O');
+                break;
+            case 'Ç':
+                word.set(index, 'C');
+                break;
+        }
     }
 
-    /*
-    private static List<Character> deleteChar(List<Character> l, int index) {
-        l.remove(index);
-        return l;
-    }
-    */
 
+    /* Public methods */
     /**
      * @param text Text
      * @param occurrence float
-     * @return Text
      */
+
+
     public static Text deleteLetters(Text text, float occurrence) {
-        int charIndex;
+        for (Sentence sentence : text.getContent()) {
+            for (List<Character> word : sentence.getContent()) {
+                Iterator<Character> iterator = word.iterator();
+                while (iterator.hasNext()) {
+                    iterator.next();
+                    if (randomGenerator.nextFloat() < occurrence) {
+                        iterator.remove();
+                    }
+                }
+            }
+        }
+        return text;
+    }
 
-        for (Sentence sentence : text) {
-            for (List<Character> word : sentence) {
-                charIndex = 0;
-                for (Character c : word) {
+    /**
+     * @param text Text
+     * @param occurrence float
+     */
+    public static void deleteSpaces(Text text, float occurrence) {
+        if (occurrence != 1) {
 
-                    if (occurrence != 1) {
-                        /* On créer un nombre aléatoire entre 0 et 1 */
-                        float randNbr = new Random().nextFloat();
-                        if (occurrence > randNbr) {
-                            word.remove(charIndex);
+            for (Sentence sentence : text.getContent()) {
+                for (int wordIndex = 0; wordIndex < sentence.getContent().size()-1;) {
+                    if (randomGenerator.nextFloat() < occurrence) {
+                        sentence.getContent().get(wordIndex).addAll(sentence.getContent().get(wordIndex+1));
+                        sentence.getContent().remove(wordIndex+1);
+                        continue;
+                    }
+                    ++wordIndex;
+                }
+            }
+        } else {
+            for (Sentence sentence : text.getContent()) {
+                for (int wordIndex = 0; wordIndex < sentence.getContent().size()-1;) {
+                    sentence.getContent().get(wordIndex).addAll(sentence.getContent().get(wordIndex+1));
+                    sentence.getContent().remove(wordIndex+1);
+                }
+            }
+        }
+    }
+
+
+
+    /**
+     * @param text Text
+     * @param occurrence float
+     */
+    public static void deleteAccents(Text text, float occurrence) {
+        if (occurrence != 1) {
+            for (Sentence sentence : text.getContent()) {
+                for (List<Character> word : sentence.getContent()) {
+                    for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
+                        if (accents.indexOf(word.get(charIndex)) != -1) {
+                            if (randomGenerator.nextFloat() < occurrence) {
+                                deleteAccent(word, charIndex);
+                            }
                         }
                     }
-                    else
-                        word.remove(charIndex);
-                    charIndex += 1;
-
                 }
             }
-        }
-
-        return text;
-    }
-
-
-    /**
-     * @param text Text
-     * @param occurrence float
-     * @return Text
-     */
-    public static Text deleteSpaces(Text text, float occurrence) {
-        int wordIndex;
-
-        for (Sentence sentence : text) {
-            wordIndex = 0;
-            for (List<Character> word : sentence) {
-                if (word.equals(sentence.getContent().get(0))) continue;
-
-                if (occurrence != 1) {
-                    /* On créer un nombre aléatoire entre 0 et 1 */
-                    float randNbr = new Random().nextFloat();
-                    if (occurrence > randNbr) {
-                        for (Character c : word)
-                            sentence.getContent().get(wordIndex).add(c);
-                        word.clear();
-                    }
-                }
-                else {
-                    for (Character c : word)
-                        sentence.getContent().get(wordIndex).add(c);
-                    word.clear();
-                }
-                wordIndex += 1;
-
-            }
-        }
-
-        return text;
-    }
-
-
-    /**
-     * @param text Text
-     * @param occurrence float
-     * @return Text
-     */
-    public static Text deleteAccents(Text text, float occurrence) {
-        for (Sentence sentence : text) {
-            for (List<Character> word : sentence) {
-                for (Character c : word) {
-                    // TODO faire en sorte de ne prendre que les caracteres accentués
-
-                    if (occurrence != 1) {
-                        /* On créer un nombre aléatoire entre 0 et 1 */
-                        float randNbr = new Random().nextFloat();
-                        if (occurrence > randNbr) {
-                            String tmp = Normalizer.normalize(String.valueOf(c), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
-                            c = tmp.charAt(0);
+        } else {
+            for (Sentence sentence : text.getContent()) {
+                for (List<Character> word : sentence.getContent()) {
+                    for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
+                        if (accents.indexOf(word.get(charIndex)) != -1) {
+                            deleteAccent(word, charIndex);
                         }
                     }
-                    else {
-                        String tmp = Normalizer.normalize(String.valueOf(c), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
-                        c = tmp.charAt(0);
-                    }
-
                 }
             }
         }
-
-        return text;
     }
 
     /**
      * @param text Text
      * @param occurrence float
-     * @return Text
      */
-    public static Text deletePunctuations(Text text, float occurrence) {
-        int sentenceIndex = 0;
-
-        for (Sentence sentence : text) {
-            if (sentence.equals(text.getContent().get(0))) continue;
-
-            if (occurrence != 1) {
+    public static void deletePunctuations(List<Sentence> text, float occurrence) {
+        if (occurrence != 1) {
+            for (Sentence sentence : text) {
                 /* On créer un nombre aléatoire entre 0 et 1 */
-                float randNbr = new Random().nextFloat();
-                if (occurrence > randNbr) {
-                    for (List<Character> word : sentence)
-                        text.getContent().get(sentenceIndex).getContent().add(word);
-                    sentence.remove();
+                if (randomGenerator.nextFloat() < occurrence) {
+                    sentence.setPunctuation(' ');  // impossible de set un caractere a NULL
                 }
             }
-            else {
-                for (List<Character> word : sentence)
-                    text.getContent().get(sentenceIndex).getContent().add(word);
-                sentence.remove();
+        } else {
+            for (Sentence sentence : text) {
+                sentence.setPunctuation(' ');
             }
-            sentenceIndex += 1;
         }
-
-        return text;
     }
-
 }
