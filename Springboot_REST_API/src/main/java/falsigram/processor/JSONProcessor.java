@@ -44,7 +44,7 @@ public class JSONProcessor {
                     case 'i' :
                         switch (instruction.getString("name")){
                             case "insertLetters" :
-                                Inserter.insertLetters(this.text.getContent(), occurrence);
+                                Inserter.insertLetters(this.text, occurrence);
                                 break;
                             case "insertSpaces" :
                                 Inserter.insertSpaces(this.text.getContent(), occurrence);
