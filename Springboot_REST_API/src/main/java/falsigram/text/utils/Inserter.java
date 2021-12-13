@@ -19,7 +19,7 @@ public class Inserter {
 
     private static final Random randomGenerator = new Random();
     private static final String letters = "azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN";
-
+    private static final String nonAccentedLetters = "aeioucAEIOUC";
     /* private methods */
     private static void splitWord(Sentence sentence, int wordIndex) {
         if (sentence.getContent().get(wordIndex).size() != 1){
@@ -29,6 +29,113 @@ public class Inserter {
         }
     }
 
+    private static void insertAccent(List<Character> word, int index) {
+        switch (word.get(index)) {
+            case 'e':
+                switch (randomGenerator.nextInt(4)) {
+                    case 0:
+                        word.set(index, 'é');
+                        break;
+                    case 1:
+                        word.set(index, 'è');
+                        break;
+                    case 2:
+                        word.set(index, 'ê');
+                        break;
+                    case 3:
+                        word.set(index, 'ë');
+                        break;
+                }
+                break;
+            case 'a':
+                switch (randomGenerator.nextInt(2)){
+                    case 0:
+                        word.set(index, 'à');
+                        break;
+                    case 1:
+                        word.set(index, 'â');
+                        break;
+                }
+                break;
+            case 'i':
+                switch (randomGenerator.nextInt(2)){
+                    case 0:
+                        word.set(index, 'î');
+                        break;
+                    case 1:
+                        word.set(index, 'ï');
+                        break;
+                }
+                break;
+            case 'o':
+                word.set(index, 'ô');
+                break;
+            case 'u':
+                switch (randomGenerator.nextInt(2)){
+                    case 0:
+                        word.set(index, 'ù');
+                        break;
+                    case 1:
+                        word.set(index, 'û');
+                        break;
+                }
+                break;
+            case 'c':
+                word.set(index, 'ç');
+                break;
+            case 'E':
+                switch (randomGenerator.nextInt(4)) {
+                    case 0:
+                        word.set(index, 'É');
+                        break;
+                    case 1:
+                        word.set(index, 'È');
+                        break;
+                    case 2:
+                        word.set(index, 'Ê');
+                        break;
+                    case 3:
+                        word.set(index, 'Ë');
+                        break;
+                }
+                break;
+            case 'A':
+                switch (randomGenerator.nextInt(2)){
+                    case 0:
+                        word.set(index, 'À');
+                        break;
+                    case 1:
+                        word.set(index, 'Â');
+                        break;
+                }
+                break;
+            case 'I':
+                switch (randomGenerator.nextInt(2)){
+                    case 0:
+                        word.set(index, 'Î');
+                        break;
+                    case 1:
+                        word.set(index, 'Ï');
+                        break;
+                }
+                break;
+            case 'O':
+                word.set(index, 'Ô');
+                break;
+            case 'U':
+                switch (randomGenerator.nextInt(2)){
+                    case 0:
+                        word.set(index, 'Ù');
+                        break;
+                    case 1:
+                        word.set(index, 'Û');
+                        break;
+                }
+                break;
+            case 'C':
+                word.set(index, 'Ç');
+        }
+    }
 
     /* Private var : Listes des nears keys */
     private static final List<Character> keysNearA = Arrays.asList('q', 'z');
@@ -58,13 +165,6 @@ public class Inserter {
     private static final List<Character> keysNearB = Arrays.asList('v', 'g', 'n');
     private static final List<Character> keysNearN = Arrays.asList('b', 'h');
 
-    /* Listes des accents suivant la lettre */
-    private static final List<Character> accentsA = Arrays.asList('à', 'ä', 'â');
-    private static final List<Character> accentsE = Arrays.asList('é', 'è', 'ê', 'ë');
-    private static final List<Character> accentsI = Arrays.asList('î', 'ï');
-    private static final List<Character> accentsO = Arrays.asList('ô', 'ö');
-    private static final List<Character> accentsU = Arrays.asList('û', 'ü', 'ù');
-    private static final List<Character> accentsY = Arrays.asList('ÿ', 'ý');
 
 
     /*    Fonctions    */
@@ -140,24 +240,6 @@ public class Inserter {
         }
     }
 
-    private static Character chooseAccent(List<Character> word, int charIndex) {
-        switch (Character.toLowerCase(word.get(charIndex))) {
-            case 'a':
-                return accentsA.get(new Random().nextInt(accentsA.size()));
-            case 'e':
-                return accentsE.get(new Random().nextInt(accentsE.size()));
-            case 'i':
-                return accentsI.get(new Random().nextInt(accentsI.size()));
-            case 'o':
-                return accentsO.get(new Random().nextInt(accentsO.size()));
-            case 'u':
-                return accentsU.get(new Random().nextInt(accentsU.size()));
-            case 'y':
-                return accentsY.get(new Random().nextInt(accentsY.size()));
-            default:
-                return word.get(charIndex);
-        }
-    }
 
     /* Public fonctions */
     /**
@@ -224,14 +306,14 @@ public class Inserter {
     // TODO a voir si on decide d'implementer les UpperCases
     public static void insertAccents(List<Sentence> text, float occurrence) {
         if (occurrence != 1) {
-            Random rand = new Random();  // Initialisation d'un nombre Random
             for (Sentence sentence : text) {
                 for (List<Character> word : sentence.getContent()) {
                     for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
-                        if (word.get(charIndex).toString().matches("[a-zA-Z]")) {
+                        if (nonAccentedLetters.indexOf(word.get(charIndex)) != -1) {
                             /* On créer un nombre aléatoire entre 0 et 1 */
-                            if (rand.nextFloat() < occurrence)
-                                word.set(charIndex, chooseAccent(word, charIndex));
+                            if (randomGenerator.nextFloat() < occurrence) {
+                                insertAccent(word, charIndex);
+                            }
                         }
                     }
                 }
@@ -240,8 +322,8 @@ public class Inserter {
             for (Sentence sentence : text) {
                 for (List<Character> word : sentence.getContent()) {
                     for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
-                        if (word.get(charIndex).toString().matches("[a-zA-Z]")) {
-                            word.set(charIndex, chooseAccent(word, charIndex));
+                        if (nonAccentedLetters.indexOf(word.get(charIndex)) != -1) {
+                                insertAccent(word, charIndex);
                         }
                     }
                 }
