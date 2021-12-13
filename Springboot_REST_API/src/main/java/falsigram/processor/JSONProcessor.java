@@ -110,13 +110,13 @@ public class JSONProcessor {
                     case 'd' :
                         switch (instruction.getString("name")) {
                             case "deleteLetters" :
-                                Deleter.deleteLetters(this.text.getContent(), occurrence);
+                                Deleter.deleteLetters(this.text, occurrence);
                                 break;
                             case "deleteSpaces" :
-                                Deleter.deleteSpaces(this.text.getContent(), occurrence);
+                                Deleter.deleteSpaces(this.text, occurrence);
                                 break;
                             case "deleteAccents" :
-                                Deleter.deleteAccents(this.text.getContent(), occurrence);
+                                Deleter.deleteAccents(this.text, occurrence);
                                 break;
                             case "deletePunctuations" :
                                 Deleter.deletePunctuations(this.text.getContent(), occurrence);

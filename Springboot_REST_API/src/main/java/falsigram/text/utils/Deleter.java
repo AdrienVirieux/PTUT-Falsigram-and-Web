@@ -17,94 +17,133 @@ import java.util.*;
 
 public class Deleter {
 
-    /*    Fonctions    */
-    /**
-     * Default constructor
-     */
-    public Deleter() {
-    }
+    /* static members */
+    private static final Random randomGenerator = new Random();
+    private static final String accents = "éèàùâêîôûëïçÉÈÀÙÂÊÎÔÛËÏÇ";
 
-    /* Public fonctions */
-    /**
-     * @param text Text
-     * @param occurrence float
-     */
-    public static void deleteLetters(List<Sentence> text, float occurrence) {
-        List<Character> tmp = new ArrayList<>();
+    /* Private methods */
 
-        if (occurrence != 1) {
-            Random rand = new Random();  // Initialisation d'un nombre Random
-            for (Sentence sentence : text) {
-                for (List<Character> word : sentence.getContent()) {
-                    for (Character c : word) {
-                        /* On créer un nombre aléatoire entre 0 et 1 */
-                        if (rand.nextFloat() > occurrence)
-                            tmp.add(c);
-                    }
-                    word.removeAll(tmp);
-                }
-            }
-        } else {
-            for (Sentence sentence : text)
-                sentence.getContent().clear();
+    /**
+     * Removes the accented character at position index in the array word
+     * @param word the list of characters that will be modified
+     * @param index the index of the character to modify
+     */
+    private static void deleteAccent(List<Character> word, int index) {
+        switch (word.get(index)) {
+            case 'é': case 'è': case 'ê': case 'ë':
+                word.set(index, 'e');
+                break;
+            case 'à': case 'â':
+                word.set(index, 'a');
+                break;
+            case 'î': case 'ï':
+                word.set(index, 'i');
+                break;
+            case 'ù': case 'ü':
+                word.set(index,'u');
+                break;
+            case 'ô':
+                word.set(index, 'o');
+                break;
+            case 'ç':
+                word.set(index, 'c');
+                break;
+            case 'É': case 'È': case 'Ê': case 'Ë':
+                word.set(index, 'E');
+                break;
+            case 'À': case 'Â':
+                word.set(index, 'A');
+                break;
+            case 'Î': case 'Ï':
+                word.set(index, 'I');
+                break;
+            case 'Ù': case 'Ü':
+                word.set(index,'U');
+                break;
+            case 'Ô':
+                word.set(index, 'O');
+                break;
+            case 'Ç':
+                word.set(index, 'C');
+                break;
         }
     }
 
+
+    /* Public methods */
     /**
      * @param text Text
      * @param occurrence float
      */
-    public static void deleteSpaces(List<Sentence> text, float occurrence) {
+
+
+    public static Text deleteLetters(Text text, float occurrence) {
+        for (Sentence sentence : text.getContent()) {
+            for (List<Character> word : sentence.getContent()) {
+                Iterator<Character> iterator = word.iterator();
+                while (iterator.hasNext()) {
+                    iterator.next();
+                    if (randomGenerator.nextFloat() < occurrence) {
+                        iterator.remove();
+                    }
+                }
+            }
+        }
+        return text;
+    }
+
+    /**
+     * @param text Text
+     * @param occurrence float
+     */
+    public static void deleteSpaces(Text text, float occurrence) {
         if (occurrence != 1) {
-            Random rand = new Random();  // Initialisation d'un nombre Random
-            for (Sentence sentence : text) {
-                for (int wordIndex = 1; wordIndex < sentence.getContent().size();) {
-                    /* On créer un nombre aléatoire entre 0 et 1 */
-                    if (rand.nextFloat() < occurrence) {
-                        sentence.getContent().get(wordIndex-1).addAll(sentence.getContent().get(wordIndex));
-                        sentence.getContent().remove(wordIndex);
+
+            for (Sentence sentence : text.getContent()) {
+                for (int wordIndex = 0; wordIndex < sentence.getContent().size()-1;) {
+                    if (randomGenerator.nextFloat() < occurrence) {
+                        sentence.getContent().get(wordIndex).addAll(sentence.getContent().get(wordIndex+1));
+                        sentence.getContent().remove(wordIndex+1);
                         continue;
                     }
                     ++wordIndex;
                 }
             }
         } else {
-            for (Sentence sentence : text) {
-                for (int wordIndex = 1; wordIndex < sentence.getContent().size();) {
-                    sentence.getContent().get(0).addAll(sentence.getContent().get(wordIndex));
-                    sentence.getContent().remove(wordIndex);
+            for (Sentence sentence : text.getContent()) {
+                for (int wordIndex = 0; wordIndex < sentence.getContent().size()-1;) {
+                    sentence.getContent().get(wordIndex).addAll(sentence.getContent().get(wordIndex+1));
+                    sentence.getContent().remove(wordIndex+1);
                 }
             }
         }
     }
 
+
+
     /**
      * @param text Text
      * @param occurrence float
      */
-    public static void deleteAccents(List<Sentence> text, float occurrence) {
+    public static void deleteAccents(Text text, float occurrence) {
         if (occurrence != 1) {
-            Random rand = new Random();  // Initialisation d'un nombre Random
-            for (Sentence sentence : text) {
+            for (Sentence sentence : text.getContent()) {
                 for (List<Character> word : sentence.getContent()) {
                     for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
-                        if (word.get(charIndex).toString().matches("[À-ÿ]")) {
-                            /* On créer un nombre aléatoire entre 0 et 1 */
-                            if (rand.nextFloat() < occurrence) {
-                                String tmp = Normalizer.normalize(String.valueOf(word.get(charIndex)), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
-                                word.set(charIndex, tmp.charAt(0));
+                        if (accents.indexOf(word.get(charIndex)) != -1) {
+                            if (randomGenerator.nextFloat() < occurrence) {
+                                deleteAccent(word, charIndex);
                             }
                         }
                     }
                 }
             }
         } else {
-            for (Sentence sentence : text) {
+            for (Sentence sentence : text.getContent()) {
                 for (List<Character> word : sentence.getContent()) {
                     for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
-                        if (word.get(charIndex).toString().matches("[À-ÿ]")) {
-                            String tmp = Normalizer.normalize(String.valueOf(word.get(charIndex)), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
-                            word.set(charIndex, tmp.charAt(0));
+                        if (accents.indexOf(word.get(charIndex)) != -1) {
+                            deleteAccent(word, charIndex);
                         }
                     }
                 }
@@ -118,10 +157,9 @@ public class Deleter {
      */
     public static void deletePunctuations(List<Sentence> text, float occurrence) {
         if (occurrence != 1) {
-            Random rand = new Random();  // Initialisation d'un nombre Random
             for (Sentence sentence : text) {
                 /* On créer un nombre aléatoire entre 0 et 1 */
-                if (rand.nextFloat() < occurrence) {
+                if (randomGenerator.nextFloat() < occurrence) {
                     sentence.setPunctuation(' ');  // impossible de set un caractere a NULL
                 }
             }
@@ -131,5 +169,4 @@ public class Deleter {
             }
         }
     }
-
 }
