@@ -19,6 +19,17 @@ public class Inserter {
 
     private static final Random randomGenerator = new Random();
     private static final String letters = "azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN";
+
+    /* private methods */
+    private static void splitWord(Sentence sentence, int wordIndex) {
+        if (sentence.getContent().get(wordIndex).size() != 1){
+            sentence.getContent().add(wordIndex+1, sentence.getContent().get(wordIndex).subList(0,1));
+            sentence.getContent().add(wordIndex+2,sentence.getContent().get(wordIndex).subList(1,sentence.getContent().get(wordIndex).size()));
+            sentence.getContent().remove(wordIndex);
+        }
+    }
+
+
     /* Private var : Listes des nears keys */
     private static final List<Character> keysNearA = Arrays.asList('q', 'z');
     private static final List<Character> keysNearZ = Arrays.asList('a', 's', 'e');
@@ -161,7 +172,7 @@ public class Inserter {
                     for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
                         /* On créer un nombre aléatoire entre 0 et 1 */
                         if (randomGenerator.nextFloat() < occurrence) {
-                            word.add(letters.charAt(randomGenerator.nextInt(letters.length())));
+                            word.add(charIndex+1,letters.charAt(randomGenerator.nextInt(letters.length())));
                             ++charIndex;
                         }
                     }
@@ -171,7 +182,7 @@ public class Inserter {
             for (Sentence sentence : text.getContent()) {
                 for (List<Character> word : sentence.getContent()) {
                     for (int charIndex = 0; charIndex < word.size(); charIndex += 2) {
-                        word.add(letters.charAt(randomGenerator.nextInt(letters.length())));
+                        word.add(charIndex+1,letters.charAt(randomGenerator.nextInt(letters.length())));
                     }
                 }
             }
@@ -182,42 +193,29 @@ public class Inserter {
      * @param text Text
      * @param occurrence float
      */
-    public static void insertSpaces(List<Sentence> text, float occurrence) {
-        List<Character> tmp;
-
+    public static void insertSpaces(Text text, float occurrence) {
         if (occurrence != 1) {
-            Random rand = new Random();  // Initialisation d'un nombre Random
-            for (Sentence sentence : text) {
+            for (Sentence sentence : text.getContent()) {
                 for (int wordIndex = 0; wordIndex < sentence.getContent().size(); ++wordIndex) {
                     for (int charIndex = 0; charIndex < sentence.getContent().get(wordIndex).size() - 1; ++charIndex) {
                         /* On créer un nombre aléatoire entre 0 et 1 */
-                        if (rand.nextFloat() < occurrence) {
-                            tmp = new ArrayList<>();
-                            for (int nextCharIndex = charIndex + 1; nextCharIndex < sentence.getContent().get(wordIndex).size();) {
-                                tmp.add(sentence.getContent().get(wordIndex).get(nextCharIndex));
-                                sentence.getContent().get(wordIndex).remove(nextCharIndex);
-                            }
-                            sentence.getContent().add(wordIndex + 1, tmp);
-                            ++wordIndex;
+                        if (randomGenerator.nextFloat() < occurrence) {
+                            splitWord(sentence, wordIndex);
+                            break;
                         }
                     }
                 }
             }
         } else {
-            for (Sentence sentence : text) {
-                for (int wordIndex = 0; wordIndex < sentence.getContent().size();) {
-                    for (int charIndex = 0; charIndex < sentence.getContent().get(wordIndex).size();) {
-                        tmp = new ArrayList<>();
-                        tmp.add(sentence.getContent().get(wordIndex).get(charIndex));
-                        sentence.getContent().get(wordIndex).remove(charIndex);
-                        sentence.getContent().add(wordIndex, tmp);
-                        ++wordIndex;
-                    }
-                    sentence.getContent().remove(wordIndex);
+            for (Sentence sentence : text.getContent()) {
+                for (int wordIndex = 0; wordIndex < sentence.getContent().size(); wordIndex += 1) {
+                    splitWord(sentence, wordIndex);
+
                 }
             }
         }
     }
+
 
     /**
      * @param text Text
