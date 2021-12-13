@@ -9,12 +9,16 @@
 package falsigram.text.utils;
 
 import falsigram.text.core.Sentence;
+import falsigram.text.core.Text;
 
 import java.text.Normalizer;
 import java.util.*;
 
 
 public class Inserter {
+
+    private static final Random randomGenerator = new Random();
+    private static final String letters = "azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN";
     /* Private var : Listes des nears keys */
     private static final List<Character> keysNearA = Arrays.asList('q', 'z');
     private static final List<Character> keysNearZ = Arrays.asList('a', 's', 'e');
@@ -150,33 +154,24 @@ public class Inserter {
      * @param occurrence float
      */
     // TODO a voir si on decide d'implementer les UpperCases
-    public static void insertLetters(List<Sentence> text, float occurrence) {
+    public static void insertLetters(Text text, float occurrence) {
         if (occurrence != 1) {
-            Random rand = new Random();  // Initialisation d'un nombre Random
-            for (Sentence sentence : text) {
+            for (Sentence sentence : text.getContent()) {
                 for (List<Character> word : sentence.getContent()) {
                     for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
                         /* On créer un nombre aléatoire entre 0 et 1 */
-                        if (rand.nextFloat() < occurrence) {
-                            /* Choix aléatoire d'un caractère */
-                            int randCarac = new Random().nextInt(26);
-                            char newCarac = (char) (randCarac + 'a');
-
-                            word.add(charIndex + 1, newCarac);
+                        if (randomGenerator.nextFloat() < occurrence) {
+                            word.add(letters.charAt(randomGenerator.nextInt(letters.length())));
                             ++charIndex;
                         }
                     }
                 }
             }
         } else {
-            for (Sentence sentence : text) {
+            for (Sentence sentence : text.getContent()) {
                 for (List<Character> word : sentence.getContent()) {
                     for (int charIndex = 0; charIndex < word.size(); charIndex += 2) {
-                        /* Choix aléatoire d'un caractère */
-                        int randCarac = new Random().nextInt(26);
-                        char newCarac = (char) (randCarac + 'a');
-
-                        word.add(charIndex + 1, newCarac);
+                        word.add(letters.charAt(randomGenerator.nextInt(letters.length())));
                     }
                 }
             }
