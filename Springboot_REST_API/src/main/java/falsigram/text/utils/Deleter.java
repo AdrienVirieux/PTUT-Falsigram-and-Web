@@ -39,7 +39,7 @@ public class Deleter {
             case 'î': case 'ï':
                 word.set(index, 'i');
                 break;
-            case 'ù': case 'ü':
+            case 'ù': case 'û':
                 word.set(index,'u');
                 break;
             case 'ô':
