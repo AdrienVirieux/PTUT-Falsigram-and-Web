@@ -47,7 +47,7 @@ public class JSONProcessor {
                                 Inserter.insertLetters(this.text, occurrence);
                                 break;
                             case "insertSpaces" :
-                                Inserter.insertSpaces(this.text.getContent(), occurrence);
+                                Inserter.insertSpaces(this.text, occurrence);
                                 break;
                             case "insertAccents" :
                                 Inserter.insertAccents(this.text.getContent(), occurrence);
