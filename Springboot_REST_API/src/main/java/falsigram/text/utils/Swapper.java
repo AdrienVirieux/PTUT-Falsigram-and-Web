@@ -19,8 +19,8 @@ public class Swapper {
     private static final Random randomGenerator = new Random();
 
     /**
-     * @param Text text
-     * @param float occurrence
+     * @param text
+     * @param occurrence
      * @return Text
      */
     public static void swapLettersInWord(Text text, float occurrence) {
@@ -49,8 +49,8 @@ public class Swapper {
 
 
     /**
-     * @param Text text
-     * @param float occurrence
+     * @param text
+     * @param occurrence
      * @return Text
      */
     public static void swapContiguousLettersInWord(Text text, float occurrence) {
@@ -79,8 +79,8 @@ public class Swapper {
 
 
     /**
-     * @param Text text
-     * @param float occurrence
+     * @param text
+     * @param occurrence
      * @return Text
      */
     public static void swapWordsInSentence(Text text, float occurrence) {
@@ -105,8 +105,8 @@ public class Swapper {
 
 
     /**
-     * @param Text text
-     * @param float occurrence
+     * @param text
+     * @param occurrence
      * @return Text
      */
     public static void swapContiguousWordsInSentence(Text text, float occurrence) {
