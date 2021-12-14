@@ -124,27 +124,26 @@ public class JSONProcessor {
                                 break;
                         }
                         break;
-                    /*case 's' :
+                    case 's' :
                         switch (instruction.getString("name")) {
-                            case "swapCharsInWord" :
-                                Swapper.swapCharsInWord(this.text.getContent(), occurrence);
+                            case "swapLettersInWord" :
+                                Swapper.swapLettersInWord(this.text, occurrence);
                                 break;
-                            case "swapContiguousCharsInWord" :
-                                Swapper.swapContiguousInWord(this.text.getContent(), occurrence);
+                            case "swapContiguousLettersInWord" :
+                                Swapper.swapContiguousLettersInWord(this.text, occurrence);
                                 break;
                             case "swapWordsInSentence" :
-                                Swapper.swapWordsInSentence(this.text.getContent(), occurrence);
+                                Swapper.swapWordsInSentence(this.text, occurrence);
                                 break;
                             case "swapContiguousWordsInSentence" :
-                                Swapper.swapContiguousWordsInSentence(this.text.getContent(), occurrence);
+                                Swapper.swapContiguousWordsInSentence(this.text, occurrence);
                             default :
                                 break;
                         }
-                        break;*/
+                        break;
                 }
             }
         }
-        String ret = this.text.toString();
-        return ret;
+        return this.text.toString();
     }
 }
