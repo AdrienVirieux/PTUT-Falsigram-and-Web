@@ -10,16 +10,14 @@ package falsigram.text.utils;
 
 import falsigram.text.core.Sentence;
 import falsigram.text.core.Text;
-
+import static falsigram.text.utils.Data.*;
 import java.text.Normalizer;
 import java.util.*;
 
 
 public class Inserter {
 
-    private static final Random randomGenerator = new Random();
-    private static final String letters = "azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN";
-    private static final String nonAccentedLetters = "aeioucAEIOUC";
+
     /* private methods */
     private static void splitWord(Sentence sentence, int wordIndex) {
         if (sentence.getContent().get(wordIndex).size() != 1){
@@ -254,7 +252,7 @@ public class Inserter {
                     for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
                         /* On créer un nombre aléatoire entre 0 et 1 */
                         if (randomGenerator.nextFloat() < occurrence) {
-                            word.add(charIndex+1,letters.charAt(randomGenerator.nextInt(letters.length())));
+                            word.add(charIndex+1, allLetters.get(randomGenerator.nextInt(allLetters.size())));
                             ++charIndex;
                         }
                     }
@@ -264,7 +262,7 @@ public class Inserter {
             for (Sentence sentence : text.getContent()) {
                 for (List<Character> word : sentence.getContent()) {
                     for (int charIndex = 0; charIndex < word.size(); charIndex += 2) {
-                        word.add(charIndex+1,letters.charAt(randomGenerator.nextInt(letters.length())));
+                        word.add(charIndex+1, allLetters.get(randomGenerator.nextInt(allLetters.size())));
                     }
                 }
             }

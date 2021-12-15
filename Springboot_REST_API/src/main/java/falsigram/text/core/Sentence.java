@@ -22,8 +22,7 @@ public class Sentence {
     public Sentence(String sentence) {
         this.content = new ArrayList<List<Character>>();
         List<Character> tmp = new ArrayList<Character>();
-
-        for (int i = 1; i < sentence.length()-1; ++i){
+        for (int i = 0; i < sentence.length()-1; ++i){
             if (sentence.charAt(i) != ' '){
                 tmp.add(sentence.charAt(i));
             }
@@ -33,6 +32,7 @@ public class Sentence {
             }
         }
         this.content.add(tmp);
+        if (this.content.get(0).size() == 0) this.content.remove(0);
         this.punctuation = sentence.charAt(sentence.length()-1);
     }
 

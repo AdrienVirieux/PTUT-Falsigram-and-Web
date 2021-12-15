@@ -8,15 +8,13 @@ package falsigram.text.utils;
 
 import falsigram.text.core.Sentence;
 import falsigram.text.core.Text;
-
+import static falsigram.text.utils.Data.*;
 import java.util.*;
 
 import static java.util.Collections.swap;
 
 
 public class Swapper {
-
-    private static final Random randomGenerator = new Random();
 
     /**
      * @param text

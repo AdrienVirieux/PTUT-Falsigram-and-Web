@@ -62,46 +62,46 @@ public class JSONProcessor {
                     case 'r' :
                         switch (instruction.getString("name")){
                             case "replaceLetters" :
-                                Replacer.replaceLetters(this.text.getContent(), occurrence);
+                                Replacer.replaceLetters(this.text, occurrence);
                                 break;
                             case "replaceAccents" :
-                                Replacer.replaceAccents(this.text.getContent(), occurrence);
+                                Replacer.replaceAccents(this.text, occurrence);
                                 break;
                             case "replacePunctuations" :
-                                Replacer.replacePunctuations(this.text.getContent(), occurrence);
+                                Replacer.replacePunctuations(this.text, occurrence);
                                 break;
                             case "replaceAHomophones" :
-                                Replacer.replaceAHomophones(this.text.getContent(), occurrence);
+                                Replacer.replaceAHomophones(this.text, occurrence);
                                 break;
                             case "replaceEtHomophones" :
-                                Replacer.replaceEtHomophones(this.text.getContent(), occurrence);
+                                Replacer.replaceEtHomophones(this.text, occurrence);
                                 break;
                             case "replaceSaHomophones" :
-                                Replacer.replaceSaHomophones(this.text.getContent(), occurrence);
+                                Replacer.replaceSaHomophones(this.text, occurrence);
                                 break;
                             case "replaceSeHomophones" :
-                                Replacer.replaceSeHomophones(this.text.getContent(), occurrence);
+                                Replacer.replaceSeHomophones(this.text, occurrence);
                                 break;
                             case "replaceSaitHomophones" :
-                                Replacer.replaceSaitHomophones(this.text.getContent(), occurrence);
+                                Replacer.replaceSaitHomophones(this.text, occurrence);
                                 break;
                             case "replaceDansHomophones" :
-                                Replacer.replaceDansHomophones(this.text.getContent(), occurrence);
+                                Replacer.replaceDansHomophones(this.text, occurrence);
                                 break;
                             case "replaceLaHomophones" :
-                                Replacer.replaceLaHomophones(this.text.getContent(), occurrence);
+                                Replacer.replaceLaHomophones(this.text, occurrence);
                                 break;
                             case "replaceMaisHomophones" :
-                                Replacer.replaceMaisHomophones(this.text.getContent(), occurrence);
+                                Replacer.replaceMaisHomophones(this.text, occurrence);
                                 break;
                             case "replaceOnHomophones" :
-                                Replacer.replaceOnHomophones(this.text.getContent(), occurrence);
+                                Replacer.replaceOnHomophones(this.text, occurrence);
                                 break;
                             case "replaceOuHomophones" :
-                                Replacer.replaceOuHomophones(this.text.getContent(), occurrence);
+                                Replacer.replaceOuHomophones(this.text, occurrence);
                                 break;
                             case "replacePeuHomophones" :
-                                Replacer.replacePeuHomophones(this.text.getContent(), occurrence);
+                                Replacer.replacePeuHomophones(this.text, occurrence);
                                 break;
                             default :
                                 break;

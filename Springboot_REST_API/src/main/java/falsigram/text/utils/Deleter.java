@@ -10,16 +10,13 @@ package falsigram.text.utils;
 
 import falsigram.text.core.Sentence;
 import falsigram.text.core.Text;
+import static falsigram.text.utils.Data.*;
 
-import java.text.Normalizer;
 import java.util.*;
 
 
 public class Deleter {
 
-    /* static members */
-    private static final Random randomGenerator = new Random();
-    private static final String accents = "éèàùâêîôûëïçÉÈÀÙÂÊÎÔÛËÏÇ";
 
     /* Private methods */
 
@@ -77,19 +74,25 @@ public class Deleter {
      */
 
 
-    public static Text deleteLetters(Text text, float occurrence) {
-        for (Sentence sentence : text.getContent()) {
-            for (List<Character> word : sentence.getContent()) {
-                Iterator<Character> iterator = word.iterator();
-                while (iterator.hasNext()) {
-                    iterator.next();
-                    if (randomGenerator.nextFloat() < occurrence) {
-                        iterator.remove();
+    public static void deleteLetters(Text text, float occurrence) {
+        if (occurrence != 1) {
+            for (Sentence sentence : text.getContent()) {
+                for (List<Character> word : sentence.getContent()) {
+                    Iterator<Character> iterator = word.iterator();
+                    while (iterator.hasNext()) {
+                        iterator.next();
+                        if (randomGenerator.nextFloat() < occurrence) {
+                            iterator.remove();
+                        }
                     }
                 }
             }
         }
-        return text;
+        else {
+            for (Sentence s : text.getContent()) {
+                s.getContent().clear();
+            }
+        }
     }
 
     /**
@@ -130,7 +133,7 @@ public class Deleter {
             for (Sentence sentence : text.getContent()) {
                 for (List<Character> word : sentence.getContent()) {
                     for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
-                        if (accents.indexOf(word.get(charIndex)) != -1) {
+                        if (allAccents.indexOf(word.get(charIndex)) != -1) {
                             if (randomGenerator.nextFloat() < occurrence) {
                                 deleteAccent(word, charIndex);
                             }
@@ -142,7 +145,7 @@ public class Deleter {
             for (Sentence sentence : text.getContent()) {
                 for (List<Character> word : sentence.getContent()) {
                     for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
-                        if (accents.indexOf(word.get(charIndex)) != -1) {
+                        if (allAccents.indexOf(word.get(charIndex)) != -1) {
                             deleteAccent(word, charIndex);
                         }
                     }
