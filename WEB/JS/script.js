@@ -1,4 +1,4 @@
-
+/*
       function testfalsi(){
 
         let Tableauoccurrence = new Array();
@@ -43,7 +43,8 @@
         return(requete);
       }
 
-      function SendRequest(){
+*/
+function SendRequest(){
         let url = "http://localhost:8080/RequestJSONProcess";
         let xhr = new XMLHttpRequest();
         xhr.open("POST", url);
@@ -52,19 +53,57 @@
 
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4) {
-            console.log(xhr.responseText);
+            console.log("La réponse du serveur est : " + xhr.responseText);
             document.getElementById("paragraphe2").innerHTML = xhr.responseText;
           }};
 
-        //let requete = testfalsi();
-        let out = "ouai salut je suis le texte de test nul";
-        let occurence = document.getElementById("input1").value
-        let requete = "{ \"text\" :" + out + ", \"instructions\" : [" +
-        "{\"name\" : \"deleteLetters\", \"occurrence\" : " + occurence +
+        let Occurence = new Array();
+        let out = document.getElementById("textinput").value;
+        for(i = 1; i < 27; i++){
+          let input = "input"+ i;
+          Occurence[i] = document.getElementById(input).value;
+        }
+
+        let requete = "{ \"text\" :" + JSON.stringify(out) + ", \"instructions\" : [" +
+        "{\"name\" : \"deleteLetters\", \"occurrence\" : " + Occurence[1] + "}," +
+        "{\"name\" : \"deleteSpaces\", \"occurrence\" : " + Occurence[2] + "}," +
+        "{\"name\" : \"deleteAccents\", \"occurrence\" : " + Occurence[3] + "}," +
+        "{\"name\" : \"deletePunctuations\", \"occurrence\" : " + Occurence[4] + "}," +
+        "{\"name\" : \"insertLetters\", \"occurrence\" : " + Occurence[5] + "}," +
+        "{\"name\" : \"insertSpaces\", \"occurrence\" : " + Occurence[6] + "}," +
+        "{\"name\" : \"insertAccents\", \"occurrence\" : " + Occurence[7] + "}," +
+        "{\"name\" : \"insertNearKeyboardKeyLetters\", \"occurrence\" : " + Occurence[8] + "}," +
+        "{\"name\" : \"replaceLetters\", \"occurrence\" : " + Occurence[9] + "}," +
+        "{\"name\" : \"replaceAccents\", \"occurrence\" : " + Occurence[10] + "}," +
+        "{\"name\" : \"replacePunctuations\", \"occurrence\" : " + Occurence[11] + "}," +
+        "{\"name\" : \"replaceAHomophones\", \"occurrence\" : " + Occurence[12] + "}," +
+        "{\"name\" : \"replaceEtHomophones\", \"occurrence\" : " + Occurence[13] + "}," +
+        "{\"name\" : \"replaceSaHomophones\", \"occurrence\" : " + Occurence[14] + "}," +
+        "{\"name\" : \"replaceSeHomophones\", \"occurrence\" : " + Occurence[15] + "}," +
+        "{\"name\" : \"replaceSaitHomophones\", \"occurrence\" : " + Occurence[16] + "}," +
+        "{\"name\" : \"replaceDansHomophones\", \"occurrence\" : " + Occurence[17] + "}," +
+        "{\"name\" : \"replaceLaHomophones\", \"occurrence\" : " + Occurence[18] + "}," +
+        "{\"name\" : \"replaceMaisHomophones\", \"occurrence\" : " + Occurence[19] + "}," +
+        "{\"name\" : \"replaceOnHomophones\", \"occurrence\" : " + Occurence[20] + "}," +
+        "{\"name\" : \"replaceOuHomophones\", \"occurrence\" : " + Occurence[21] + "}," +
+        "{\"name\" : \"replacePeuHomophones\", \"occurrence\" : " + Occurence[22] + "}," +
+        "{\"name\" : \"swapLettersInWord\", \"occurrence\" : " + Occurence[23] + "}," +
+        "{\"name\" : \"swapContiguousLettersInWord\", \"occurrence\" : " + Occurence[24] + "}," +
+        "{\"name\" : \"swapWordsInSentence\", \"occurrence\" : " + Occurence[25] + "}," +
+        "{\"name\" : \"swapContiguousWordsInSentence\", \"occurrence\" : " + Occurence[26] +
         "} ] }";
-        console.log(requete);
+
+        console.log("La requete envoyé est : " + requete);
         xhr.send(requete);
         document.getElementById("paragraphe1").innerHTML = requete;
-        document.getElementById("input1label").innerHTML = "deleteLetters. Valeure choisie : " + occurence;
 
-      }
+        for(i = 1; i < 27; i++){
+          let inputlabel = "inputlabel" + i;
+          let label = document.getElementById(inputlabel)
+          let occurence = Occurence[i];
+          //console.log(inputlabel + " " + occurence);
+          //console.log(label),
+          label.innerHTML = " Valeure choisie : " + occurence;
+          //document.getElementById("inputlabel1").innerHTML = "test";
+        }
+}
