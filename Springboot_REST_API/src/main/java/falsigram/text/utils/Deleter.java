@@ -100,22 +100,24 @@ public class Deleter {
      */
     public static void deleteSpaces(Text text, float occurrence) {
         if (occurrence != 1) {
-
-            for (Sentence sentence : text.getContent()) {
-                for (int wordIndex = 0; wordIndex < sentence.getContent().size()-1;) {
+            for (int i = 1; i < text.getContent().get(0).GetWordsNumber(); ++i) {
+                if(randomGenerator.nextFloat() < occurrence) {
+                    text.getContent().get(0).removeCharacter(i, -1);
+                }
+            }
+            for (int i = 1; i < text.getContent().size(); ++i) {
+                for (int j = 1; j < text.getContent().get(0).GetWordsNumber(); ++j) {
                     if (randomGenerator.nextFloat() < occurrence) {
-                        sentence.getContent().get(wordIndex).addAll(sentence.getContent().get(wordIndex+1));
-                        sentence.getContent().remove(wordIndex+1);
-                        continue;
+                        text.getContent().get(0).removeCharacter(j, -1);
                     }
-                    ++wordIndex;
                 }
             }
         } else {
             for (Sentence sentence : text.getContent()) {
-                for (int wordIndex = 0; wordIndex < sentence.getContent().size()-1;) {
-                    sentence.getContent().get(wordIndex).addAll(sentence.getContent().get(wordIndex+1));
-                    sentence.getContent().remove(wordIndex+1);
+                int lastSpace = sentence.getContent().indexOf(" ");
+                while (lastSpace != -1) {
+                    sentence.removeCharacter(0, lastSpace);
+                    lastSpace = sentence.getContent().indexOf(" ");
                 }
             }
         }
