@@ -76,21 +76,20 @@ public class Deleter {
 
     public static void deleteLetters(Text text, float occurrence) {
         if (occurrence != 1) {
-            for (Sentence sentence : text.getContent()) {
-                for (List<Character> word : sentence.getContent()) {
-                    Iterator<Character> iterator = word.iterator();
-                    while (iterator.hasNext()) {
-                        iterator.next();
-                        if (randomGenerator.nextFloat() < occurrence) {
-                            iterator.remove();
+            for(Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber();++i) {
+                    for (int j=0; j < s.getWordSize(i); ++j) {
+                        if(randomGenerator.nextFloat() < occurrence) {
+                            s.removeCharacter(i, j);
+                            --j;
                         }
                     }
                 }
             }
         }
         else {
-            for (Sentence s : text.getContent()) {
-                s.getContent().clear();
+            for(Sentence s : text.getContent()) {
+                s.getContent().setLength(0);
             }
         }
     }
