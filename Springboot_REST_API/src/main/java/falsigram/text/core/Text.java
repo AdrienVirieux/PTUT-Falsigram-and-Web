@@ -24,7 +24,7 @@ public class Text {
             this.content.add(new Sentence(s));
         }
     }
-
+// Test
     public List<Sentence> getContent() {
         return this.content;
     }
