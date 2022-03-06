@@ -42,8 +42,21 @@
         document.getElementById("paragraphe1").innerHTML = requete;
         return(requete);
       }
-
 */
+
+function ReadCustomRequest(){
+  var RequestCustom = document.getElementById("requetePerso").files[0];
+
+  var fileReader =  new FileReader();
+  fileReader.onload = function(fileLoadedEvent){
+    var ContenueDeRequestCustom = fileLoadedEvent.target.result;
+    document.getElementById("ContenueCustomRequest").innerHTML = ContenueDeRequestCustom;
+  };
+
+  //fileReader.readAsText(ContenueDeRequestCustom, "UTF-8");
+
+}
+
 function SendRequest(){
         let url = "http://localhost:8080/RequestJSONProcess";
         let xhr = new XMLHttpRequest();
