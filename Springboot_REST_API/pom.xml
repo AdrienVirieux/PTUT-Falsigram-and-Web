@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>demo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>Falsigram</artifactId>
+	<version>0.0.2</version>
 	<name>Falsigram</name>
 	<description>Falsigram REST server</description>
 	<properties>
