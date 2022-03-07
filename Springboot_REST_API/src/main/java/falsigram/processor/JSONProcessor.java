@@ -119,7 +119,7 @@ public class JSONProcessor {
                                 Deleter.deleteAccents(this.text, occurrence);
                                 break;
                             case "deletePunctuations" :
-                                Deleter.deletePunctuations(this.text.getContent(), occurrence);
+                                Deleter.deletePunctuations(this.text, occurrence);
                             default :
                                 break;
                         }

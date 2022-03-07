@@ -28,6 +28,9 @@ public class Sentence {
 
     }
 
+    public ArrayList<Integer> getWordsIndexes (){
+        return this.wordsIndexes;
+    }
     public int getWordSize(int index) {
         if (index == this.wordsIndexes.size()-1){
             return this.content.length()-1-this.wordsIndexes.get(index);

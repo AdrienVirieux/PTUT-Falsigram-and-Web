@@ -12,7 +12,6 @@ import falsigram.text.core.Sentence;
 import falsigram.text.core.Text;
 import static falsigram.text.utils.Data.*;
 
-import java.util.*;
 
 
 public class Deleter {
@@ -22,48 +21,35 @@ public class Deleter {
 
     /**
      * Removes the accented character at position index in the array word
-     * @param word the list of characters that will be modified
-     * @param index the index of the character to modify
      */
-    private static void deleteAccent(List<Character> word, int index) {
-        switch (word.get(index)) {
+    private static char deleteAccent(char c) {
+        switch (c) {
             case 'é': case 'è': case 'ê': case 'ë':
-                word.set(index, 'e');
-                break;
+                return 'e';
             case 'à': case 'â':
-                word.set(index, 'a');
-                break;
+                return 'a';
             case 'î': case 'ï':
-                word.set(index, 'i');
-                break;
+                return 'i';
             case 'ù': case 'û':
-                word.set(index,'u');
-                break;
+                return 'u';
             case 'ô':
-                word.set(index, 'o');
-                break;
+                return 'o';
             case 'ç':
-                word.set(index, 'c');
-                break;
+                return 'c';
             case 'É': case 'È': case 'Ê': case 'Ë':
-                word.set(index, 'E');
-                break;
+                return 'E';
             case 'À': case 'Â':
-                word.set(index, 'A');
-                break;
+                return 'A';
             case 'Î': case 'Ï':
-                word.set(index, 'I');
-                break;
+                return 'I';
             case 'Ù': case 'Ü':
-                word.set(index,'U');
-                break;
+                return 'U';
             case 'Ô':
-                word.set(index, 'O');
-                break;
+                return 'O';
             case 'Ç':
-                word.set(index, 'C');
-                break;
+                return 'C';
         }
+        return ' ';
     }
 
 
@@ -101,29 +87,29 @@ public class Deleter {
     public static void deleteSpaces(Text text, float occurrence) {
         if (occurrence != 1) {
             for (int i = 1; i < text.getContent().get(0).GetWordsNumber(); ++i) {
-                if(randomGenerator.nextFloat() < occurrence) {
+                if (randomGenerator.nextFloat() < occurrence) {
                     text.getContent().get(0).removeCharacter(i, -1);
                 }
             }
             for (int i = 1; i < text.getContent().size(); ++i) {
-                for (int j = 1; j < text.getContent().get(0).GetWordsNumber(); ++j) {
+                for (int j = 1; j < text.getContent().get(i).GetWordsNumber(); ++j) {
                     if (randomGenerator.nextFloat() < occurrence) {
-                        text.getContent().get(0).removeCharacter(j, -1);
+                        text.getContent().get(i).removeCharacter(j, -1);
                     }
                 }
             }
         } else {
+            int lastSpace;
             for (Sentence sentence : text.getContent()) {
-                int lastSpace = sentence.getContent().indexOf(" ");
+                lastSpace = 0;
+                lastSpace = sentence.getContent().indexOf(" ");
                 while (lastSpace != -1) {
-                    sentence.removeCharacter(0, lastSpace);
+                    sentence.getContent().deleteCharAt(lastSpace);
                     lastSpace = sentence.getContent().indexOf(" ");
                 }
             }
         }
     }
-
-
 
     /**
      * @param text Text
@@ -132,22 +118,23 @@ public class Deleter {
     public static void deleteAccents(Text text, float occurrence) {
         if (occurrence != 1) {
             for (Sentence sentence : text.getContent()) {
-                for (List<Character> word : sentence.getContent()) {
-                    for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
-                        if (allAccents.indexOf(word.get(charIndex)) != -1) {
-                            if (randomGenerator.nextFloat() < occurrence) {
-                                deleteAccent(word, charIndex);
+                for (int i = 0; i < sentence.GetWordsNumber();++i) {
+                    for (int j=0; j < sentence.getWordSize(i); ++j) {
+                        if (allAccents.indexOf(sentence.getContent().charAt(sentence.getWordsIndexes().get(i)+j)) != -1) {
+                            if(randomGenerator.nextFloat() < occurrence) {
+                                sentence.getContent().setCharAt(sentence.getWordsIndexes().get(i)+j, deleteAccent(sentence.getContent().charAt(sentence.getWordsIndexes().get(i)+j)) );
                             }
                         }
+
                     }
                 }
             }
         } else {
             for (Sentence sentence : text.getContent()) {
-                for (List<Character> word : sentence.getContent()) {
-                    for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
-                        if (allAccents.indexOf(word.get(charIndex)) != -1) {
-                            deleteAccent(word, charIndex);
+                for (int i = 0; i < sentence.GetWordsNumber();++i) {
+                    for (int j=0; j < sentence.getWordSize(i); ++j) {
+                        if (allAccents.indexOf(sentence.getContent().charAt(sentence.getWordsIndexes().get(i)+j)) != -1) {
+                            sentence.getContent().setCharAt(sentence.getWordsIndexes().get(i)+j, deleteAccent(sentence.getContent().charAt(sentence.getWordsIndexes().get(i)+j)) );
                         }
                     }
                 }
@@ -159,17 +146,17 @@ public class Deleter {
      * @param text Text
      * @param occurrence float
      */
-    public static void deletePunctuations(List<Sentence> text, float occurrence) {
+    public static void deletePunctuations(Text text, float occurrence) {
         if (occurrence != 1) {
-            for (Sentence sentence : text) {
+            for (Sentence sentence : text.getContent()) {
                 /* On créer un nombre aléatoire entre 0 et 1 */
                 if (randomGenerator.nextFloat() < occurrence) {
-                    sentence.setPunctuation(' ');  // impossible de set un caractere a NULL
+                    sentence.getContent().deleteCharAt(sentence.getContent().length()-1);
                 }
             }
         } else {
-            for (Sentence sentence : text) {
-                sentence.setPunctuation(' ');
+            for (Sentence sentence : text.getContent()) {
+                sentence.getContent().deleteCharAt(sentence.getContent().length()-1);
             }
         }
     }
