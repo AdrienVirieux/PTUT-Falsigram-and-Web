@@ -50,7 +50,7 @@ public class JSONProcessor {
                                 Inserter.insertSpaces(this.text, occurrence);
                                 break;
                             case "insertAccents" :
-                                Inserter.insertAccents(this.text.getContent(), occurrence);
+                                Inserter.insertAccents(this.text, occurrence);
                                 break;
                             case "insertNearKeyboardKeyLetters" :
                                 Inserter.insertNearKeyboardKeyLetters(this.text.getContent(), occurrence);

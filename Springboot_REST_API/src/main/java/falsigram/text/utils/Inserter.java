@@ -11,158 +11,97 @@ package falsigram.text.utils;
 import falsigram.text.core.Sentence;
 import falsigram.text.core.Text;
 import static falsigram.text.utils.Data.*;
-import java.text.Normalizer;
-import java.util.*;
+
 
 
 public class Inserter {
 
 
-    /* private methods */
-    private static void splitWord(Sentence sentence, int wordIndex) {
-        if (sentence.getContent().get(wordIndex).size() != 1){
-            sentence.getContent().add(wordIndex+1, sentence.getContent().get(wordIndex).subList(0,1));
-            sentence.getContent().add(wordIndex+2,sentence.getContent().get(wordIndex).subList(1,sentence.getContent().get(wordIndex).size()));
-            sentence.getContent().remove(wordIndex);
-        }
-    }
-
-    private static void insertAccent(List<Character> word, int index) {
-        switch (word.get(index)) {
+    private static char insertAccent(char c) {
+        switch (c) {
             case 'e':
                 switch (randomGenerator.nextInt(4)) {
                     case 0:
-                        word.set(index, 'é');
-                        break;
+                        return 'é';
                     case 1:
-                        word.set(index, 'è');
-                        break;
+                        return 'è';
                     case 2:
-                        word.set(index, 'ê');
-                        break;
+                        return 'ê';
                     case 3:
-                        word.set(index, 'ë');
-                        break;
+                        return 'ë';
                 }
                 break;
             case 'a':
                 switch (randomGenerator.nextInt(2)){
                     case 0:
-                        word.set(index, 'à');
-                        break;
+                        return 'à';
                     case 1:
-                        word.set(index, 'â');
-                        break;
+                        return 'â';
                 }
                 break;
             case 'i':
                 switch (randomGenerator.nextInt(2)){
                     case 0:
-                        word.set(index, 'î');
-                        break;
+                        return 'î';
                     case 1:
-                        word.set(index, 'ï');
-                        break;
+                        return 'ï';
                 }
                 break;
             case 'o':
-                word.set(index, 'ô');
-                break;
+                return 'ô';
             case 'u':
                 switch (randomGenerator.nextInt(2)){
                     case 0:
-                        word.set(index, 'ù');
-                        break;
+                        return 'ù';
                     case 1:
-                        word.set(index, 'û');
-                        break;
+                        return 'û';
                 }
                 break;
             case 'c':
-                word.set(index, 'ç');
-                break;
+                return 'ç';
             case 'E':
                 switch (randomGenerator.nextInt(4)) {
                     case 0:
-                        word.set(index, 'É');
-                        break;
+                        return 'É';
                     case 1:
-                        word.set(index, 'È');
-                        break;
+                        return 'È';
                     case 2:
-                        word.set(index, 'Ê');
-                        break;
+                        return 'Ê';
                     case 3:
-                        word.set(index, 'Ë');
-                        break;
+                        return 'Ë';
                 }
                 break;
             case 'A':
                 switch (randomGenerator.nextInt(2)){
                     case 0:
-                        word.set(index, 'À');
-                        break;
+                        return 'À';
                     case 1:
-                        word.set(index, 'Â');
-                        break;
+                        return 'Â';
                 }
                 break;
             case 'I':
                 switch (randomGenerator.nextInt(2)){
                     case 0:
-                        word.set(index, 'Î');
-                        break;
+                        return 'Î';
                     case 1:
-                        word.set(index, 'Ï');
-                        break;
+                        return 'Ï';
                 }
                 break;
             case 'O':
-                word.set(index, 'Ô');
-                break;
+                return 'Ô';
             case 'U':
                 switch (randomGenerator.nextInt(2)){
                     case 0:
-                        word.set(index, 'Ù');
-                        break;
+                        return  'Ù';
                     case 1:
-                        word.set(index, 'Û');
-                        break;
+                        return 'Û';
                 }
                 break;
             case 'C':
-                word.set(index, 'Ç');
+                return 'Ç';
         }
+        return c;
     }
-
-    /* Private var : Listes des nears keys */
-    private static final List<Character> keysNearA = Arrays.asList('q', 'z');
-    private static final List<Character> keysNearZ = Arrays.asList('a', 's', 'e');
-    private static final List<Character> keysNearE = Arrays.asList('z', 'd', 'r');
-    private static final List<Character> keysNearR = Arrays.asList('e', 'f', 't');
-    private static final List<Character> keysNearT = Arrays.asList('r', 'g', 'y');
-    private static final List<Character> keysNearY = Arrays.asList('t', 'h', 'u');
-    private static final List<Character> keysNearU = Arrays.asList('y', 'j', 'i');
-    private static final List<Character> keysNearI = Arrays.asList('u', 'k', 'o');
-    private static final List<Character> keysNearO = Arrays.asList('i', 'l', 'p');
-    private static final List<Character> keysNearP = Arrays.asList('o', 'm');
-    private static final List<Character> keysNearQ = Arrays.asList('a', 's', 'w');
-    private static final List<Character> keysNearS = Arrays.asList('q', 'z', 'd', 'x');
-    private static final List<Character> keysNearD = Arrays.asList('s', 'e', 'f', 'c');
-    private static final List<Character> keysNearF = Arrays.asList('d', 'r', 'g', 'v');
-    private static final List<Character> keysNearG = Arrays.asList('f', 't', 'h', 'b');
-    private static final List<Character> keysNearH = Arrays.asList('g', 'y', 'j', 'n');
-    private static final List<Character> keysNearJ = Arrays.asList('h', 'u', 'k');
-    private static final List<Character> keysNearK = Arrays.asList('j', 'i', 'l');
-    private static final List<Character> keysNearL = Arrays.asList('k', 'o', 'm');
-    private static final List<Character> keysNearM = Arrays.asList('l', 'p');
-    private static final List<Character> keysNearW = Arrays.asList('q', 'x');
-    private static final List<Character> keysNearX = Arrays.asList('w', 's', 'c');
-    private static final List<Character> keysNearC = Arrays.asList('x', 'd', 'v');
-    private static final List<Character> keysNearV = Arrays.asList('c', 'f', 'b');
-    private static final List<Character> keysNearB = Arrays.asList('v', 'g', 'n');
-    private static final List<Character> keysNearN = Arrays.asList('b', 'h');
-
 
 
     /*    Fonctions    */
@@ -172,71 +111,6 @@ public class Inserter {
     public Inserter() {
     }
 
-    /* Private function */
-    /**
-     * @param word List<Character>
-     * @param charIndex int
-     * @return Character
-     */
-    private static Character chooseNearKey(List<Character> word, int charIndex) {
-        String tmp = Normalizer.normalize(String.valueOf(word.get(charIndex)), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
-        switch (Character.toLowerCase(tmp.charAt(0))) {
-            case 'a':
-                return keysNearA.get(new Random().nextInt(keysNearA.size()));
-            case 'z':
-                return keysNearZ.get(new Random().nextInt(keysNearZ.size()));
-            case 'e':
-                return keysNearE.get(new Random().nextInt(keysNearE.size()));
-            case 'r':
-                return keysNearR.get(new Random().nextInt(keysNearR.size()));
-            case 't':
-                return keysNearT.get(new Random().nextInt(keysNearT.size()));
-            case 'y':
-                return keysNearY.get(new Random().nextInt(keysNearY.size()));
-            case 'u':
-                return keysNearU.get(new Random().nextInt(keysNearU.size()));
-            case 'i':
-                return keysNearI.get(new Random().nextInt(keysNearI.size()));
-            case 'o':
-                return keysNearO.get(new Random().nextInt(keysNearO.size()));
-            case 'p':
-                return keysNearP.get(new Random().nextInt(keysNearP.size()));
-            case 'q':
-                return keysNearQ.get(new Random().nextInt(keysNearQ.size()));
-            case 's':
-                return keysNearS.get(new Random().nextInt(keysNearS.size()));
-            case 'd':
-                return keysNearD.get(new Random().nextInt(keysNearD.size()));
-            case 'f':
-                return keysNearF.get(new Random().nextInt(keysNearF.size()));
-            case 'g':
-                return keysNearG.get(new Random().nextInt(keysNearG.size()));
-            case 'h':
-                return keysNearH.get(new Random().nextInt(keysNearH.size()));
-            case 'j':
-                return keysNearJ.get(new Random().nextInt(keysNearJ.size()));
-            case 'k':
-                return keysNearK.get(new Random().nextInt(keysNearK.size()));
-            case 'l':
-                return keysNearL.get(new Random().nextInt(keysNearL.size()));
-            case 'm':
-                return keysNearM.get(new Random().nextInt(keysNearM.size()));
-            case 'w':
-                return keysNearW.get(new Random().nextInt(keysNearW.size()));
-            case 'x':
-                return keysNearX.get(new Random().nextInt(keysNearX.size()));
-            case 'c':
-                return keysNearC.get(new Random().nextInt(keysNearC.size()));
-            case 'v':
-                return keysNearV.get(new Random().nextInt(keysNearV.size()));
-            case 'b':
-                return keysNearB.get(new Random().nextInt(keysNearB.size()));
-            case 'n':
-                return keysNearN.get(new Random().nextInt(keysNearN.size()));
-            default:
-                return word.get(charIndex);
-        }
-    }
 
 
     /* Public fonctions */
@@ -247,23 +121,21 @@ public class Inserter {
     // TODO a voir si on decide d'implementer les UpperCases
     public static void insertLetters(Text text, float occurrence) {
         if (occurrence != 1) {
-            for (Sentence sentence : text.getContent()) {
-                for (List<Character> word : sentence.getContent()) {
-                    for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
-                        /* On créer un nombre aléatoire entre 0 et 1 */
-                        if (randomGenerator.nextFloat() < occurrence) {
-                            word.add(charIndex+1, allLetters.get(randomGenerator.nextInt(allLetters.size())));
-                            ++charIndex;
+            for(Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber();++i) {
+                    for (int j = 0; j < s.getWordSize(i); ++j) {
+                        if(randomGenerator.nextFloat() < 0.5f) {
+                            s.insertCharacter(i,j, Data.allLetters.get(randomGenerator.nextInt(allLetters.size())));
                         }
                     }
                 }
             }
-        } else {
-            for (Sentence sentence : text.getContent()) {
-                for (List<Character> word : sentence.getContent()) {
-                    for (int charIndex = 0; charIndex < word.size(); charIndex += 2) {
-                        word.add(charIndex+1, allLetters.get(randomGenerator.nextInt(allLetters.size())));
-                    }
+        }
+        else {
+            for(Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber();++i) {
+                    for (int j = 0; j < s.getWordSize(i); ++j)
+                        s.insertCharacter(i,j, Data.allLetters.get(randomGenerator.nextInt(allLetters.size())));
                 }
             }
         }
@@ -275,22 +147,21 @@ public class Inserter {
      */
     public static void insertSpaces(Text text, float occurrence) {
         if (occurrence != 1) {
-            for (Sentence sentence : text.getContent()) {
-                for (int wordIndex = 0; wordIndex < sentence.getContent().size(); ++wordIndex) {
-                    for (int charIndex = 0; charIndex < sentence.getContent().get(wordIndex).size() - 1; ++charIndex) {
-                        /* On créer un nombre aléatoire entre 0 et 1 */
-                        if (randomGenerator.nextFloat() < occurrence) {
-                            splitWord(sentence, wordIndex);
-                            break;
+            for(Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber();++i) {
+                    for (int j = 0; j < s.getWordSize(i); ++j) {
+                        if(randomGenerator.nextFloat() < 0.5f) {
+                            s.insertCharacter(i,j, ' ');
                         }
                     }
                 }
             }
-        } else {
-            for (Sentence sentence : text.getContent()) {
-                for (int wordIndex = 0; wordIndex < sentence.getContent().size(); wordIndex += 1) {
-                    splitWord(sentence, wordIndex);
-
+        }
+        else {
+            for(Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber();++i) {
+                    for (int j = 0; j < s.getWordSize(i); ++j)
+                        s.insertCharacter(i,j, ' ');
                 }
             }
         }
@@ -302,67 +173,30 @@ public class Inserter {
      * @param occurrence float
      */
     // TODO a voir si on decide d'implementer les UpperCases
-    public static void insertAccents(List<Sentence> text, float occurrence) {
+    public static void insertAccents(Text text, float occurrence) {
         if (occurrence != 1) {
-            for (Sentence sentence : text) {
-                for (List<Character> word : sentence.getContent()) {
-                    for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
-                        if (nonAccentedLetters.indexOf(word.get(charIndex)) != -1) {
-                            /* On créer un nombre aléatoire entre 0 et 1 */
+            for (Sentence sentence : text.getContent()) {
+                for (int i = 0; i < sentence.GetWordsNumber(); ++i) {
+                    for (int j = 0; j < sentence.getWordSize(i); ++j) {
+                        if (nonAccentedLetters.indexOf(sentence.getContent().charAt(sentence.getWordsIndexes().get(i) + j)) != -1) {
                             if (randomGenerator.nextFloat() < occurrence) {
-                                insertAccent(word, charIndex);
+                                sentence.getContent().setCharAt(sentence.getWordsIndexes().get(i) + j, insertAccent(sentence.getContent().charAt(sentence.getWordsIndexes().get(i) + j)));
                             }
                         }
+
                     }
                 }
             }
         } else {
-            for (Sentence sentence : text) {
-                for (List<Character> word : sentence.getContent()) {
-                    for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
-                        if (nonAccentedLetters.indexOf(word.get(charIndex)) != -1) {
-                                insertAccent(word, charIndex);
+            for (Sentence sentence : text.getContent()) {
+                for (int i = 0; i < sentence.GetWordsNumber(); ++i) {
+                    for (int j = 0; j < sentence.getWordSize(i); ++j) {
+                        if (nonAccentedLetters.indexOf(sentence.getContent().charAt(sentence.getWordsIndexes().get(i) + j)) != -1) {
+                            sentence.getContent().setCharAt(sentence.getWordsIndexes().get(i) + j, insertAccent(sentence.getContent().charAt(sentence.getWordsIndexes().get(i) + j)));
                         }
                     }
                 }
             }
         }
     }
-
-    /**
-     * @param text Text
-     * @param occurrence float
-     */
-    // TODO a voir si on decide d'implementer les UpperCases
-    public static void insertNearKeyboardKeyLetters(List<Sentence> text, float occurrence) {
-        if (occurrence != 1) {
-            Random rand = new Random();  // Initialisation d'un nombre Random
-            for (Sentence sentence : text) {
-                for (List<Character> word : sentence.getContent()) {
-                    for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
-                        /* On créer un nombre aléatoire entre 0 et 1 */
-                        if (rand.nextFloat() < occurrence) {
-                            if (Character.isUpperCase(word.get(charIndex)))
-                                word.add(charIndex + 1, Character.toUpperCase(chooseNearKey(word, charIndex)));
-                            else
-                                word.add(charIndex + 1, chooseNearKey(word, charIndex));
-                            ++charIndex;
-                        }
-                    }
-                }
-            }
-        } else {
-            for (Sentence sentence : text) {
-                for (List<Character> word : sentence.getContent()) {
-                    for (int charIndex = 0; charIndex < word.size(); charIndex += 2) {
-                        if (Character.isUpperCase(word.get(charIndex)))
-                            word.add(charIndex + 1, Character.toUpperCase(chooseNearKey(word, charIndex)));
-                        else
-                            word.add(charIndex + 1, chooseNearKey(word, charIndex));
-                    }
-                }
-            }
-        }
-    }
-
 }
