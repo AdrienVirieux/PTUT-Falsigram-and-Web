@@ -44,17 +44,30 @@
       }
 */
 
-function ReadCustomRequest(){
-  var RequestCustom = document.getElementById("requetePerso").files[0];
+window.onload = function ReadFile(){
+  document.querySelector("#ReadText").addEventListener('click', function(){
+    if(document.querySelector("#textUpload").files.length == 0){
+      alert('PAS BON');
+      return;
+    }
+    let file = document.querySelector("#textUpload").files[0];
+    let reader = new FileReader();
+    reader.addEventListener('load', function(e){
+      let text = e.target.result;
+      console.log("Texte chargé avec succes");
+      document.querySelector("#ContenueText").textContent = text;
+      document.getElementById("ContenueText").style.display = "none";
+    });
 
-  var fileReader =  new FileReader();
-  fileReader.onload = function(fileLoadedEvent){
-    var ContenueDeRequestCustom = fileLoadedEvent.target.result;
-    document.getElementById("ContenueCustomRequest").innerHTML = ContenueDeRequestCustom;
-  };
+    reader.readAsText(file);
+  })
+}
 
-  //fileReader.readAsText(ContenueDeRequestCustom, "UTF-8");
-
+function UseLoadedText(){
+  var text = document.getElementById("ContenueText").innerHTML;
+  //document.getElementById("ContenueText").style.display = "none";
+  //console.log(text);
+  document.getElementById("textinput").value = text;
 }
 
 function SendRequest(){
