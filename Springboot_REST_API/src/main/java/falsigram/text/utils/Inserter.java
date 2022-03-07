@@ -124,7 +124,7 @@ public class Inserter {
             for(Sentence s : text.getContent()) {
                 for (int i = 0; i < s.GetWordsNumber();++i) {
                     for (int j = 0; j < s.getWordSize(i); ++j) {
-                        if(randomGenerator.nextFloat() < 0.5f) {
+                        if(randomGenerator.nextFloat() < occurrence) {
                             s.insertCharacter(i,j, Data.allLetters.get(randomGenerator.nextInt(allLetters.size())));
                         }
                     }
@@ -150,7 +150,7 @@ public class Inserter {
             for(Sentence s : text.getContent()) {
                 for (int i = 0; i < s.GetWordsNumber();++i) {
                     for (int j = 0; j < s.getWordSize(i); ++j) {
-                        if(randomGenerator.nextFloat() < 0.5f) {
+                        if(randomGenerator.nextFloat() < occurrence) {
                             s.insertCharacter(i,j, ' ');
                         }
                     }
