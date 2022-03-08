@@ -7,57 +7,56 @@ import java.util.Random;
 class Data {
 
     /* Liste des homophones */
-    static final List<List<Character>> homophoneA = Arrays.asList(
-            Arrays.asList('a'),
-            Arrays.asList('à'),
-            Arrays.asList('a', 'h'),
-            Arrays.asList('a', 's'),
-            Arrays.asList('h', 'a'));
-    static final List<List<Character>> homophoneEt = Arrays.asList(
-            Arrays.asList('e', 's', 't'),
-            Arrays.asList('a', 'i'),
-            Arrays.asList('e', 's'),
-            Arrays.asList('e', 't'));
-    static final List<List<Character>> homophoneSa = Arrays.asList(
-            Arrays.asList('s', 'a'),
-            Arrays.asList('ç', 'a'),
-            Arrays.asList('ç', 'à'));
-    static final List<List<Character>> homophoneSe = Arrays.asList(
-            Arrays.asList('s', 'e'),
-            Arrays.asList('c', 'e'),
-            Arrays.asList('c', 'e', 'u', 'x'));
-    static final List<List<Character>> homophoneSait = Arrays.asList(
-            Arrays.asList('s', 'a', 'i', 't'),
-            Arrays.asList('s', 'e', 's'),
-            Arrays.asList('c', 'e', 's'),
-            Arrays.asList('c', '\'', 'e', 's', 't'),
-            Arrays.asList('s', '\'', 'e', 's', 't'),
-            Arrays.asList('s', 'a', 'i', 's'));
-    static final List<List<Character>> homophoneDans = Arrays.asList(
-            Arrays.asList('d', 'a', 'n', 's'),
-            Arrays.asList('d', '\'', 'e', 'n'));
-    static final List<List<Character>> homophoneLa = Arrays.asList(
-            Arrays.asList('l', 'a'),
-            Arrays.asList('l', 'à'),
-            Arrays.asList('l', '\'', 'a'),
-            Arrays.asList('l', '\'', 'a', 's'));
-    static final List<List<Character>> homophoneMais = Arrays.asList(
-            Arrays.asList('m', 'a', 'i', 's'),
-            Arrays.asList('m', 'e', 't', 's'),
-            Arrays.asList('m', 'e', 't'),
-            Arrays.asList('m', 'e', 's'),
-            Arrays.asList('m', '\'', 'e', 's'),
-            Arrays.asList('m', '\'', 'e', 's', 't'));
-    static final List<List<Character>> homophoneOn = Arrays.asList(
-            Arrays.asList('o', 'n'),
-            Arrays.asList('o', 'n', 't'));
-    static final List<List<Character>> homophoneOu = Arrays.asList(
-            Arrays.asList('o', 'u'),
-            Arrays.asList('o', 'ù'));
-    static final List<List<Character>> homophonePeu = Arrays.asList(
-            Arrays.asList('p', 'e', 'u'),
-            Arrays.asList('p', 'e', 'u', 't'),
-            Arrays.asList('p', 'e', 'u', 'x'));
+    static final List<String> homophoneA = Arrays.asList(
+            "a",
+            "à",
+            "ah",
+            "as",
+            "ha");
+    static final List<String> homophoneEt = Arrays.asList(
+            "est",
+            "ai",
+            "es",
+            "et");
+    static final List<String> homophoneSa = Arrays.asList(
+            "sa",
+            "ça",
+            "çà");
+    static final List<String> homophoneSe = Arrays.asList(
+            "se",
+            "ce",
+            "ceux");
+    static final List<String> homophoneSait = Arrays.asList(
+            "sait",
+            "ses",
+            "ces",
+            "c'est",
+            "s'est",
+            "sais");
+    static final List<String> homophoneDans = Arrays.asList(
+            "dans",
+            "d'en");
+    static final List<String> homophoneLa = Arrays.asList(
+            "la",
+            "là",
+            "l'a",
+            "l'as");
+    static final List<String> homophoneMais = Arrays.asList(
+            "mais",
+            "mets",
+            "met",
+            "mes",
+            "m'est");
+    static final List<String> homophoneOn = Arrays.asList(
+            "on",
+            "ont");
+    static final List<String> homophoneOu = Arrays.asList(
+            "ou",
+            "où");
+    static final List<String> homophonePeu = Arrays.asList(
+            "peu",
+            "peut",
+            "peux");
 
     /* Liste de la ponctuation */
     static final String punctuations = ".!?:";
