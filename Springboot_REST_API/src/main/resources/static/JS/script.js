@@ -57,6 +57,7 @@ window.onload = function ReadFile(){
       console.log("Texte chargé avec succes");
       document.querySelector("#ContenueText").textContent = text;
       document.getElementById("ContenueText").style.display = "none";
+      UseLoadedText();
     });
 
     reader.readAsText(file);
@@ -85,8 +86,9 @@ function SendRequest(){
 
         let Occurence = new Array();
         let out = document.getElementById("textinput").value;
-        for(i = 1; i < 27; i++){
+        for(i = 1; i < 26; i++){
           let input = "input"+ i;
+          console.log(input);
           Occurence[i] = document.getElementById(input).value;
         }
 
@@ -98,32 +100,32 @@ function SendRequest(){
         "{\"name\" : \"insertLetters\", \"occurrence\" : " + Occurence[5] + "}," +
         "{\"name\" : \"insertSpaces\", \"occurrence\" : " + Occurence[6] + "}," +
         "{\"name\" : \"insertAccents\", \"occurrence\" : " + Occurence[7] + "}," +
-        "{\"name\" : \"insertNearKeyboardKeyLetters\", \"occurrence\" : " + Occurence[8] + "}," +
-        "{\"name\" : \"replaceLetters\", \"occurrence\" : " + Occurence[9] + "}," +
-        "{\"name\" : \"replaceAccents\", \"occurrence\" : " + Occurence[10] + "}," +
-        "{\"name\" : \"replacePunctuations\", \"occurrence\" : " + Occurence[11] + "}," +
-        "{\"name\" : \"replaceAHomophones\", \"occurrence\" : " + Occurence[12] + "}," +
-        "{\"name\" : \"replaceEtHomophones\", \"occurrence\" : " + Occurence[13] + "}," +
-        "{\"name\" : \"replaceSaHomophones\", \"occurrence\" : " + Occurence[14] + "}," +
-        "{\"name\" : \"replaceSeHomophones\", \"occurrence\" : " + Occurence[15] + "}," +
-        "{\"name\" : \"replaceSaitHomophones\", \"occurrence\" : " + Occurence[16] + "}," +
-        "{\"name\" : \"replaceDansHomophones\", \"occurrence\" : " + Occurence[17] + "}," +
-        "{\"name\" : \"replaceLaHomophones\", \"occurrence\" : " + Occurence[18] + "}," +
-        "{\"name\" : \"replaceMaisHomophones\", \"occurrence\" : " + Occurence[19] + "}," +
-        "{\"name\" : \"replaceOnHomophones\", \"occurrence\" : " + Occurence[20] + "}," +
-        "{\"name\" : \"replaceOuHomophones\", \"occurrence\" : " + Occurence[21] + "}," +
-        "{\"name\" : \"replacePeuHomophones\", \"occurrence\" : " + Occurence[22] + "}," +
-        "{\"name\" : \"swapLettersInWord\", \"occurrence\" : " + Occurence[23] + "}," +
-        "{\"name\" : \"swapContiguousLettersInWord\", \"occurrence\" : " + Occurence[24] + "}," +
-        "{\"name\" : \"swapWordsInSentence\", \"occurrence\" : " + Occurence[25] + "}," +
-        "{\"name\" : \"swapContiguousWordsInSentence\", \"occurrence\" : " + Occurence[26] +
+        //"{\"name\" : \"insertNearKeyboardKeyLetters\", \"occurrence\" : " + Occurence[7] + "}," +
+        "{\"name\" : \"replaceLetters\", \"occurrence\" : " + Occurence[8] + "}," +
+        "{\"name\" : \"replaceAccents\", \"occurrence\" : " + Occurence[9] + "}," +
+        "{\"name\" : \"replacePunctuations\", \"occurrence\" : " + Occurence[10] + "}," +
+        "{\"name\" : \"replaceAHomophones\", \"occurrence\" : " + Occurence[11] + "}," +
+        "{\"name\" : \"replaceEtHomophones\", \"occurrence\" : " + Occurence[12] + "}," +
+        "{\"name\" : \"replaceSaHomophones\", \"occurrence\" : " + Occurence[13] + "}," +
+        "{\"name\" : \"replaceSeHomophones\", \"occurrence\" : " + Occurence[14] + "}," +
+        "{\"name\" : \"replaceSaitHomophones\", \"occurrence\" : " + Occurence[15] + "}," +
+        "{\"name\" : \"replaceDansHomophones\", \"occurrence\" : " + Occurence[16] + "}," +
+        "{\"name\" : \"replaceLaHomophones\", \"occurrence\" : " + Occurence[17] + "}," +
+        "{\"name\" : \"replaceMaisHomophones\", \"occurrence\" : " + Occurence[18] + "}," +
+        "{\"name\" : \"replaceOnHomophones\", \"occurrence\" : " + Occurence[19] + "}," +
+        "{\"name\" : \"replaceOuHomophones\", \"occurrence\" : " + Occurence[20] + "}," +
+        "{\"name\" : \"replacePeuHomophones\", \"occurrence\" : " + Occurence[21] + "}," +
+        "{\"name\" : \"swapLettersInWord\", \"occurrence\" : " + Occurence[22] + "}," +
+        "{\"name\" : \"swapContiguousLettersInWord\", \"occurrence\" : " + Occurence[23] + "}," +
+        "{\"name\" : \"swapWordsInSentence\", \"occurrence\" : " + Occurence[24] + "}," +
+        "{\"name\" : \"swapContiguousWordsInSentence\", \"occurrence\" : " + Occurence[25] +
         "} ] }";
 
         console.log("La requete envoyé est : " + requete);
         xhr.send(requete);
         document.getElementById("paragraphe1").innerHTML = requete;
 
-        for(i = 1; i < 27; i++){
+        for(i = 1; i < 26; i++){
           let inputlabel = "inputlabel" + i;
           let label = document.getElementById(inputlabel)
           let occurence = Occurence[i];
