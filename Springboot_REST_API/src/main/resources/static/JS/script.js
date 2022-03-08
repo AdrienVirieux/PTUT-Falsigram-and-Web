@@ -88,7 +88,7 @@ function SendRequest(){
         let out = document.getElementById("textinput").value;
         for(i = 1; i < 26; i++){
           let input = "input"+ i;
-          console.log(input);
+          //console.log(input);
           Occurence[i] = document.getElementById(input).value;
         }
 
