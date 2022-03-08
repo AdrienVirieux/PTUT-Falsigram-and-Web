@@ -52,9 +52,6 @@ public class JSONProcessor {
                             case "insertAccents" :
                                 Inserter.insertAccents(this.text, occurrence);
                                 break;
-                            case "insertNearKeyboardKeyLetters" :
-                                Inserter.insertNearKeyboardKeyLetters(this.text.getContent(), occurrence);
-                                break;
                             default :
                                 break;
                         }
