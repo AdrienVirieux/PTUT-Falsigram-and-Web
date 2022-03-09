@@ -88,7 +88,7 @@ function SendRequest(){
         let out = document.getElementById("textinput").value;
         for(i = 1; i < 28; i++){
           let input = "input"+ i;
-          //console.log(input);
+          console.log(input);
           Occurence[i] = document.getElementById(input).value;
         }
 
@@ -118,8 +118,8 @@ function SendRequest(){
         "{\"name\" : \"swapLettersInWord\", \"occurrence\" : " + Occurence[22] + "}," +
         "{\"name\" : \"swapContiguousLettersInWord\", \"occurrence\" : " + Occurence[23] + "}," +
         "{\"name\" : \"swapWordsInSentence\", \"occurrence\" : " + Occurence[24] + "}," +
-        "{\"name\" : \"swapContiguousWordsInSentence\", \"occurrence\" : " + Occurence[25] +
-        "{\"name\" : \"insertWordFromSentence\", \"occurrence\" : " + Occurence[26] +
+        "{\"name\" : \"swapContiguousWordsInSentence\", \"occurrence\" : " + Occurence[25] + "}," +
+        "{\"name\" : \"insertWordFromSentence\", \"occurrence\" : " + Occurence[26] + "}," +
         "{\"name\" : \"replaceWordFromSentence\", \"occurrence\" : " + Occurence[27] +
         "} ] }";
 
