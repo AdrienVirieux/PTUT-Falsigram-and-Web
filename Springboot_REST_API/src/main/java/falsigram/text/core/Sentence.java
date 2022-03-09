@@ -84,8 +84,8 @@ public class Sentence {
         if(wordIndex == this.wordsIndexes.size()-1) {
             //Insertion of the word at the index of the last character of the word
             this.content.append(" ").append(word);
-            this.content.append(this.content.charAt(this.content.length()-1-word.length()));
-            this.content.deleteCharAt(this.content.charAt(this.content.length()-1-word.length()));
+            this.content.append(this.content.charAt(this.content.length()-1-word.length()-1));
+            this.content.deleteCharAt(this.content.length()-1-word.length()-2);
         }
         else {
             //Insertion of the word at the index of the last character of the word
