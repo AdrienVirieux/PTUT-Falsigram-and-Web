@@ -10,6 +10,12 @@ package falsigram.text.utils;
 
 import falsigram.text.core.Sentence;
 import falsigram.text.core.Text;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.LineNumberReader;
+
 import static falsigram.text.utils.Data.*;
 
 
@@ -199,4 +205,28 @@ public class Inserter {
             }
         }
     }
+
+    public static void insertWords(Text text, float occurrence) {
+        if (occurrence != 1) {
+            for (Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                    if (randomGenerator.nextFloat() < occurrence) {
+                        s.insertWord(i, dict.get(randomGenerator.nextInt(dict.size())));
+                        ++i;
+                    }
+                }
+            }
+        }
+        else {
+            for (Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                    s.insertWord(i, dict.get(randomGenerator.nextInt(dict.size())));
+                    ++i;
+                }
+            }
+        }
+    }
+
+
+
 }
