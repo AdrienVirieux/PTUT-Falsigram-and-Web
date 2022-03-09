@@ -86,7 +86,7 @@ function SendRequest(){
 
         let Occurence = new Array();
         let out = document.getElementById("textinput").value;
-        for(i = 1; i < 26; i++){
+        for(i = 1; i < 28; i++){
           let input = "input"+ i;
           //console.log(input);
           Occurence[i] = document.getElementById(input).value;
@@ -119,13 +119,15 @@ function SendRequest(){
         "{\"name\" : \"swapContiguousLettersInWord\", \"occurrence\" : " + Occurence[23] + "}," +
         "{\"name\" : \"swapWordsInSentence\", \"occurrence\" : " + Occurence[24] + "}," +
         "{\"name\" : \"swapContiguousWordsInSentence\", \"occurrence\" : " + Occurence[25] +
+        "{\"name\" : \"insertWordFromSentence\", \"occurrence\" : " + Occurence[26] +
+        "{\"name\" : \"replaceWordFromSentence\", \"occurrence\" : " + Occurence[27] +
         "} ] }";
 
         console.log("La requete envoyé est : " + requete);
         xhr.send(requete);
         document.getElementById("paragraphe1").innerHTML = requete;
 
-        for(i = 1; i < 26; i++){
+        for(i = 1; i < 28; i++){
           let inputlabel = "inputlabel" + i;
           let label = document.getElementById(inputlabel)
           let occurence = Occurence[i];
