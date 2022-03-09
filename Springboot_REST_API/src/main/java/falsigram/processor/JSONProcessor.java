@@ -52,6 +52,8 @@ public class JSONProcessor {
                             case "insertAccents" :
                                 Inserter.insertAccents(this.text, occurrence);
                                 break;
+                            case "insertWords" :
+                                Inserter.insertWords(this.text, occurrence);
                             default :
                                 break;
                         }
