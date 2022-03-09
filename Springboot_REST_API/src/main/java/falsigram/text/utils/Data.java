@@ -1,5 +1,10 @@
 package falsigram.text.utils;
 
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -7,56 +12,17 @@ import java.util.Random;
 class Data {
 
     /* Liste des homophones */
-    static final List<String> homophoneA = Arrays.asList(
-            "a",
-            "à",
-            "ah",
-            "as",
-            "ha");
-    static final List<String> homophoneEt = Arrays.asList(
-            "est",
-            "ai",
-            "es",
-            "et");
-    static final List<String> homophoneSa = Arrays.asList(
-            "sa",
-            "ça",
-            "çà");
-    static final List<String> homophoneSe = Arrays.asList(
-            "se",
-            "ce",
-            "ceux");
-    static final List<String> homophoneSait = Arrays.asList(
-            "sait",
-            "ses",
-            "ces",
-            "c'est",
-            "s'est",
-            "sais");
-    static final List<String> homophoneDans = Arrays.asList(
-            "dans",
-            "d'en");
-    static final List<String> homophoneLa = Arrays.asList(
-            "la",
-            "là",
-            "l'a",
-            "l'as");
-    static final List<String> homophoneMais = Arrays.asList(
-            "mais",
-            "mets",
-            "met",
-            "mes",
-            "m'est");
-    static final List<String> homophoneOn = Arrays.asList(
-            "on",
-            "ont");
-    static final List<String> homophoneOu = Arrays.asList(
-            "ou",
-            "où");
-    static final List<String> homophonePeu = Arrays.asList(
-            "peu",
-            "peut",
-            "peux");
+    static final List<String> homophoneA = Arrays.asList("a", "à", "ah", "as", "ha");
+    static final List<String> homophoneEt = Arrays.asList("est", "ai", "es", "et");
+    static final List<String> homophoneSa = Arrays.asList("sa", "ça", "çà");
+    static final List<String> homophoneSe = Arrays.asList("se", "ce", "ceux");
+    static final List<String> homophoneSait = Arrays.asList("sait", "ses", "ces", "c'est", "s'est", "sais");
+    static final List<String> homophoneDans = Arrays.asList("dans", "d'en");
+    static final List<String> homophoneLa = Arrays.asList("la", "là", "l'a", "l'as");
+    static final List<String> homophoneMais = Arrays.asList("mais", "mets", "met", "mes", "m'est");
+    static final List<String> homophoneOn = Arrays.asList("on", "ont");
+    static final List<String> homophoneOu = Arrays.asList("ou", "où");
+    static final List<String> homophonePeu = Arrays.asList("peu", "peut", "peux");
 
     /* Liste de la ponctuation */
     static final String punctuations = ".!?:";
@@ -82,4 +48,13 @@ class Data {
     static final List<Character> uLCAccents = Arrays.asList('ù', 'û');
     static final List<Character> uUCAccents = Arrays.asList('Ù', 'Û');
 
+    static List<String> dict = null;
+
+    static {
+        try {
+            dict = Files.readAllLines(Path.of("src/main/resources/dict.txt"), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
