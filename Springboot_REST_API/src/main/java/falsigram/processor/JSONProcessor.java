@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import falsigram.text.core.Text;
 import falsigram.text.utils.*;
 import java.time.Duration;
+import java.util.Arrays;
 
 public class JSONProcessor {
 
@@ -54,6 +55,13 @@ public class JSONProcessor {
                                 break;
                             case "insertWords" :
                                 Inserter.insertWords(this.text, occurrence);
+                                break;
+                            case "insertWordsFromSentence":
+                                Inserter.insertWordsFromSentence(this.text, occurrence);
+                                break;
+                            case "insertWordsFromList" :
+                                Inserter.insertWordsFromList(this.text, occurrence, Arrays.asList(instruction.get("wordList").toString().split(";")));
+                                break;
                             default :
                                 break;
                         }
