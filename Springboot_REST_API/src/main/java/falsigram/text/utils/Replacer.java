@@ -234,7 +234,62 @@ public class Replacer {
         }
     }
 
+    public static void replaceWords(Text text, float occurrence) {
+        if (occurrence != 1) {
+            for (Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                    if (randomGenerator.nextFloat() < occurrence) {
+                        s.replaceWord(i, dict.get(randomGenerator.nextInt(dict.size())));
+                    }
+                }
+            }
+        }
+        else {
+            for (Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                    s.replaceWord(i, dict.get(randomGenerator.nextInt(dict.size())));
+                }
+            }
+        }
+    }
 
+    public static void replaceWordsFromSentence(Text text, float occurrence) {
+        if (occurrence != 1) {
+            for (Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                    if (randomGenerator.nextFloat() < occurrence) {
+                        s.replaceWord(i, s.getWord(randomGenerator.nextInt(s.GetWordsNumber())));
+                    }
+                }
+            }
+        }
+        else {
+            for (Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                    s.replaceWord(i, s.getWord(randomGenerator.nextInt(s.GetWordsNumber())));
+                }
+            }
+        }
+    }
+
+    public static void replaceWordsFromList(Text text, float occurrence, List<String> wordList) {
+        if (occurrence != 1) {
+            for (Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                    if (randomGenerator.nextFloat() < occurrence) {
+                        s.replaceWord(i, wordList.get(randomGenerator.nextInt(wordList.size())));
+                    }
+                }
+            }
+        }
+        else {
+            for (Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                    s.replaceWord(i, wordList.get(randomGenerator.nextInt(wordList.size())));
+                }
+            }
+        }
+    }
 
     /**
      * @param text Text

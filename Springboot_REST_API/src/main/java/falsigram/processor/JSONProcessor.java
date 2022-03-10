@@ -77,6 +77,15 @@ public class JSONProcessor {
                             case "replacePunctuations" :
                                 Replacer.replacePunctuations(this.text, occurrence);
                                 break;
+                            case "replaceWords" :
+                                Replacer.replaceWords(this.text, occurrence);
+                                break;
+                            case "replaceWordsFromSentence" :
+                                Replacer.replaceWordsFromSentence(this.text, occurrence);
+                                break;
+                            case "replaceWordsFromList" :
+                                Replacer.replaceWordsFromList(this.text, occurrence, Arrays.asList(instruction.get("wordList").toString().split(";")));
+                                break;
                             case "replaceAHomophones" :
                                 Replacer.replaceAHomophones(this.text, occurrence);
                                 break;
