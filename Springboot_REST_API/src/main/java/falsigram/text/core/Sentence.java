@@ -20,7 +20,7 @@ public class Sentence {
     */
     public String getWord(int index) {
         if (index == this.wordsIndexes.size()-1){
-            return this.content.substring(this.wordsIndexes.get(index), this.content.length());
+            return this.content.substring(this.wordsIndexes.get(index), this.content.length()-1);
         }
         else {
             return this.content.substring(this.wordsIndexes.get(index), this.wordsIndexes.get(index+1)-1);
