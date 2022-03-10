@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-class Data {
+public class Data {
 
     /* Liste des homophones */
     static final List<String> homophoneA = Arrays.asList("a", "à", "ah", "as", "ha");
@@ -25,7 +25,7 @@ class Data {
     static final List<String> homophonePeu = Arrays.asList("peu", "peut", "peux");
 
     /* Liste de la ponctuation */
-    static final String punctuations = ".!?:";
+    public static final String punctuations = ".!?:";
 
     /* générateur d'aléatoire commun */
     static final Random randomGenerator = new Random();

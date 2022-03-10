@@ -3,6 +3,8 @@ package falsigram.text.core;
 
 import java.util.ArrayList;
 
+import static falsigram.text.utils.Data.punctuations;
+
 public class Sentence {
 
     //private members
@@ -20,7 +22,13 @@ public class Sentence {
     */
     public String getWord(int index) {
         if (index == this.wordsIndexes.size()-1){
-            return this.content.substring(this.wordsIndexes.get(index), this.content.length()-1);
+            if(punctuations.contains(String.valueOf(this.content.charAt(this.content.length()-1)))) {
+                return this.content.substring(this.wordsIndexes.get(index), this.content.length()-1);
+            }
+            else {
+                return this.content.substring(this.wordsIndexes.get(index), this.content.length());
+            }
+
         }
         else {
             return this.content.substring(this.wordsIndexes.get(index), this.wordsIndexes.get(index+1)-1);
@@ -125,7 +133,7 @@ public class Sentence {
         for(int i=wordIndex; i < this.wordsIndexes.size(); ++i) {
             wordsIndexes.set(i, wordsIndexes.get(i) + 1);
         }
-
+        calculateIndexes();
     }
 
     /**
@@ -173,7 +181,6 @@ public class Sentence {
             this.content.deleteCharAt(this.wordsIndexes.get(wordIndex)+characterIndex);
             calculateIndexes();
         }
-
     }
 
     /**
@@ -239,6 +246,7 @@ public class Sentence {
         replaceCharacter(wordIndex, secondCharacterIndex, this.content.charAt(this.wordsIndexes.get(wordIndex)+firstCharaterIndex));
         // Replacement of the first character by tempchar
         replaceCharacter(wordIndex, firstCharaterIndex, tempChar);
+        calculateIndexes();
     }
 
     /**
@@ -300,6 +308,7 @@ public class Sentence {
          */
         if(this.wordsIndexes.get(wordIndex)+ characterIndex != this.content.length()-1) {
             this.content.setCharAt(this.wordsIndexes.get(wordIndex)+characterIndex, character);
+            calculateIndexes();
         }
 
     }
