@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
+import java.util.List;
 
 import static falsigram.text.utils.Data.*;
 
@@ -227,8 +228,46 @@ public class Inserter {
         }
     }
 
-    public static void insertWordsFromSentence(Text text, float occurrence) {}
+    public static void insertWordsFromSentence(Text text, float occurrence) {
+        if (occurrence != 1) {
+            for (Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                    if (randomGenerator.nextFloat() < occurrence) {
+                        s.insertWord(i, s.getWord(randomGenerator.nextInt(s.GetWordsNumber())));
+                        ++i;
+                    }
+                }
+            }
+        }
+        else {
+            for (Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                    s.insertWord(i, s.getWord(randomGenerator.nextInt(s.GetWordsNumber())));
+                    ++i;
+                }
+            }
+        }
+    }
 
-    public static void insertWordsFromList(Text text, float occurrence) {}
+    public static void insertWordsFromList(Text text, float occurrence, List<String> wordList) {
+        if (occurrence != 1) {
+            for (Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                    if (randomGenerator.nextFloat() < occurrence) {
+                        s.insertWord(i, wordList.get(randomGenerator.nextInt(wordList.size())));
+                        ++i;
+                    }
+                }
+            }
+        }
+        else {
+            for (Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                    s.insertWord(i, wordList.get(randomGenerator.nextInt(wordList.size())));
+                    ++i;
+                }
+            }
+        }
+    }
 
 }
