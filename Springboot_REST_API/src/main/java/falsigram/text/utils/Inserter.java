@@ -227,6 +227,8 @@ public class Inserter {
         }
     }
 
+    public static void insertWordsFromSentence(Text text, float occurrence) {}
 
+    public static void insertWordsFromList(Text text, float occurrence) {}
 
 }
