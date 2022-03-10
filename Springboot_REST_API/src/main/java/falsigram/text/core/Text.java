@@ -39,17 +39,18 @@ public class Text {
         return result;
     }
 
-    private static int findMin(int[] integers) {
+    public List<Sentence> getContent() {
+        return this.content;
+    }
+
+  private static int findMin(int[] integers) {
         int min = integers[0];
         for(int i = 1; i < integers.length; ++i) {
             if (min > integers[i] && integers[i] > 0) min = integers[i];
         }
         return min;
     }
-    public List<Sentence> getContent() {
-        return this.content;
-    }
-
+  
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
