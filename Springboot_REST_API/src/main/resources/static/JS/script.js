@@ -86,9 +86,11 @@ function SendRequest(){
 
         let Occurence = new Array();
         let out = document.getElementById("textinput").value;
-        for(i = 1; i < 28; i++){
+        var nombreInput = document.querySelectorAll(".input").length;
+        //console.log(nombreInput);
+        for(i = 1; i < nombreInput + 1; i++){
           let input = "input"+ i;
-          console.log(input);
+          //console.log(input);
           Occurence[i] = document.getElementById(input).value;
         }
 
@@ -127,7 +129,7 @@ function SendRequest(){
         xhr.send(requete);
         document.getElementById("paragraphe1").innerHTML = requete;
 
-        for(i = 1; i < 28; i++){
+        for(i = 1; i < nombreInput + 1; i++){
           let inputlabel = "inputlabel" + i;
           let label = document.getElementById(inputlabel)
           let occurence = Occurence[i];
