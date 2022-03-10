@@ -22,24 +22,34 @@ public class Swapper {
      * @return Text
      */
     public static void swapLettersInWord(Text text, float occurrence) {
-        if (occurrence != 1) {           //On vérifie que la occurrence ne bloque pas la suite de la fonction
-            for (Sentence sentence : text.getContent()) {
-                for (List<Character> word : sentence.getContent()) {
-                    for (int i = 0; i < word.size()-1; ++i) {
-                        if (randomGenerator.nextFloat() < occurrence) {
-                            swap(word, i, randomGenerator.nextInt(word.size() - 1));
+        if (occurrence != 1) {   //On vérifie que la occurrence ne bloque pas la suite de la fonction
+            for(Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber()-1;++i) {
+                    for(int j = 0; j < s.getWordSize(i)-1; ++j) {
+                        if(randomGenerator.nextFloat() < occurrence) {
+                            s.swapCharacters(i, j, j+randomGenerator.nextInt(s.getWordSize(i)-j));
                         }
+
                     }
+                }
+                for (int j = 0; j < s.getWordSize(s.GetWordsNumber()-1)-1; ++j) {
+                    if(randomGenerator.nextFloat() < occurrence) {
+                        s.swapCharacters(s.GetWordsNumber()-1, j, j+randomGenerator.nextInt(s.getWordSize(s.GetWordsNumber()-1)-j));
+                    }
+
                 }
             }
         }
         else
         {
-            for (Sentence sentence : text.getContent()) {
-                for (List<Character> word : sentence.getContent()) {
-                    for (int i = 0; i < word.size()-1; ++i) {
-                        swap(word, i, randomGenerator.nextInt(word.size() - 1));
+            for(Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber()-1;++i) {
+                    for(int j = 0; j < s.getWordSize(i)-1; ++j) {
+                        s.swapCharacters(i, j, j+randomGenerator.nextInt(s.getWordSize(i)-j));
                     }
+                }
+                for (int j = 0; j < s.getWordSize(s.GetWordsNumber()-1)-1; ++j) {
+                    s.swapCharacters(s.GetWordsNumber()-1, j, j+randomGenerator.nextInt(s.getWordSize(s.GetWordsNumber()-1)-j));
                 }
             }
         }
@@ -53,23 +63,33 @@ public class Swapper {
      */
     public static void swapContiguousLettersInWord(Text text, float occurrence) {
         if (occurrence != 1) {   //On vérifie que la occurrence ne bloque pas la suite de la fonction
-            for (Sentence sentence : text.getContent()) {
-                for (List<Character> word : sentence.getContent()) {
-                    for (int i = 0; i < word.size() - 1; ++i) {
-                        if (randomGenerator.nextFloat() < occurrence) {
-                            Collections.swap(word, i, i + 1);
+            for(Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber()-1;++i) {
+                    for(int j = 0; j < s.getWordSize(i)-1; ++j) {
+                        if(randomGenerator.nextFloat() < occurrence) {
+                            s.swapCharacters(i, j, j+1);
                         }
+
                     }
+                }
+                for (int j = 0; j < s.getWordSize(s.GetWordsNumber()-1)-1; ++j) {
+                    if(randomGenerator.nextFloat() < occurrence) {
+                        s.swapCharacters(s.GetWordsNumber()-1, j, j+1);
+                    }
+
                 }
             }
         }
         else
         {
-            for (Sentence sentence : text.getContent()) {
-                for (List<Character> word : sentence.getContent()) {
-                    for (int i = 0; i < word.size() - 1; ++i) {
-                        swap(word, i, i + 1);
+            for(Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber()-1;++i) {
+                    for(int j = 0; j < s.getWordSize(i)-1; ++j) {
+                        s.swapCharacters(i, j, j+1);
                     }
+                }
+                for (int j = 0; j < s.getWordSize(s.GetWordsNumber()-1)-1; ++j) {
+                    s.swapCharacters(s.GetWordsNumber()-1, j, j+1);
                 }
             }
         }
@@ -83,19 +103,17 @@ public class Swapper {
      */
     public static void swapWordsInSentence(Text text, float occurrence) {
         if (occurrence != 1) {           //On vérifie que la occurrence ne bloque pas la suite de la fonction
-            for (Sentence sentence : text.getContent()) {
-                for (int i = 0; i < sentence.getContent().size() -1; ++i) {
+            for(Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber()-1;++i) {
                     if (randomGenerator.nextFloat() < occurrence) {
-                        swap(sentence.getContent(), i, randomGenerator.nextInt(sentence.getContent().size() - 1));
+                        s.swapWords(i, i+randomGenerator.nextInt(s.GetWordsNumber()-1-i));
                     }
                 }
             }
-        }
-        else
-        {
-            for (Sentence sentence : text.getContent()) {
-                for (int i = 0; i < sentence.getContent().size()-1; ++i) {
-                    swap(sentence.getContent(), i, randomGenerator.nextInt(sentence.getContent().size() - 1));
+        } else {
+            for(Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber()-1;++i) {
+                    s.swapWords(i, i+randomGenerator.nextInt(s.GetWordsNumber()-1-i));
                 }
             }
         }
@@ -109,17 +127,17 @@ public class Swapper {
      */
     public static void swapContiguousWordsInSentence(Text text, float occurrence) {
         if (occurrence != 1) {           //On vérifie que la occurrence ne bloque pas la suite de la fonction
-            for (Sentence sentence : text.getContent()) {
-                for (int i = 0; i < sentence.getContent().size() -1; ++i) {
+            for(Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber()-1;++i) {
                     if (randomGenerator.nextFloat() < occurrence) {
-                        swap(sentence.getContent(), i, i+1);
+                        s.swapWords(i, i + 1);
                     }
                 }
             }
         } else {
-            for (Sentence sentence : text.getContent()) {
-                for (int i = 0; i < sentence.getContent().size() -1; ++i) {
-                    swap(sentence.getContent(), i, i+1);
+            for(Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber()-1;++i) {
+                    s.swapWords(i, i+1);
                 }
             }
         }

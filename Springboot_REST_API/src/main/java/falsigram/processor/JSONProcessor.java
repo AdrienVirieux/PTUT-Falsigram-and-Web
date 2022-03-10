@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import falsigram.text.core.Text;
 import falsigram.text.utils.*;
 import java.time.Duration;
+import java.util.Arrays;
 
 public class JSONProcessor {
 
@@ -50,10 +51,16 @@ public class JSONProcessor {
                                 Inserter.insertSpaces(this.text, occurrence);
                                 break;
                             case "insertAccents" :
-                                Inserter.insertAccents(this.text.getContent(), occurrence);
+                                Inserter.insertAccents(this.text, occurrence);
                                 break;
-                            case "insertNearKeyboardKeyLetters" :
-                                Inserter.insertNearKeyboardKeyLetters(this.text.getContent(), occurrence);
+                            case "insertWords" :
+                                Inserter.insertWords(this.text, occurrence);
+                                break;
+                            case "insertWordsFromSentence":
+                                Inserter.insertWordsFromSentence(this.text, occurrence);
+                                break;
+                            case "insertWordsFromList" :
+                                Inserter.insertWordsFromList(this.text, occurrence, Arrays.asList(instruction.get("wordList").toString().split(";")));
                                 break;
                             default :
                                 break;
@@ -69,6 +76,15 @@ public class JSONProcessor {
                                 break;
                             case "replacePunctuations" :
                                 Replacer.replacePunctuations(this.text, occurrence);
+                                break;
+                            case "replaceWords" :
+                                Replacer.replaceWords(this.text, occurrence);
+                                break;
+                            case "replaceWordsFromSentence" :
+                                Replacer.replaceWordsFromSentence(this.text, occurrence);
+                                break;
+                            case "replaceWordsFromList" :
+                                Replacer.replaceWordsFromList(this.text, occurrence, Arrays.asList(instruction.get("wordList").toString().split(";")));
                                 break;
                             case "replaceAHomophones" :
                                 Replacer.replaceAHomophones(this.text, occurrence);
@@ -119,7 +135,7 @@ public class JSONProcessor {
                                 Deleter.deleteAccents(this.text, occurrence);
                                 break;
                             case "deletePunctuations" :
-                                Deleter.deletePunctuations(this.text.getContent(), occurrence);
+                                Deleter.deletePunctuations(this.text, occurrence);
                             default :
                                 break;
                         }

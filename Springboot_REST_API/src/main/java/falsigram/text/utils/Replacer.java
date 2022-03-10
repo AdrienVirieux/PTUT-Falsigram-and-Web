@@ -11,6 +11,8 @@ package falsigram.text.utils;
 import falsigram.text.core.Sentence;
 import falsigram.text.core.Text;
 import static falsigram.text.utils.Data.*;
+import static java.lang.Character.isUpperCase;
+
 import java.util.*;
 
 
@@ -23,70 +25,146 @@ public class Replacer {
      * @param occurrence float
      * @param Homophone List<String>
      */
-    private static void replaceHomophone(Text text, float occurrence, List<List<Character>> Homophone) {
-        int tempRandom;
+    private static void replaceHomophone(Text text, float occurrence, List<String> Homophone) {
+        int homophoneIndex;
+        int newHomophoneIndex;
         if (occurrence != 1) {
             for (Sentence sentence : text.getContent()) {
-                for (int wordIndex = 0; wordIndex < sentence.getContent().size(); ++wordIndex)  {
-                    if (Homophone.contains(sentence.getContent().get(wordIndex))) {
+                for (int i = 0; i < sentence.GetWordsNumber(); ++i) {
+                    if ((homophoneIndex = Homophone.indexOf(sentence.getWord(i))) != -1) {
                         if (randomGenerator.nextFloat() < occurrence) {
                             do {
-                                tempRandom = randomGenerator.nextInt(Homophone.size());
-                            }  while (tempRandom == Homophone.indexOf(sentence.getContent().get(wordIndex)));
-                            sentence.getContent().set(wordIndex,Homophone.get(randomGenerator.nextInt(Homophone.size())));
+                                sentence.replaceWord(i, Homophone.get(newHomophoneIndex = randomGenerator.nextInt(Homophone.size())));
+                            } while (newHomophoneIndex == homophoneIndex);
                         }
                     }
                 }
             }
-        } else {
+        }
+        else {
             for (Sentence sentence : text.getContent()) {
-                for (int wordIndex = 0; wordIndex < sentence.getContent().size(); ++wordIndex)  {
-                    if (Homophone.contains(sentence.getContent().get(wordIndex))) {
-                        do {
-                            tempRandom = randomGenerator.nextInt(Homophone.size());
-                        } while (tempRandom == Homophone.indexOf(sentence.getContent().get(wordIndex)));
-                        sentence.getContent().set(wordIndex,Homophone.get(tempRandom));
+                for (int i = 0; i < sentence.GetWordsNumber(); ++i) {
+                    if ((homophoneIndex = Homophone.indexOf(sentence.getWord(i))) != -1) {
+                            do {
+                                sentence.replaceWord(i, Homophone.get(newHomophoneIndex = randomGenerator.nextInt(Homophone.size())));
+                            } while (newHomophoneIndex == homophoneIndex);
                     }
                 }
             }
         }
     }
 
-    private static void replaceCharacter(List<Character> word, int charIndex, List<Character> upperCase, List<Character> lowerCase) {
-        int tempRandom;
-        if (upperCase.indexOf(word.get(charIndex)) != -1) {
-            do {
-                tempRandom = randomGenerator.nextInt(upperCase.size());
-            } while (tempRandom == upperCase.indexOf(word.get(charIndex)));
-            word.set(charIndex, upperCase.get(tempRandom));
-        }
-        else if (lowerCase.indexOf(word.get(charIndex)) != -1){
-            do {
-                tempRandom = randomGenerator.nextInt(lowerCase.size());
-            } while (tempRandom == lowerCase.indexOf(word.get(charIndex)));
-            word.set(charIndex, lowerCase.get(tempRandom));
-        }
-    }
 
-    private static void determineAccentLetter(List<Character> word, int charIndex) {
-        switch (word.get(charIndex)) {
-            case 'é': case 'è': case 'ê': case 'ë':
-            case 'É': case 'È': case 'Ê': case 'Ë':
-                replaceCharacter(word, charIndex, eLCAccents, eUCAccents);
-                break;
-            case 'à': case 'â':
-            case 'À': case 'Â':
-                replaceCharacter(word, charIndex, aLCAccents, aUCAccents);
-                break;
-            case 'î': case 'ï':
-            case 'Î': case 'Ï':
-                replaceCharacter(word, charIndex, iLCAccents, iUCAccents);
-                break;
-            case 'ù': case 'û':
-            case 'Ù': case 'Û':
-                replaceCharacter(word, charIndex, uLCAccents, uUCAccents);
-                break;
+    private static char replaceAccent(char c) {
+        switch (c) {
+            case 'é':
+                switch (randomGenerator.nextInt(3)) {
+                    case 0:
+                        return 'è';
+                    case 1:
+                        return 'ê';
+                    case 2:
+                        return 'ë';
+                } break;
+            case 'è':
+                switch (randomGenerator.nextInt(3)) {
+                    case 0:
+                        return 'é';
+                    case 1:
+                        return 'ê';
+                    case 2:
+                        return 'ë';
+                } break;
+            case 'ê':
+                switch (randomGenerator.nextInt(3)) {
+                    case 0:
+                        return 'é';
+                    case 1:
+                        return 'è';
+                    case 2:
+                        return 'ë';
+                } break;
+            case 'ë':
+                switch (randomGenerator.nextInt(3)) {
+                    case 0:
+                        return 'é';
+                    case 1:
+                        return 'è';
+                    case 2:
+                        return 'ê';
+                } break;
+
+            case 'É':
+                switch (randomGenerator.nextInt(3)) {
+                    case 0:
+                        return 'È';
+                    case 1:
+                        return 'Ê';
+                    case 2:
+                        return 'Ë';
+                } break;
+            case 'È':
+                switch (randomGenerator.nextInt(3)) {
+                    case 0:
+                        return 'É';
+                    case 1:
+                        return 'Ê';
+                    case 2:
+                        return 'Ë';
+                    } break;
+            case 'Ê':
+                switch (randomGenerator.nextInt(3)) {
+                    case 0:
+                        return 'É';
+                    case 1:
+                        return 'È';
+                    case 2:
+                        return 'Ë';
+                } break;
+            case 'Ë':
+                switch (randomGenerator.nextInt(3)) {
+                    case 0:
+                        return 'È';
+                    case 1:
+                        return 'É';
+                    case 2:
+                        return 'Ê';
+                } break;
+
+
+            case 'à':
+                return 'â';
+            case 'â':
+                return 'à';
+
+            case 'À':
+                return 'Â';
+            case 'Â':
+                return 'À';
+
+
+            case 'î':
+                return 'ï';
+            case 'ï':
+                return 'î';
+
+            case 'Î':
+                return 'Ï';
+            case 'Ï':
+                return 'Î';
+
+
+            case 'ù':
+                return 'û';
+            case 'û':
+                return 'ù';
+
+            case 'Ù':
+                return 'Û';
+            case 'Û':
+                return 'Ù';
         }
+        return c;
     }
     /* Public fonctions */
     /**
@@ -96,21 +174,28 @@ public class Replacer {
 
     public static void replaceLetters(Text text, float occurrence) {
         if (occurrence != 1) {
-            for (Sentence sentence : text.getContent()) {
-                for (List<Character> word : sentence.getContent()) {
-                    for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
-                        /* On créer un nombre aléatoire entre 0 et 1 */
-                        if (randomGenerator.nextFloat() < occurrence) {
-                            replaceCharacter(word, charIndex, uCLettersAndAccents, lCLettersAndAccents);
+            for (Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                    for (int j = 0; j < s.getWordSize(i); ++j) {
+                        if(randomGenerator.nextFloat() < occurrence) {
+                            if (isUpperCase(s.getWord(i).charAt(j)))
+                                s.replaceCharacter(i, j, Data.uCLettersAndAccents.get(randomGenerator.nextInt(uCLettersAndAccents.size())));
+                            else
+                                s.replaceCharacter(i, j, Data.lCLettersAndAccents.get(randomGenerator.nextInt(lCLettersAndAccents.size())));
                         }
                     }
                 }
             }
         } else {
             for (Sentence sentence : text.getContent()) {
-                for (List<Character> word : sentence.getContent()) {
-                    for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
-                        replaceCharacter(word, charIndex, uCLettersAndAccents, lCLettersAndAccents);
+                for (Sentence s : text.getContent()) {
+                    for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                        for (int j = 0; j < s.getWordSize(i); ++j) {
+                            if (isUpperCase(s.getWord(i).charAt(j)))
+                                s.replaceCharacter(i, j, Data.uCLettersAndAccents.get(randomGenerator.nextInt(uCLettersAndAccents.size())));
+                            else
+                                s.replaceCharacter(i, j, Data.lCLettersAndAccents.get(randomGenerator.nextInt(lCLettersAndAccents.size())));
+                        }
                     }
                 }
             }
@@ -125,25 +210,23 @@ public class Replacer {
     public static void replaceAccents(Text text, float occurrence) {
         if (occurrence != 1) {
             for (Sentence sentence : text.getContent()) {
-                for (List<Character> word : sentence.getContent()) {
-                    for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
-                        /* On créer un nombre aléatoire entre 0 et 1 */
-                            if (allAccents.indexOf(word.get(charIndex)) != 1)
-                            {
-                                if (randomGenerator.nextFloat() < occurrence) {
-                                    determineAccentLetter(word, charIndex);
-                                }
+                for (int i = 0; i < sentence.GetWordsNumber();++i) {
+                    for (int j=0; j < sentence.getWordSize(i); ++j) {
+                        if (allAccents.indexOf(sentence.getContent().charAt(sentence.getWordsIndexes().get(i)+j)) != -1) {
+                            if(randomGenerator.nextFloat() < occurrence) {
+                                sentence.getContent().setCharAt(sentence.getWordsIndexes().get(i)+j, replaceAccent(sentence.getContent().charAt(sentence.getWordsIndexes().get(i)+j)) );
+                            }
                         }
+
                     }
                 }
             }
         } else {
             for (Sentence sentence : text.getContent()) {
-                for (List<Character> word : sentence.getContent()) {
-                    for (int charIndex = 0; charIndex < word.size(); ++charIndex) {
-                        if (allAccents.indexOf(word.get(charIndex)) != 1)
-                        {
-                            determineAccentLetter(word, charIndex);
+                for (int i = 0; i < sentence.GetWordsNumber();++i) {
+                    for (int j=0; j < sentence.getWordSize(i); ++j) {
+                        if (allAccents.indexOf(sentence.getContent().charAt(sentence.getWordsIndexes().get(i)+j)) != -1) {
+                            sentence.getContent().setCharAt(sentence.getWordsIndexes().get(i)+j, replaceAccent(sentence.getContent().charAt(sentence.getWordsIndexes().get(i)+j)) );
                         }
                     }
                 }
@@ -151,7 +234,62 @@ public class Replacer {
         }
     }
 
+    public static void replaceWords(Text text, float occurrence) {
+        if (occurrence != 1) {
+            for (Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                    if (randomGenerator.nextFloat() < occurrence) {
+                        s.replaceWord(i, dict.get(randomGenerator.nextInt(dict.size())));
+                    }
+                }
+            }
+        }
+        else {
+            for (Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                    s.replaceWord(i, dict.get(randomGenerator.nextInt(dict.size())));
+                }
+            }
+        }
+    }
 
+    public static void replaceWordsFromSentence(Text text, float occurrence) {
+        if (occurrence != 1) {
+            for (Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                    if (randomGenerator.nextFloat() < occurrence) {
+                        s.replaceWord(i, s.getWord(randomGenerator.nextInt(s.GetWordsNumber())));
+                    }
+                }
+            }
+        }
+        else {
+            for (Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                    s.replaceWord(i, s.getWord(randomGenerator.nextInt(s.GetWordsNumber())));
+                }
+            }
+        }
+    }
+
+    public static void replaceWordsFromList(Text text, float occurrence, List<String> wordList) {
+        if (occurrence != 1) {
+            for (Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                    if (randomGenerator.nextFloat() < occurrence) {
+                        s.replaceWord(i, wordList.get(randomGenerator.nextInt(wordList.size())));
+                    }
+                }
+            }
+        }
+        else {
+            for (Sentence s : text.getContent()) {
+                for (int i = 0; i < s.GetWordsNumber(); ++i) {
+                    s.replaceWord(i, wordList.get(randomGenerator.nextInt(wordList.size())));
+                }
+            }
+        }
+    }
 
     /**
      * @param text Text
@@ -165,16 +303,16 @@ public class Replacer {
                 if (randomGenerator.nextFloat() < occurrence) {
                     do {
                         tempRandom = randomGenerator.nextInt(punctuations.length());
-                    } while (tempRandom == punctuations.indexOf(sentence.getPunctuation()));
-                    sentence.setPunctuation(punctuations.charAt(tempRandom));
+                    } while (tempRandom == punctuations.indexOf(sentence.getContent().charAt(sentence.getContent().length()-1)));
+                    sentence.getContent().setCharAt(sentence.getContent().length()-1, punctuations.charAt(tempRandom));
                 }
             }
         } else {
             for (Sentence sentence : text.getContent()) {
                 do {
                     tempRandom = randomGenerator.nextInt(punctuations.length());
-                } while (tempRandom == punctuations.indexOf(sentence.getPunctuation()));
-                sentence.setPunctuation(punctuations.charAt(tempRandom));
+                } while (tempRandom == punctuations.indexOf(sentence.getContent().charAt(sentence.getContent().length()-1)));
+                sentence.getContent().setCharAt(sentence.getContent().length()-1, punctuations.charAt(tempRandom));
             }
         }
     }
