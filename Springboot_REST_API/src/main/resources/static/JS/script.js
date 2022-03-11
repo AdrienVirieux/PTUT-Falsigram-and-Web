@@ -62,10 +62,26 @@ window.onload = function ReadFile(){
 
     reader.readAsText(file);
   })
+  document.querySelector("#ReadwordList").addEventListener('click', function(){
+    if(document.querySelector("#wordListUpload").files.length == 0){
+      alert('PAS BON');
+      return;
+    }
+    let file = document.querySelector("#wordListUpload").files[0];
+    let reader = new FileReader();
+    reader.addEventListener('load', function(e){
+      let text = e.target.result;
+      console.log("Liste chargée avec succes");
+      document.querySelector("#ContenueWordList").textContent = text;
+      document.querySelector("#ContenueWordList").style.display = "block";
+    });
+
+    reader.readAsText(file);
+  })
 }
 
 function UseLoadedText(){
-  var text = document.getElementById("ContenueText").innerHTML;
+  var text = document.querySelector("#ContenueText").innerHTML;
   //document.getElementById("ContenueText").style.display = "none";
   //console.log(text);
   document.getElementById("textinput").value = text;
@@ -94,7 +110,8 @@ function SendRequest(){
           Occurence[i] = document.getElementById(input).value;
         }
 
-        let wordList = "Cringe;Pascal";
+        let wordList = document.querySelector("#ContenueWordList");
+        console.log(wordList);
         let requete = "{ \"text\" :" + JSON.stringify(out) + ", \"instructions\" : [" +
         "{\"name\" : \"deleteLetters\", \"occurrence\" : " + Occurence[1] + "}," +
         "{\"name\" : \"deleteSpaces\", \"occurrence\" : " + Occurence[2] + "}," +
