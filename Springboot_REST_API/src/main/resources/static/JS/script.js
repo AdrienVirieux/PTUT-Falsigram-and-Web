@@ -146,7 +146,7 @@ function SendRequest(){
 
         console.log("La requete envoyé est : " + requete);
         xhr.send(requete);
-        document.getElementById("paragraphe1").innerHTML = requete;
+        document.querySelector("#paragraphe1").innerHTML = requete;
 
         for(i = 1; i < nombreInput + 1; i++){
           let inputlabel = "inputlabel" + i;
