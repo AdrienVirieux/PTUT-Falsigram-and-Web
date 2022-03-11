@@ -94,6 +94,7 @@ function SendRequest(){
           Occurence[i] = document.getElementById(input).value;
         }
 
+        let wordList = "Cringe;Pascal";
         let requete = "{ \"text\" :" + JSON.stringify(out) + ", \"instructions\" : [" +
         "{\"name\" : \"deleteLetters\", \"occurrence\" : " + Occurence[1] + "}," +
         "{\"name\" : \"deleteSpaces\", \"occurrence\" : " + Occurence[2] + "}," +
@@ -122,8 +123,9 @@ function SendRequest(){
         "{\"name\" : \"swapWordsInSentence\", \"occurrence\" : " + Occurence[24] + "}," +
         "{\"name\" : \"swapContiguousWordsInSentence\", \"occurrence\" : " + Occurence[25] + "}," +
         "{\"name\" : \"insertWordFromSentence\", \"occurrence\" : " + Occurence[26] + "}," +
-        "{\"name\" : \"replaceWordFromSentence\", \"occurrence\" : " + Occurence[27] +
-        "} ] }";
+        "{\"name\" : \"replaceWordFromSentence\", \"occurrence\" : " + Occurence[27] + "}," +
+        "{\"name\" : \"insertWordsFromList\", \"occurrence\" : " + Occurence[28] + ", \"wordList\" : " +  JSON.stringify(wordList) + "}," +
+        "{\"name\" : \"replaceWordsFromList\", \"occurrence\" : " + Occurence[29] + ", \"wordList\" : " +  JSON.stringify(wordList) + "} ] }";
 
         console.log("La requete envoyé est : " + requete);
         xhr.send(requete);
