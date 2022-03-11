@@ -56,7 +56,7 @@ window.onload = function ReadFile(){
       let text = e.target.result;
       console.log("Texte chargé avec succes");
       document.querySelector("#ContenueText").textContent = text;
-      document.getElementById("ContenueText").style.display = "none";
+      document.querySelector("#ContenueText").style.display = "none";
       UseLoadedText();
     });
 
@@ -73,7 +73,7 @@ window.onload = function ReadFile(){
       let text = e.target.result;
       console.log("Liste chargée avec succes");
       document.querySelector("#ContenueWordList").textContent = text;
-      document.querySelector("#ContenueWordList").style.display = "block";
+      document.querySelector("#ContenueWordList").style.display = "none";
     });
 
     reader.readAsText(file);
@@ -110,7 +110,7 @@ function SendRequest(){
           Occurence[i] = document.getElementById(input).value;
         }
 
-        let wordList = document.querySelector("#ContenueWordList");
+        let wordList = document.querySelector("#ContenueWordList").innerHTML;
         console.log(wordList);
         let requete = "{ \"text\" :" + JSON.stringify(out) + ", \"instructions\" : [" +
         "{\"name\" : \"deleteLetters\", \"occurrence\" : " + Occurence[1] + "}," +
