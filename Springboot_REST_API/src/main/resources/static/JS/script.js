@@ -41,8 +41,11 @@
         "} ] }";
         document.getElementById("paragraphe1").innerHTML = requete;
         return(requete);
-      }
+
 */
+
+
+
 
 window.onload = function ReadFile(){
   document.querySelector("#ReadText").addEventListener('click', function(){
@@ -105,9 +108,9 @@ function SendRequest(){
         var nombreInput = document.querySelectorAll(".input").length;
         //console.log(nombreInput);
         for(i = 1; i < nombreInput + 1; i++){
-          let input = "input"+ i;
-          //console.log(input);
-          Occurence[i] = document.getElementById(input).value;
+          let Input = "#Input"+ i;
+          console.log(Input);
+          Occurence[i] = document.querySelector(Input).value;
         }
 
         let wordList = document.querySelector("#ContenueWordList").innerHTML;
@@ -157,4 +160,16 @@ function SendRequest(){
           label.innerHTML = " Valeure choisie : " + occurence;
           //document.getElementById("inputlabel1").innerHTML = "test";
         }
+}
+
+function updateTextInput(val, id) {
+  Input = "#text" + id;
+  console.log(Input);
+  document.querySelector(Input).value = val;
+}
+
+function updateRangeInput(val, id) {
+  Input = "#" + id.substring(4);
+  console.log(Input);
+  document.querySelector(Input).value = val;
 }
