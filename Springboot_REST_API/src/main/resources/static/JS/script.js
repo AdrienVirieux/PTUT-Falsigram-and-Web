@@ -100,11 +100,11 @@ function SendRequest(){
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4) {
             console.log("La réponse du serveur est : " + xhr.responseText);
-            document.getElementById("paragraphe2").innerHTML = xhr.responseText;
+            document.querySelector("#paragraphe2").innerHTML = xhr.responseText;
           }};
 
         let Occurence = new Array();
-        let out = document.getElementById("textinput").value;
+        let out = document.querySelector("#textinput").value;
         var nombreInput = document.querySelectorAll(".input").length;
         //console.log(nombreInput);
         for(i = 1; i < nombreInput + 1; i++){
@@ -152,8 +152,8 @@ function SendRequest(){
         document.querySelector("#paragraphe1").innerHTML = requete;
 
         for(i = 1; i < nombreInput + 1; i++){
-          let inputlabel = "inputlabel" + i;
-          let label = document.getElementById(inputlabel)
+          let inputlabel = "#inputlabel" + i;
+          let label = document.querySelector(inputlabel)
           let occurence = Occurence[i];
           //console.log(inputlabel + " " + occurence);
           //console.log(label),
