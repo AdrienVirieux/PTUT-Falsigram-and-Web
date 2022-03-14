@@ -10,8 +10,10 @@
 
   <body>
 
+    <!-- input pour le texte en entré -->
     <textarea id="textinput" name="entré" rows="10" cols="50"></textarea><label for="textinput">Texte en entré</label></br>
 
+    <!-- tous les inputs permettant de regler les occurences -->
     <input class="input" id="Input1" onchange="updateTextInput(this.value, this.id);" type="range" min="0" max="1" value="0" step="0.01"><label class="labelinput" for="input1" data-hover="C'est la fonction deleteLetters">deleteLetters</label><label id="inputlabel1" for="input1"></label></br>
     <input type="text" id="textInput1" onchange="updateRangeInput(this.value, this.id);" value="0"></br>
 
@@ -33,7 +35,6 @@
     <input class="input" id="Input7" onchange="updateTextInput(this.value, this.id);" type="range" min="0" max="1" value="0" step="0.01"><label class="labelinput" for="input7" data-hover="C'est la fonction insertAccents">insertAccents</label><label id="inputlabel7" for="input7"></label></br>
     <input type="text" id="textInput7" onchange="updateRangeInput(this.value, this.id);" value="0"></br>
 
-    <!-- <input id="input8" type="range" min="0" max="1" value="0" step="0.01"><label for="input8">insertNearKeyboardKeyLetters</label><label id="inputlabel8" for="input8"></label></br> -->
     <input class="input" id="Input8" onchange="updateTextInput(this.value, this.id);" type="range" min="0" max="1" value="0" step="0.01"><label class="labelinput" for="input8" data-hover="C'est la fonction replaceLetters">replaceLetters</label><label id="inputlabel8" for="input8"></label></br>
     <input type="text" id="textInput8" onchange="updateRangeInput(this.value, this.id);" value="0"></br>
 
@@ -100,9 +101,10 @@
     <input class="input" id="Input29" onchange="updateTextInput(this.value, this.id);" type="range" min="0" max="1" value="0" step="0.01"><label class="labelinput" for="input29" data-hover="C'est la fonction replaceWordsFromList">replaceWordsFromList</label><label id="inputlabel29" for="input29"></label></br>
     <input type="text" id="textInput29" onchange="updateRangeInput(this.value, this.id);" value="0"></br>
 
+
+    <!-- upload text brut personnalisé -->
     <input id="textUpload" type="file" /></br>
     <button id="ReadText">Chargé le texte personnalisé</button></br>
-    <!-- <button onclick="UseLoadedText()">Utilisé le texte chargé</button></br> -->
 
     <!-- upload liste fichier insertWordsFromList -->
     <input id="wordListUploadInsert" type="file" /></br>
@@ -112,12 +114,20 @@
     <input id="wordListUploadReplace" type="file" /></br>
     <button id="ReadwordListReplace">Chargé la liste de mot pour replaceWordsFromList</button></br>
 
+    <!-- bouton pour envoyer la requete -->
     <button onclick="SendRequest()">Envoyé une requete</button></br>
+
+    <!-- paragraphes contenant la requete envoyé au serveur ainsi que la réponse du serveur (en texte brut) -->
     <textarea id="paragraphe1" name="requete" rows="10" cols="50" readonly></textarea><label for="paragraphe1">Requete envoyé</label></br>
     <textarea id="paragraphe2" name="sortie" rows="10" cols="50" readonly></textarea><label for="paragraphe2">Texte en sortie</label></br>
+
+    <!-- section permettant de stocker le texte temporairement (non visible a l'utilisateur) -->
     <p id="ContenueText"></p></br>
+
+    <!-- paragraphes contenant les listes de mots pour les fonctions ContenueWordListInsert et ContenueWordListReplace -->
     <textarea id="ContenueWordListInsert" rows="10" cols="50"></textarea><label for="ContenueWordListInsert">WordListInsert</label></br>
     <textarea id="ContenueWordListReplace" rows="10" cols="50"></textarea><label for="ContenueWordListReplace">WordListReplace</label></br>
+
   </body>
 
 </html>

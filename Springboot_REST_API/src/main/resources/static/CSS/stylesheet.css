@@ -1,8 +1,5 @@
-.labelinput {
-  color: red;
-}
-
 .labelinput{
+  color: red;
   position: relative;
   border-bottom: 1px black;
 }
