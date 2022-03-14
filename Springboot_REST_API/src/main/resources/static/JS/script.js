@@ -120,21 +120,16 @@ function SendRequest(){
           let inputlabel = "#inputlabel" + i;
           let label = document.querySelector(inputlabel)
           let occurence = Occurence[i];
-          //console.log(inputlabel + " " + occurence);
-          //console.log(label),
           label.innerHTML = " Valeure choisie : " + occurence;
-          //document.getElementById("inputlabel1").innerHTML = "test";
         }
 }
 
 function updateTextInput(val, id) {
   Input = "#text" + id;
-  console.log(Input);
   document.querySelector(Input).innerHTML = val;
 }
 
 function updateRangeInput(val, id) {
   Input = "#" + id.substring(4);
-  console.log(Input);
   document.querySelector(Input).innerHTML = val;
 }
