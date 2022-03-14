@@ -129,8 +129,8 @@ function SendRequest(){
           Occurence[i] = document.querySelector(Input).value;
         }
 
-        let wordListInsert = document.querySelector("#ContenueWordListInsert").value;
-        let wordListReplace = document.querySelector("#ContenueWordListReplace").value;
+        let wordListInsert = document.querySelector("#ContenueWordListInsert").innerHTML;
+        let wordListReplace = document.querySelector("#ContenueWordListReplace").innerHTML;
 
         console.log(wordListInsert);
         console.log(wordListReplace);
@@ -185,11 +185,11 @@ function SendRequest(){
 function updateTextInput(val, id) {
   Input = "#text" + id;
   console.log(Input);
-  document.querySelector(Input).value = val;
+  document.querySelector(Input).innerHTML = val;
 }
 
 function updateRangeInput(val, id) {
   Input = "#" + id.substring(4);
   console.log(Input);
-  document.querySelector(Input).value = val;
+  document.querySelector(Input).innerHTML = val;
 }
