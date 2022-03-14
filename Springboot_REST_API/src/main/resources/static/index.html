@@ -103,15 +103,21 @@
     <input id="textUpload" type="file" /></br>
     <button id="ReadText">Chargé le texte personnalisé</button></br>
     <!-- <button onclick="UseLoadedText()">Utilisé le texte chargé</button></br> -->
-    <input id="wordListUpload" type="file" /></br>
-    <button id="ReadwordList">Chargé la liste de mot</button></br>
 
+    <!-- upload liste fichier insertWordsFromList -->
+    <input id="wordListUploadInsert" type="file" /></br>
+    <button id="ReadwordListInsert">Chargé la liste de mot pour insertWordsFromList</button></br>
+
+    <!-- upload liste fichier replaceWordsFromList -->
+    <input id="wordListUploadReplace" type="file" /></br>
+    <button id="ReadwordListReplace">Chargé la liste de mot pour replaceWordsFromList</button></br>
 
     <button onclick="SendRequest()">Envoyé une requete</button></br>
     <textarea id="paragraphe1" name="requete" rows="10" cols="50" readonly></textarea><label for="paragraphe1">Requete envoyé</label></br>
     <textarea id="paragraphe2" name="sortie" rows="10" cols="50" readonly></textarea><label for="paragraphe2">Texte en sortie</label></br>
-    <p id="ContenueText"></p>
-    <p id="ContenueWordList"></p>
+    <p id="ContenueText"></p></br>
+    <input id="ContenueWordListInsert"></br>
+    <input id="ContenueWordListReplace">
   </body>
 
 </html>

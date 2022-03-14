@@ -65,18 +65,34 @@ window.onload = function ReadFile(){
 
     reader.readAsText(file);
   })
-  document.querySelector("#ReadwordList").addEventListener('click', function(){
-    if(document.querySelector("#wordListUpload").files.length == 0){
+  document.querySelector("#ReadwordListInsert").addEventListener('click', function(){
+    if(document.querySelector("#wordListUploadInsert").files.length == 0){
       alert('PAS BON');
       return;
     }
-    let file = document.querySelector("#wordListUpload").files[0];
+    let file = document.querySelector("#wordListUploadInsert").files[0];
     let reader = new FileReader();
     reader.addEventListener('load', function(e){
       let text = e.target.result;
       console.log("Liste chargée avec succes");
-      document.querySelector("#ContenueWordList").textContent = text;
-      document.querySelector("#ContenueWordList").style.display = "none";
+      document.querySelector("#ContenueWordListInsert").value = text;
+      //document.querySelector("#ContenueWordListInsert").style.display = "none";
+    });
+
+    reader.readAsText(file);
+  })
+  document.querySelector("#ReadwordListReplace").addEventListener('click', function(){
+    if(document.querySelector("#wordListUploadReplace").files.length == 0){
+      alert('PAS BON');
+      return;
+    }
+    let file = document.querySelector("#wordListUploadReplace").files[0];
+    let reader = new FileReader();
+    reader.addEventListener('load', function(e){
+      let text = e.target.result;
+      console.log("Liste chargée avec succes");
+      document.querySelector("#ContenueWordListReplace").value = text;
+      //document.querySelector("#ContenueWordListReplace").style.display = "none";
     });
 
     reader.readAsText(file);
@@ -113,8 +129,12 @@ function SendRequest(){
           Occurence[i] = document.querySelector(Input).value;
         }
 
-        let wordList = document.querySelector("#ContenueWordList").innerHTML;
-        console.log(wordList);
+        let wordListInsert = document.querySelector("#ContenueWordListInsert").value;
+        let wordListReplace = document.querySelector("#ContenueWordListReplace").value;
+
+        console.log(wordListInsert);
+        console.log(wordListReplace);
+
         let requete = "{ \"text\" :" + JSON.stringify(out) + ", \"instructions\" : [" +
         "{\"name\" : \"deleteLetters\", \"occurrence\" : " + Occurence[1] + "}," +
         "{\"name\" : \"deleteSpaces\", \"occurrence\" : " + Occurence[2] + "}," +
@@ -144,8 +164,8 @@ function SendRequest(){
         "{\"name\" : \"swapContiguousWordsInSentence\", \"occurrence\" : " + Occurence[25] + "}," +
         "{\"name\" : \"insertWordFromSentence\", \"occurrence\" : " + Occurence[26] + "}," +
         "{\"name\" : \"replaceWordFromSentence\", \"occurrence\" : " + Occurence[27] + "}," +
-        "{\"name\" : \"insertWordsFromList\", \"occurrence\" : " + Occurence[28] + ", \"wordList\" : " +  JSON.stringify(wordList) + "}," +
-        "{\"name\" : \"replaceWordsFromList\", \"occurrence\" : " + Occurence[29] + ", \"wordList\" : " +  JSON.stringify(wordList) + "} ] }";
+        "{\"name\" : \"insertWordsFromList\", \"occurrence\" : " + Occurence[28] + ", \"wordList\" : " +  JSON.stringify(wordListInsert) + "}," +
+        "{\"name\" : \"replaceWordsFromList\", \"occurrence\" : " + Occurence[29] + ", \"wordList\" : " +  JSON.stringify(wordListReplace) + "} ] }";
 
         console.log("La requete envoyé est : " + requete);
         xhr.send(requete);
