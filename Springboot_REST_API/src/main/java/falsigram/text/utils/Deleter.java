@@ -30,7 +30,7 @@ public class Deleter {
                 return 'a';
             case 'î': case 'ï':
                 return 'i';
-            case 'ù': case 'û':
+            case 'ù': case 'û': case 'ü':
                 return 'u';
             case 'ô':
                 return 'o';
@@ -42,12 +42,15 @@ public class Deleter {
                 return 'A';
             case 'Î': case 'Ï':
                 return 'I';
-            case 'Ù': case 'Ü':
+            case 'Ù': case 'Û': case 'Ü':
                 return 'U';
             case 'Ô':
                 return 'O';
             case 'Ç':
                 return 'C';
+            default:
+                System.out.println("Caractère introuvable");
+                throw new Exception("Entrée invalide");
         }
         return ' ';
     }

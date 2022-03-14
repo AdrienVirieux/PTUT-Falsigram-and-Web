@@ -57,11 +57,13 @@ public class Inserter {
             case 'o':
                 return 'ô';
             case 'u':
-                switch (randomGenerator.nextInt(2)){
+                switch (randomGenerator.nextInt(3)){
                     case 0:
                         return 'ù';
                     case 1:
                         return 'û';
+                    case 2:
+                        return 'ü';
                 }
                 break;
             case 'c':
@@ -97,15 +99,20 @@ public class Inserter {
             case 'O':
                 return 'Ô';
             case 'U':
-                switch (randomGenerator.nextInt(2)){
+                switch (randomGenerator.nextInt(3)){
                     case 0:
                         return  'Ù';
                     case 1:
                         return 'Û';
+                    case 2:
+                        return 'Ü';
                 }
                 break;
             case 'C':
                 return 'Ç';
+            default:
+                System.out.println("Caractère introuvable");
+                throw new Exception("Entrée invalide");
         }
         return c;
     }

@@ -155,14 +155,51 @@ public class Replacer {
 
 
             case 'ù':
-                return 'û';
+                switch (randomGenerator.nextInt(2)) {
+                    case 0:
+                        return 'û';
+                    case 1:
+                        return 'ü';
+                } break;
             case 'û':
-                return 'ù';
+                switch (randomGenerator.nextInt(2)) {
+                    case 0:
+                        return 'ù';
+                    case 1:
+                        return 'ü';
+                } break;
+            case 'ü':
+                switch (randomGenerator.nextInt(2)) {
+                    case 0:
+                        return 'û';
+                    case 1:
+                        return 'ù';
+                } break;
 
             case 'Ù':
-                return 'Û';
+                switch (randomGenerator.nextInt(2)) {
+                    case 0:
+                        return 'Û';
+                    case 1:
+                        return 'Ü';
+                } break;
             case 'Û':
-                return 'Ù';
+                switch (randomGenerator.nextInt(2)) {
+                    case 0:
+                        return 'Ù';
+                    case 1:
+                        return 'Ü';
+                } break;
+            case 'Ü':
+                switch (randomGenerator.nextInt(2)) {
+                    case 0:
+                        return 'Û';
+                    case 1:
+                        return 'Ù';
+                } break;
+            default:
+                System.out.println("Caractère introuvable");
+                throw new Exception("Entrée invalide");
         }
         return c;
     }
