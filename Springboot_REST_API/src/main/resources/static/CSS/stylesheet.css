@@ -1,5 +1,46 @@
+body{
+  background-color: grey;
+}
+
+.filechooser{
+  color: white;
+}
+
+textarea{
+  color: white;
+  border-radius: 5px;
+  border-color: black;
+  border-width: 3px;
+}
+
+label[for=textinput]{
+  color: white;
+}
+
+label[for=paragraphe1]{
+  color: white;
+}
+
+label[for=paragraphe2]{
+  color: white;
+}
+
+label[for=ContenueWordListInsert]{
+  color: white;
+}
+
+label[for=ContenueWordListReplace]{
+  color: white;
+}
+
+.inputvaleurebrut{
+  border-radius: 5px;
+  border-color: black;
+  border-width: 3px;
+}
+
 .labelinput{
-  color: red;
+  color: white;
   position: relative;
   border-bottom: 1px black;
 }
