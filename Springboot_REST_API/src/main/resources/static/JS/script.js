@@ -1,7 +1,7 @@
 window.onload = function ReadFile(){
   document.querySelector("#ReadText").addEventListener('click', function(){
     if(document.querySelector("#textUpload").files.length == 0){
-      alert('PAS BON');
+      alert('Erreur dans le texte personnalisé');
       return;
     }
     let file = document.querySelector("#textUpload").files[0];
@@ -18,7 +18,7 @@ window.onload = function ReadFile(){
   })
   document.querySelector("#ReadwordListInsert").addEventListener('click', function(){
     if(document.querySelector("#wordListUploadInsert").files.length == 0){
-      alert('PAS BON');
+      alert('Erreur dans la liste de Insert');
       return;
     }
     let file = document.querySelector("#wordListUploadInsert").files[0];
@@ -33,7 +33,7 @@ window.onload = function ReadFile(){
   })
   document.querySelector("#ReadwordListReplace").addEventListener('click', function(){
     if(document.querySelector("#wordListUploadReplace").files.length == 0){
-      alert('PAS BON');
+      alert('Erreur dans la liste de Replace');
       return;
     }
     let file = document.querySelector("#wordListUploadReplace").files[0];
