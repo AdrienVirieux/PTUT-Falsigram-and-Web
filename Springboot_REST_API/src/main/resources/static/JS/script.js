@@ -9,9 +9,7 @@ window.onload = function ReadFile(){
     reader.addEventListener('load', function(e){
       let text = e.target.result;
       console.log("Texte chargé avec succes");
-      document.querySelector("#ContenueText").textContent = text;
-      document.querySelector("#ContenueText").style.display = "none";
-      UseLoadedText();
+      document.querySelector("#textinput").textContent = text;
     });
 
     reader.readAsText(file);
@@ -48,11 +46,6 @@ window.onload = function ReadFile(){
   })
 }
 
-function UseLoadedText(){
-  var text = document.querySelector("#ContenueText").innerHTML;
-  document.getElementById("textinput").value = text;
-}
-
 function SendRequest(){
         let url = "http://localhost:8080/RequestJSONProcess";
         let xhr = new XMLHttpRequest();
@@ -71,12 +64,11 @@ function SendRequest(){
         var nombreInput = document.querySelectorAll(".input").length;
         for(i = 1; i < nombreInput + 1; i++){
           let Input = "#Input"+ i;
-          console.log(Input);
           Occurence[i] = document.querySelector(Input).value;
         }
 
-        let wordListInsert = document.querySelector("#ContenueWordListInsert").innerHTML;
-        let wordListReplace = document.querySelector("#ContenueWordListReplace").innerHTML;
+        let wordListInsert = document.querySelector("#ContenueWordListInsert").value;
+        let wordListReplace = document.querySelector("#ContenueWordListReplace").value;
 
         console.log(wordListInsert);
         console.log(wordListReplace);
