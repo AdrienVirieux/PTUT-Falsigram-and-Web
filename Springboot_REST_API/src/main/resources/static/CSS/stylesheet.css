@@ -24,6 +24,32 @@ body{
   background-color: lightgrey;
 }
 
+.SendRequest{
+  cursor: pointer;
+  color: white;
+  border: 3px solid black;
+  border-radius: 5px;
+  border-width: 3px;
+  background-color: #636363;
+}
+
+.SendRequest:hover{
+  background-color: lightgrey;
+}
+
+.boutonload{
+  cursor: pointer;
+  color: white;
+  border: 3px solid black;
+  border-radius: 5px;
+  border-width: 3px;
+  background-color: #636363;
+}
+
+.boutonload:hover{
+  background-color: lightgrey;
+}
+
 textarea{
   color: black;
   border-radius: 5px;
