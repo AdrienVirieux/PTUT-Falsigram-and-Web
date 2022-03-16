@@ -118,10 +118,10 @@ function SendRequest(){
 
 function updateTextInput(val, id) {
   Input = "#text" + id;
-  document.querySelector(Input).innerHTML = val;
+  document.querySelector(Input).value = val;
 }
 
 function updateRangeInput(val, id) {
   Input = "#" + id.substring(4);
-  document.querySelector(Input).innerHTML = val;
+  document.querySelector(Input).value = val;
 }
