@@ -1,5 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Falsigram" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="demo" />
     <module name="Falsigram" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="falsigram.Falsigram" />
     <option name="ALTERNATIVE_JRE_PATH" />
