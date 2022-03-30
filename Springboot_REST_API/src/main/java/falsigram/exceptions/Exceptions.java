@@ -1,17 +1,16 @@
-import java.io.IOException;
+package falsigram.exceptions;
 
-import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.boot.autoconfigure.web.ErrorController;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-
-
+@RequestMapping
+@RestController
 @ControllerAdvice
-public class ControllerExceptionTranslator {
+    public class Exceptions extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({RequestNotFound.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
