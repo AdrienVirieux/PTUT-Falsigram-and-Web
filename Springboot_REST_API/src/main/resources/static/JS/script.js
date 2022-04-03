@@ -1,4 +1,10 @@
+
+//Fonction qui gere les upload de fichier
+//window.onload car a besoin d'etre instanciée dés l'ouverture de la page web
+
 window.onload = function ReadFile(){
+
+  //Listener pour le texte personnalisé
   document.querySelector("#ReadText").addEventListener('click', function(){
     if(document.querySelector("#textUpload").files.length == 0){
       alert('Erreur dans le texte personnalisé');
@@ -14,6 +20,8 @@ window.onload = function ReadFile(){
 
     reader.readAsText(file);
   })
+
+  //Listener pour la liste de Insert
   document.querySelector("#ReadwordListInsert").addEventListener('click', function(){
     if(document.querySelector("#wordListUploadInsert").files.length == 0){
       alert('Erreur dans la liste de Insert');
@@ -29,6 +37,8 @@ window.onload = function ReadFile(){
 
     reader.readAsText(file);
   })
+
+  //Listener pour la liste de Replace
   document.querySelector("#ReadwordListReplace").addEventListener('click', function(){
     if(document.querySelector("#wordListUploadReplace").files.length == 0){
       alert('Erreur dans la liste de Replace');
@@ -46,6 +56,8 @@ window.onload = function ReadFile(){
   })
 }
 
+//Fonction d'envoie de la requete
+
 function SendRequest(){
   let url = "http://localhost:8080/RequestJSONProcess";
   let xhr = new XMLHttpRequest();
@@ -53,11 +65,15 @@ function SendRequest(){
   xhr.setRequestHeader("Accept", "application/json")
   xhr.setRequestHeader("Content-Type", "application/json");
 
+  //Listener qui attend la réponse du serveur
+
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
       console.log("La réponse du serveur est : " + xhr.responseText);
       document.querySelector("#paragraphe2").innerHTML = xhr.responseText;
     }};
+
+  //Création de la requete JSON
 
   let Occurence = new Array();
   let out = document.querySelector("#textinput").value;
@@ -70,6 +86,7 @@ function SendRequest(){
   let wordListInsert = document.querySelector("#ContenueWordListInsert").value;
   let wordListReplace = document.querySelector("#ContenueWordListReplace").value;
 
+  //Debug
   console.log(wordListInsert);
   console.log(wordListReplace);
 
@@ -115,6 +132,8 @@ function SendRequest(){
     label.innerHTML = " Valeure choisie : " + occurence;
   }
 }
+
+//Fonctions permettant de synchroniser les deux inputs pour chaque fonctions
 
 function updateTextInput(val, id) {
   Input = "#text" + id;
