@@ -20,7 +20,7 @@ window.onload = function ReadFile(){
 
     reader.readAsText(file);
   })
-  	
+
   //Listener pour la liste de Insert
   document.querySelector("#ReadwordListInsert").addEventListener('click', function(){
     if(document.querySelector("#wordListUploadInsert").files.length =="0"){
@@ -38,7 +38,7 @@ window.onload = function ReadFile(){
 
     reader.readAsText(file);
   })
-  
+
   //Listener pour la liste de Replace
   document.querySelector("#ReadwordListReplace").addEventListener('click', function(){
     if(document.querySelector("#wordListUploadReplace").files.length =="0"){
@@ -172,9 +172,9 @@ function inputselect(select) {
       document.getElementsByClassName('checkReplace')[0].style.display ="none";
       document.getElementsByClassName('checkSwap')[0].style.display ="none";
 
-    
+
       document.getElementsByClassName('checkInsert')[0].style.display = "block";
-      
+
     break;
 
     case 'Replace' :
@@ -213,7 +213,7 @@ function outputselect(select) {
       document.getElementById('ContenueWordListInsert').style.display ="none";
       document.getElementById('ContenueWordListReplace').style.display ="none";
 
-      document.getElementById('paragraphe1').style.display = "block";
+      document.getElementById('paragraphe2').style.display = "block";
       document.getElementsByClassName('texteEnSortie')[0].style.display = "block";
     break;
 
@@ -229,7 +229,7 @@ function outputselect(select) {
       document.getElementById('ContenueWordListInsert').style.display ="none";
       document.getElementById('ContenueWordListReplace').style.display ="none";
 
-      document.getElementById('paragraphe2').style.display = "block";
+      document.getElementById('paragraphe1').style.display = "block";
       document.getElementsByClassName('requeteEnvoye')[0].style.display = "block";
     break;
 
