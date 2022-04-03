@@ -16,10 +16,18 @@
 
   <!-- tous les inputs permettant de regler les occurences -->
 
-  <div class="checkDelete">
+    <div class="checkDelete">
+      <input class="input" id="Input1" onchange="updateTextInput(this.value, this.id);" type="range" min="0" max="1"
+      value="0" step="0.01"><label class="labelinput" for="input2"
+      data-hover="C'est la fonction deleteLetters">deleteLetters</label><label id="inputlabel1" 
+      for="input1"></label></br>
+    <input class="inputvaleurebrut" type="text" id="textInput2" onchange="updateRangeInput(this.value, this.id);"
+      value="0"></br>
+
     <input class="input" id="Input2" onchange="updateTextInput(this.value, this.id);" type="range" min="0" max="1"
       value="0" step="0.01"><label class="labelinput" for="input2"
-      data-hover="C'est la fonction deleteSpaces">deleteSpaces</label><label id="inputlabel2" for="input2"></label></br>
+      data-hover="C'est la fonction deleteSpaces">deleteSpaces</label><label id="inputlabel2" 
+      for="input2"></label></br>
     <input class="inputvaleurebrut" type="text" id="textInput2" onchange="updateRangeInput(this.value, this.id);"
       value="0"></br>
 
