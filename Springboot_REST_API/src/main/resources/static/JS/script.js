@@ -15,6 +15,7 @@ window.onload = function ReadFile(){
     reader.addEventListener('load', function(e){
       let text = e.target.result;
       console.log("Texte chargé avec succes");
+      console.log(e.target.result.replace(/(?:\r\n|\r|\n|--|_)/g, ''));
       document.querySelector("#textinput").textContent = text;
     });
 
@@ -32,6 +33,7 @@ window.onload = function ReadFile(){
     reader.addEventListener('load', function(e){
       let text = e.target.result;
       console.log("Liste chargée avec succes");
+      console.log(e.target.result.replace(/(?:\r\n|\r|\n)/g, ''));
       document.querySelector("#ContenueWordListInsert").value = text;
     });
 
@@ -49,6 +51,7 @@ window.onload = function ReadFile(){
     reader.addEventListener('load', function(e){
       let text = e.target.result;
       console.log("Liste chargée avec succes");
+      console.log(e.target.result.replace(/(?:\r\n|\r|\n)/g, ''));
       document.querySelector("#ContenueWordListReplace").value = text;
     });
 
