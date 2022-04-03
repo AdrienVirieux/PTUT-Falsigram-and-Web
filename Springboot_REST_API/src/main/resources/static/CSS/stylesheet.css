@@ -293,11 +293,11 @@ select {
 }
       /* Output Textarea */
 #paragraphe1 {
-  display: block;
+  display: none;
 }    
 
 #paragraphe2 {
-  display: none;
+  display: block;
 }
 
 #ContenueWordListInsert {
