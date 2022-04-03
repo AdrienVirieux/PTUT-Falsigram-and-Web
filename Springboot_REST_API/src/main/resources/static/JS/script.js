@@ -1,4 +1,3 @@
-
 //Fonction qui gere les upload de fichier
 //window.onload car a besoin d'etre instanciée dés l'ouverture de la page web
 
@@ -6,7 +5,7 @@ window.onload = function ReadFile(){
 
   //Listener pour le texte personnalisé
   document.querySelector("#ReadText").addEventListener('click', function(){
-    if(document.querySelector("#textUpload").files.length == 0){
+    if(document.querySelector("#textUpload").files.length =="0"){
       alert('Erreur dans le texte personnalisé');
       return;
     }
@@ -21,10 +20,10 @@ window.onload = function ReadFile(){
 
     reader.readAsText(file);
   })
-
+  	
   //Listener pour la liste de Insert
   document.querySelector("#ReadwordListInsert").addEventListener('click', function(){
-    if(document.querySelector("#wordListUploadInsert").files.length == 0){
+    if(document.querySelector("#wordListUploadInsert").files.length =="0"){
       alert('Erreur dans la liste de Insert');
       return;
     }
@@ -39,10 +38,10 @@ window.onload = function ReadFile(){
 
     reader.readAsText(file);
   })
-
+  
   //Listener pour la liste de Replace
   document.querySelector("#ReadwordListReplace").addEventListener('click', function(){
-    if(document.querySelector("#wordListUploadReplace").files.length == 0){
+    if(document.querySelector("#wordListUploadReplace").files.length =="0"){
       alert('Erreur dans la liste de Replace');
       return;
     }
@@ -146,4 +145,125 @@ function updateTextInput(val, id) {
 function updateRangeInput(val, id) {
   Input = "#" + id.substring(4);
   document.querySelector(Input).value = val;
+}
+
+//Hide/Show
+function inputselect(select) {
+  var selectedtext = select.options[select.selectedIndex].text;
+  switch (selectedtext) {
+    case 'Fonctions' :
+      document.getElementsByClassName('checkDelete')[0].style.display ="none";
+      document.getElementsByClassName('checkInsert')[0].style.display ="none";
+      document.getElementsByClassName('checkReplace')[0].style.display ="none";
+      document.getElementsByClassName('checkSwap')[0].style.display ="none";
+    break;
+
+    case 'Delete' :
+      document.getElementsByClassName('checkInsert')[0].style.display ="none";
+      document.getElementsByClassName('checkReplace')[0].style.display ="none";
+      document.getElementsByClassName('checkSwap')[0].style.display ="none";
+
+      document.getElementsByClassName('checkDelete')[0].style.display = "block";
+    break;
+
+    case 'Insert' :
+      document.getElementsByClassName('checkDelete')[0].style.display ="none";
+      document.getElementsByClassName('checkInsert')[0].style.display ="none";
+      document.getElementsByClassName('checkReplace')[0].style.display ="none";
+      document.getElementsByClassName('checkSwap')[0].style.display ="none";
+
+    
+      document.getElementsByClassName('checkInsert')[0].style.display = "block";
+      
+    break;
+
+    case 'Replace' :
+      document.getElementsByClassName('checkDelete')[0].style.display ="none";
+      document.getElementsByClassName('checkInsert')[0].style.display ="none";
+      document.getElementsByClassName('checkReplace')[0].style.display ="none";
+      document.getElementsByClassName('checkSwap')[0].style.display ="none";
+
+      document.getElementsByClassName('checkReplace')[0].style.display = "block";
+    break;
+
+    case 'Swap' :
+      document.getElementsByClassName('checkDelete')[0].style.display ="none";
+      document.getElementsByClassName('checkInsert')[0].style.display ="none";
+      document.getElementsByClassName('checkReplace')[0].style.display ="none";
+      document.getElementsByClassName('checkSwap')[0].style.display ="none";
+
+      document.getElementsByClassName('checkSwap')[0].style.display = "block";
+    break;
+
+  }
+}
+
+function outputselect(select) {
+  var selectedtext = select.options[select.selectedIndex].text;
+  switch (selectedtext) {
+    case 'Texte en sortie' :
+      //label
+      document.getElementsByClassName('texteEnSortie')[0].style.display ="none";
+      document.getElementsByClassName('requeteEnvoye')[0].style.display ="none";
+      document.getElementsByClassName('worldListInsert')[0].style.display ="none";
+      document.getElementsByClassName('worldListReplace')[0].style.display ="none";
+      //TextArea
+      document.getElementById('paragraphe1').style.display ="none";
+      document.getElementById('paragraphe2').style.display ="none";
+      document.getElementById('ContenueWordListInsert').style.display ="none";
+      document.getElementById('ContenueWordListReplace').style.display ="none";
+
+      document.getElementById('paragraphe1').style.display = "block";
+      document.getElementsByClassName('texteEnSortie')[0].style.display = "block";
+    break;
+
+    case 'Requete envoyé' :
+      //label
+      document.getElementsByClassName('texteEnSortie')[0].style.display ="none";
+      document.getElementsByClassName('requeteEnvoye')[0].style.display ="none";
+      document.getElementsByClassName('worldListInsert')[0].style.display ="none";
+      document.getElementsByClassName('worldListReplace')[0].style.display ="none";
+      //TextArea
+      document.getElementById('paragraphe1').style.display ="none";
+      document.getElementById('paragraphe2').style.display ="none";
+      document.getElementById('ContenueWordListInsert').style.display ="none";
+      document.getElementById('ContenueWordListReplace').style.display ="none";
+
+      document.getElementById('paragraphe2').style.display = "block";
+      document.getElementsByClassName('requeteEnvoye')[0].style.display = "block";
+    break;
+
+    case 'WordListInsert' :
+      //label
+      document.getElementsByClassName('texteEnSortie')[0].style.display ="none";
+      document.getElementsByClassName('requeteEnvoye')[0].style.display ="none";
+      document.getElementsByClassName('worldListInsert')[0].style.display ="none";
+      document.getElementsByClassName('worldListReplace')[0].style.display ="none";
+      //TextArea
+      document.getElementById('paragraphe1').style.display ="none";
+      document.getElementById('paragraphe2').style.display ="none";
+      document.getElementById('ContenueWordListInsert').style.display ="none";
+      document.getElementById('ContenueWordListReplace').style.display ="none";
+
+      document.getElementById('ContenueWordListInsert').style.display = "block";
+      document.getElementsByClassName('worldListInsert')[0].style.display = "block";
+    break;
+
+    case 'WordListReplace' :
+      //label
+      document.getElementsByClassName('texteEnSortie')[0].style.display ="none";
+      document.getElementsByClassName('requeteEnvoye')[0].style.display ="none";
+      document.getElementsByClassName('worldListInsert')[0].style.display ="none";
+      document.getElementsByClassName('worldListReplace')[0].style.display ="none";
+      //TextArea
+      document.getElementById('paragraphe1').style.display ="none";
+      document.getElementById('paragraphe2').style.display ="none";
+      document.getElementById('ContenueWordListInsert').style.display ="none";
+      document.getElementById('ContenueWordListReplace').style.display ="none";
+
+      document.getElementById('ContenueWordListReplace').style.display = "block";
+      document.getElementsByClassName('worldListReplace')[0].style.display = "block";
+    break;
+
+  }
 }

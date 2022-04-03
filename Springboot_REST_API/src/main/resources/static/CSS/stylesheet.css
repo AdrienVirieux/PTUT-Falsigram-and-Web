@@ -2,6 +2,11 @@ body{
   background-color: grey;
 }
 
+input {
+  background-color: lightgrey;
+}
+
+
 .filechooser{
   width: 0.1px;
   height: 0.1px;
@@ -21,7 +26,7 @@ body{
 }
 
 .labelupload:hover{
-  background-color: lightgrey;
+  background-color: rgb(53, 53, 53);
 }
 
 .SendRequest{
@@ -34,7 +39,7 @@ body{
 }
 
 .SendRequest:hover{
-  background-color: lightgrey;
+  background-color: rgb(53, 53, 53);
 }
 
 .boutonload{
@@ -47,46 +52,75 @@ body{
 }
 
 .boutonload:hover{
-  background-color: lightgrey;
+  background-color: rgb(53, 53, 53);
 }
 
 textarea{
-  color: black;
+  color: white;
   border-radius: 5px;
   border-color: black;
   border-width: 3px;
+  resize: none;
+  width: 43vw;
+  height: 50vh;
 }
 
 label[for=textinput]{
   color: white;
+  position: absolute;
+  top: 5%;
+  left: 22vw;
+  font-size: 150%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 label[for=paragraphe1]{
   color: white;
+  position: absolute;
+  top: 5%;
+  right: 22vw;
+  font-size: 150%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 label[for=paragraphe2]{
   color: white;
+  position: absolute;
+  top: 5%;
+  right: 22vw;
+  font-size: 150%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 label[for=ContenueWordListInsert]{
   color: white;
+  position: absolute;
+  top: 5%;
+  right: 22vw;
+  font-size: 150%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 label[for=ContenueWordListReplace]{
   color: white;
+  position: absolute;
+  top: 5%;
+  right: 22vw;
+  font-size: 150%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .inputvaleurebrut{
   border-radius: 5px;
-  border-color: black;
+  border-color: white;
   border-width: 3px;
+  border-color: #bbbbbb;
 }
 
 .labelinput{
   color: white;
   position: relative;
-  border-bottom: 1px black;
+  border-bottom: 1px white;
 }
 
 .labelinput:before{
@@ -94,8 +128,8 @@ label[for=ContenueWordListReplace]{
   visibility: hidden;
   opacity: 0;
   width: 300px;
-  background-color: black;
-  color: #fff;
+  background-color: lightgrey;
+  color: lightgrey;
   text-align: center;
   border-radius: 5px;
   padding: 5px 0;
@@ -103,10 +137,180 @@ label[for=ContenueWordListReplace]{
   position: absolute;
   z-index: 1;
   left: 0;
-  top: 110%;
+  top: 100%;
 }
 
 .labelinput:hover:before{
   opacity: 1;
   visibility: visible;
+}
+
+/* paragraphes input (gauche) */
+#textinput {
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  background-color: lightgrey;
+  color: black;
+  font-size: 120%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/*Classes regroupant tous les paragraphes output (droite) */
+.paragraphealt {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  background-color: lightgrey;
+  color: black;
+  font-size: 120%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+
+
+/*Positioner la liste déroulante en milieude page */
+.bloc {
+  flex-direction: column;
+  align-items : center;
+  justify-content: center;
+  height: 100vh;
+  position: absolute;
+  top: 63%;
+  left: 5%;
+}
+
+.bloc2 {
+  flex-direction: column;
+  align-items : center;
+  justify-content: center;
+  height: 100vh;
+  position: absolute;
+  top: 63%;
+  right: 5%;
+}
+
+/*Réinitilaisation de la liste déroulante*/
+select {
+  appearance: none;
+  outline: 0;
+  border: 0 !important;
+  background: #636363;
+  background-image: none;
+  box-shadow: none;
+  font-size: 1.2em;
+}
+
+/* Mise en forme de la div .select*/
+.select {
+  position: relative;
+  width: 350px;
+  height: 45px;
+  overflow: hidden;
+  border-radius: 5px;
+  border: 1px solid #636363;
+}
+
+/* Mise en forme de la balise select*/
+select {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding-left: 15px;
+  color: white;
+  cursor: pointer;
+}
+
+
+/* Mise en place de la flèche */
+.select::after {
+  content: '\276F';
+  position: absolute;
+  top: 10%;
+  right: 0;
+  padding: 0 15px;
+  background: #636363;
+  pointer-events: none;
+  transform: rotate(90deg);
+  font-size: 1.5em;
+}
+
+
+.select:hover::after {
+  color: #FA6141;
+}
+
+
+/* Classes Show/Hide */
+  /* Input */
+.checkFonctions {
+  display: block;
+  position: absolute;
+  top: 65%;
+  left: 30%;
+}
+.checkDelete {
+  display: none;
+  position: absolute;
+  top: 65%;
+  left: 30%;
+}
+.checkInsert {
+  display: none;
+  position: absolute;
+  top: 65%;
+  left: 30%;
+}
+.checkReplace {
+  display: none;
+  position: absolute;
+  top: 65%;
+  left: 30%;
+}
+.checkSwap {
+  display: none;
+  position: absolute;
+  top: 65%;
+  left: 30%;
+}
+
+    /* Output label */
+.texteEnSortie {
+  display: block;
+}    
+
+.requeteEnvoye {
+  display: none;
+}
+
+.worldListInsert {
+  display: none;
+}
+
+.worldListReplace {
+  display: none;
+}
+      /* Output Textarea */
+#paragraphe1 {
+  display: block;
+}    
+
+#paragraphe2 {
+  display: none;
+}
+
+#ContenueWordListInsert {
+  display: none;
+}
+
+#ContenueWordListReplace {
+  display: none;
+}
+
+
+.buttons {
+  position: absolute;
+  top: 65%;
+  left: 55%;
 }
